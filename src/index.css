@@ -1,0 +1,246 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ── 白框内的卡片：去掉浮起阴影 ────────────────────────────────
+   2026-10-28：白框本身已是"浮起"的面，框内卡片再叠阴影 = 双层阴影，
+   视觉上是"框中框"，显廉价。框内只留描边区分，层次由白框承担。 */
+[data-testid="content-frame"] [data-card] {
+  box-shadow: none;
+  background-color: hsl(var(--muted) / 0.5);
+  border-color: hsl(var(--border));
+}
+
+@layer base {
+  :root {
+    /* ── 台面层次（2026-10-20 对齐 Element Plus 深色侧栏主题）──────────
+       background = 画布底（D 区）｜card = 内容面（B 顶栏 / 卡片）
+       chrome     = 导航外壳（A 品牌条 + C 菜单区，深海军蓝）        */
+    --background: 220 20% 96%;          /* #F3F5F8 画布 */
+    --foreground: 240 10% 3.9%;
+    --card: 0 0% 100%;                  /* #FFFFFF 内容面 */
+    --card-foreground: 240 10% 3.9%;
+    --primary: 243 75% 59%;             /* #4F46E5 靛蓝 */
+    --primary-foreground: 0 0% 100%;
+    --secondary: 220 16% 96%;
+    --secondary-foreground: 240 5.9% 10%;
+    --muted: 220 16% 96%;
+    --muted-foreground: 240 3.8% 46.1%;
+    /* 表格/描述列表「标签列」底色（2026-10-29 新增，10-30 回调）：
+       取值要落在「白框底 255」与「网格线 231.7」之间，才能同时与两侧拉开。
+       93% 时实测 rgb(234,236,240)：离网格线只剩 5.0 → 1px 线被吃掉（维护者反馈）。
+       回调到 96% = rgb(243,244,247)：与线差 12.5、与白卡差 10.5，线重新可见。 */
+    --table-head: 220 20% 96%;
+    --accent: 220 16% 96%;
+    --accent-foreground: 240 5.9% 10%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 240 10% 3.9%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 220 13% 91%;              /* #E2E5EC 常规分界 */
+    --border-strong: 220 13% 84%;        /* #D0D5DF 区域分界 */
+    --input: 220 13% 91%;
+    --ring: 243 75% 59%;
+    --radius: 0.6rem;
+    /* 导航外壳（深色侧栏） */
+    --chrome: 222 47% 11%;              /* #0F172A 蓝黑 */
+    --chrome-foreground: 215 20% 70%;    /* #A1ADC0 */
+    --chrome-hover: 217 33% 15%;         /* #1A2333 */
+    --chrome-active: 210 40% 98%;        /* #F8FAFC 白块反相（不依赖色相，明暗结构对比） */
+    --chrome-active-foreground: 222 47% 11%;  /* #0F172A 深字（白块上） */
+    /* 状态语义色（成功/警告/信息） */
+    --success: 142 71% 45%;
+    --success-foreground: 0 0% 100%;
+    --warning: 38 92% 50%;
+    --warning-foreground: 26 83% 14%;
+    --info: 199 89% 48%;
+    --info-foreground: 0 0% 100%;
+    /* ── 按钮用途语义色（2026-10-28 采纳 webtools「白框排版」规范 §6）──────
+       白底上 ghost/outline 描边按钮几乎不可见（对方返工三次）→ 可见按钮一律
+       实底 + 白字，靠色相区分用途。对比度硬约束：按钮 ≥3:1，正文 ≥4.5:1。 */
+    --action-run: 152 62% 30%;           /* 运行/重跑/重试 —— 深绿 */
+    --action-run-foreground: 0 0% 100%;
+    --action-view: 192 95% 28%;          /* 详情/打开/流程图 —— 深青 */
+    --action-view-foreground: 0 0% 100%;
+    --action-back: 262 60% 46%;          /* 返回/后退 —— 深紫 */
+    --action-back-foreground: 0 0% 100%;
+  }
+
+  .dark {
+    --background: 240 10% 4%;            /* 画布底 */
+    --foreground: 0 0% 98%;
+    --card: 240 8% 9%;                   /* 内容面（明显高于画布） */
+    --card-foreground: 0 0% 98%;
+    --primary: 239 84% 67%;             /* #818CF8 靛蓝亮档 */
+    --primary-foreground: 240 20% 10%;
+    --secondary: 240 6% 13%;
+    --secondary-foreground: 0 0% 98%;
+    --muted: 240 6% 13%;
+    --muted-foreground: 240 5% 64.9%;
+    /* 暗色标签列（10-30 回调）：暗色下方向与 light 相反 —— 网格线 rgb(39,39,43) 比标签更亮，
+       故标签要往「更暗」走才能让线浮出来；同时仍须比内容面 card(9%) 亮，否则沉进画框。
+       15% 时 rgb(35,35,41) 比线还暗 3.3（线消失）→ 回调到 12.5% = rgb(29,29,34)：
+       比线暗 9.7、比 card 亮 8.3，两条判据同时成立。 */
+    --table-head: 240 8% 12.5%;
+    --accent: 240 6% 13%;
+    --accent-foreground: 0 0% 98%;
+    --popover: 240 8% 9%;
+    --popover-foreground: 0 0% 98%;
+    --destructive: 0 62.8% 45%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 240 5% 16%;
+    --border-strong: 240 6% 23%;
+    --input: 240 5% 16%;
+    --ring: 239 84% 67%;
+    /* 导航外壳（暗色下仍保持深蓝，比画布更深） */
+    --chrome: 222 40% 13%;
+    --chrome-foreground: 215 18% 68%;
+    --chrome-hover: 222 38% 17%;
+    --chrome-active: 210 40% 98%;
+    --chrome-active-foreground: 222 47% 11%;  /* #0F172A 深字（白块上） */
+    /* 状态语义色（成功/警告/信息） */
+    --success: 142 69% 58%;
+    --success-foreground: 144 61% 12%;
+    --warning: 38 92% 50%;
+    --warning-foreground: 26 83% 14%;
+    --info: 199 89% 60%;
+    --info-foreground: 202 80% 10%;
+    /* 按钮用途语义色（暗色：亮底 + 深字，与 primary 同一套反相逻辑） */
+    --action-run: 152 55% 62%;
+    --action-run-foreground: 152 70% 8%;
+    --action-view: 190 85% 62%;
+    --action-view-foreground: 192 90% 8%;
+    --action-back: 262 80% 72%;
+    --action-back-foreground: 262 60% 10%;
+  }
+
+  * {
+    border-color: hsl(var(--border));
+  }
+
+  body {
+    background-color: hsl(var(--background));
+    color: hsl(var(--foreground));
+    font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto,
+      "Helvetica Neue", "PingFang SC", "Microsoft YaHei", sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  code,
+  pre {
+    font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas,
+      "Liberation Mono", monospace;
+  }
+}
+
+/* shiki 代码高亮块适配 */
+.shiki-block pre {
+  margin: 0;
+  padding: 1rem;
+  overflow: auto;
+  font-size: 12.5px;
+  line-height: 1.6;
+  background: hsl(240 6% 5%) !important;
+}
+.shiki-block code {
+  font-size: 12.5px;
+}
+
+@layer components {
+  /* 细滚动条 */
+  .scrollbar-thin::-webkit-scrollbar { height: 6px; width: 6px; }
+  .scrollbar-thin::-webkit-scrollbar-thumb { @apply rounded-full bg-border; }
+  .scrollbar-thin::-webkit-scrollbar-track { background: transparent; }
+  .scrollbar-thin { scrollbar-width: thin; }
+
+  /* 富文本内容排版（Tiptap 编辑区 + 渲染区通用） */
+  .prose-win3 { @apply text-sm leading-7 text-foreground; }
+  .prose-win3 h1 { @apply mt-3 mb-2 text-xl font-bold; }
+  .prose-win3 h2 { @apply mt-3 mb-2 text-lg font-semibold; }
+  .prose-win3 h3 { @apply mt-2 mb-1 text-base font-semibold; }
+  .prose-win3 p { @apply my-1.5; }
+  .prose-win3 ul { @apply my-1.5 list-disc pl-5; }
+  .prose-win3 ol { @apply my-1.5 list-decimal pl-5; }
+  .prose-win3 blockquote { @apply my-2 border-l-2 border-primary/50 pl-3 text-muted-foreground; }
+  .prose-win3 code { @apply rounded bg-muted px-1 py-0.5 text-xs; }
+  .prose-win3 a { @apply text-primary underline; }
+  .prose-win3 p.is-editor-empty:first-child::before {
+    content: attr(data-placeholder);
+    @apply pointer-events-none float-left h-0 text-muted-foreground;
+  }
+
+  /* Markdown 编辑器：贴合 shadcn 主题 */
+  .win3-md .w-md-editor { @apply bg-transparent; }
+  .win3-md .w-md-editor-toolbar { @apply border-b bg-muted/30; }
+  /*
+   * 关键：编辑区 = 透明 textarea（真光标）+ 背后高亮 pre 叠层。
+   * 二者字体度量必须逐一致（font-size / line-height / font-family /
+   * letter-spacing / padding / white-space），否则光标会与可见文字错位。
+   * 注意 .w-md-editor-text-pre > code 默认 14px，比 textarea 的 13px 大 →
+   * 高亮层字宽偏大 → 光标随行漂移。故这里把内层 code/code-line/token
+   * 一并锁到 13px / 18px（与 textarea 一致）。
+   */
+  .win3-md .w-md-editor-text,
+  .win3-md .w-md-editor-text-pre,
+  .win3-md .w-md-editor-text-pre > code,
+  .win3-md .w-md-editor-text-pre .code-line,
+  .win3-md .w-md-editor-text-pre .token,
+  .win3-md .w-md-editor-text-input {
+    font-size: 13px !important;
+    line-height: 18px !important;
+    font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas,
+      "Liberation Mono", monospace !important;
+    letter-spacing: normal !important;
+    tab-size: 4 !important;
+  }
+
+  /* 全屏态：必须给不透明主题背景，否则 fixed 覆盖层透明 → 背后控件可见 */
+  .win3-md .w-md-editor-fullscreen {
+    background-color: hsl(var(--background)) !important;
+  }
+  .win3-md .w-md-editor-fullscreen .w-md-editor-content,
+  .win3-md .w-md-editor-fullscreen .w-md-editor-area,
+  .win3-md .w-md-editor-fullscreen .w-md-editor-text,
+  .win3-md .w-md-editor-fullscreen .w-md-editor-preview {
+    background-color: hsl(var(--background)) !important;
+  }
+}
+
+/* 无障碍：尊重系统「减少动态效果」偏好（原缺失） */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ── React Flow 主题化 ────────────────────────────────────────────────
+   2026-10-28：React Flow 自带一组写死的浅色值（controls 按钮 #fefefe、
+   attribution rgba(255,255,255,.5)），暗色下会露出两块纯白。用它的
+   CSS 变量接管，随主题走，不再各页面单独打 !bg-* 补丁。            */
+.react-flow {
+  --xy-background-pattern-color: hsl(var(--border));
+  --xy-controls-button-background-color: hsl(var(--card));
+  --xy-controls-button-background-color-hover: hsl(var(--accent));
+  --xy-controls-button-color: hsl(var(--foreground));
+  --xy-controls-button-color-hover: hsl(var(--foreground));
+  --xy-controls-button-border-color: hsl(var(--border));
+  --xy-controls-box-shadow: 0 0 0 1px hsl(var(--border));
+  --xy-minimap-background-color: hsl(var(--card));
+  --xy-minimap-mask-background-color: hsl(var(--foreground) / 0.08);
+  --xy-minimap-mask-stroke-color: hsl(var(--border-strong));
+  /* 小地图节点：默认是写死的浅灰 #e2e2e2，暗色下变成一片白条纹 */
+  --xy-minimap-node-background-color: hsl(var(--muted-foreground) / 0.5);
+  --xy-minimap-node-stroke-color: hsl(var(--muted-foreground) / 0.7);
+  --xy-minimap-node-stroke-width: 0;
+  --xy-attribution-background-color: hsl(var(--card) / 0.8);
+  --xy-edge-label-background-color: hsl(var(--card));
+  --xy-edge-label-color: hsl(var(--foreground));
+}
+.react-flow__attribution a { color: hsl(var(--muted-foreground)); }
+.react-flow__controls-button { border-bottom: 1px solid hsl(var(--border)); }
+.react-flow__controls-button svg { fill: currentColor; }

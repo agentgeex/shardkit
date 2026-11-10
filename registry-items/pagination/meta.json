@@ -1,0 +1,20 @@
+{
+  "id": "pagination",
+  "name": "分页",
+  "category": "04-navigation",
+  "tags": [
+    "pagination",
+    "pager",
+    "nav"
+  ],
+  "stack": "shadcn",
+  "source": "shardkit",
+  "complexity": "组件",
+  "scene": [
+    "列表",
+    "导航"
+  ],
+  "status": "可用",
+  "usability": "copy-paste",
+  "targetDir": "src/components/ui"
+}

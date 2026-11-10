@@ -1,0 +1,15 @@
+{
+  "id": "tabs-basic",
+  "name": "标签页",
+  "category": "03-layout",
+  "tags": ["tabs", "navigation", "switch", "shadcn"],
+  "stack": "shadcn",
+  "source": "shadcn-official",
+  "complexity": "组件",
+  "scene": ["general", "dashboard", "详情"],
+  "status": "可用",
+  "usability": "copy-paste",
+  "deps": ["@radix-ui/react-tabs"],
+  "installCmd": "npm i @radix-ui/react-tabs",
+  "targetDir": "src/components/ui"
+}

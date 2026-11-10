@@ -1,0 +1,20 @@
+{
+  "id": "upload",
+  "name": "文件上传",
+  "category": "02-form",
+  "tags": [
+    "upload",
+    "file",
+    "form"
+  ],
+  "stack": "shadcn",
+  "source": "shardkit",
+  "complexity": "组件",
+  "scene": [
+    "表单",
+    "文件"
+  ],
+  "status": "可用",
+  "usability": "copy-paste",
+  "targetDir": "src/components/ui"
+}

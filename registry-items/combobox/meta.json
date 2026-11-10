@@ -1,0 +1,21 @@
+{
+  "id": "combobox",
+  "name": "自动完成",
+  "category": "02-form",
+  "tags": [
+    "combobox",
+    "autocomplete",
+    "search",
+    "form"
+  ],
+  "stack": "shadcn",
+  "source": "shardkit",
+  "complexity": "组件",
+  "scene": [
+    "表单",
+    "搜索选择"
+  ],
+  "status": "可用",
+  "usability": "copy-paste",
+  "targetDir": "src/components/ui"
+}

@@ -1,0 +1,14 @@
+{
+  "id": "table-basic",
+  "name": "数据表格",
+  "category": "05-data-display",
+  "tags": ["table", "datagrid", "list", "shadcn"],
+  "stack": "shadcn",
+  "source": "shadcn-official",
+  "complexity": "组件",
+  "scene": ["列表", "dashboard"],
+  "status": "可用",
+  "usability": "copy-paste",
+  "deps": [],
+  "targetDir": "src/components/ui"
+}

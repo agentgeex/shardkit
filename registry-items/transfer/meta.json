@@ -1,0 +1,24 @@
+{
+  "id": "transfer",
+  "name": "穿梭框",
+  "category": "02-form",
+  "tags": [
+    "transfer",
+    "form",
+    "shuttle"
+  ],
+  "stack": "shadcn",
+  "source": "shardkit",
+  "complexity": "组件",
+  "scene": [
+    "form",
+    "权限分配"
+  ],
+  "status": "可用",
+  "usability": "需依赖",
+  "deps": [
+    "@radix-ui/react-checkbox"
+  ],
+  "installCmd": "npm i @radix-ui/react-checkbox",
+  "targetDir": "src/components/ui"
+}

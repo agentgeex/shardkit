@@ -1,0 +1,14 @@
+{
+  "id": "input-basic",
+  "name": "基础输入框",
+  "category": "02-form",
+  "tags": ["input", "form", "text", "shadcn"],
+  "stack": "shadcn",
+  "source": "shadcn-official",
+  "complexity": "组件",
+  "scene": ["form", "general"],
+  "status": "可用",
+  "usability": "copy-paste",
+  "deps": [],
+  "targetDir": "src/components/ui"
+}

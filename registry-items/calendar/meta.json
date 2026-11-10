@@ -1,0 +1,22 @@
+{
+  "id": "calendar",
+  "name": "日历",
+  "category": "05-data-display",
+  "tags": [
+    "calendar",
+    "date",
+    "picker"
+  ],
+  "stack": "shadcn",
+  "source": "shardkit",
+  "complexity": "组件",
+  "scene": [
+    "form",
+    "排期"
+  ],
+  "status": "可用",
+  "usability": "copy-paste",
+  "deps": [],
+  "installCmd": "",
+  "targetDir": "src/components/ui"
+}

@@ -1,0 +1,14 @@
+{
+  "id": "separator-basic",
+  "name": "分隔线",
+  "category": "03-layout",
+  "tags": ["separator", "divider", "layout"],
+  "stack": "shadcn",
+  "source": "shadcn-official",
+  "complexity": "片段",
+  "scene": ["general"],
+  "status": "可用",
+  "usability": "copy-paste",
+  "deps": [],
+  "targetDir": "src/components/ui"
+}

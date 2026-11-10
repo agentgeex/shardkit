@@ -1,0 +1,15 @@
+{
+  "id": "label-basic",
+  "name": "表单标签",
+  "category": "02-form",
+  "tags": ["label", "form", "a11y", "shadcn"],
+  "stack": "shadcn",
+  "source": "shadcn-official",
+  "complexity": "片段",
+  "scene": ["form"],
+  "status": "可用",
+  "usability": "copy-paste",
+  "deps": ["@radix-ui/react-label"],
+  "installCmd": "npm i @radix-ui/react-label",
+  "targetDir": "src/components/ui"
+}

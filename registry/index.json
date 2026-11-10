@@ -1,0 +1,1128 @@
+{
+  "$schema": "./schema.json",
+  "generatedAt": "2026-10-28",
+  "version": "0.0.1",
+  "count": 40,
+  "items": [
+    {
+      "id": "alert-basic",
+      "name": "提示条",
+      "category": "06-feedback",
+      "tags": [
+        "alert",
+        "feedback",
+        "notice",
+        "shadcn"
+      ],
+      "stack": "shadcn",
+      "source": "shadcn-official",
+      "complexity": "组件",
+      "scene": [
+        "general",
+        "form"
+      ],
+      "status": "可用",
+      "usability": "copy-paste",
+      "deps": [],
+      "targetDir": "src/components/ui",
+      "files": [
+        "registry-items/alert-basic/demo.tsx"
+      ],
+      "demo": "registry-items/alert-basic/demo.tsx",
+      "createdAt": "2026-09-16"
+    },
+    {
+      "id": "avatar-basic",
+      "name": "头像",
+      "category": "01-basic",
+      "tags": [
+        "avatar",
+        "user",
+        "image",
+        "fallback"
+      ],
+      "stack": "shadcn",
+      "source": "自研",
+      "complexity": "片段",
+      "scene": [
+        "general",
+        "dashboard",
+        "列表"
+      ],
+      "status": "可用",
+      "usability": "copy-paste",
+      "deps": [],
+      "targetDir": "src/components/ui",
+      "files": [
+        "registry-items/avatar-basic/index.tsx",
+        "registry-items/avatar-basic/demo.tsx"
+      ],
+      "demo": "registry-items/avatar-basic/demo.tsx",
+      "createdAt": "2026-09-16"
+    },
+    {
+      "id": "badge-basic",
+      "name": "徽标",
+      "category": "05-data-display",
+      "tags": [
+        "badge",
+        "tag",
+        "status",
+        "shadcn"
+      ],
+      "stack": "shadcn",
+      "source": "shadcn-official",
+      "complexity": "片段",
+      "scene": [
+        "general",
+        "列表",
+        "dashboard"
+      ],
+      "status": "可用",
+      "usability": "copy-paste",
+      "deps": [
+        "class-variance-authority"
+      ],
+      "installCmd": "npm i class-variance-authority",
+      "targetDir": "src/components/ui",
+      "files": [
+        "registry-items/badge-basic/demo.tsx"
+      ],
+      "demo": "registry-items/badge-basic/demo.tsx",
+      "createdAt": "2026-09-16"
+    },
+    {
+      "id": "button-primary",
+      "name": "主按钮",
+      "category": "01-basic",
+      "tags": [
+        "button",
+        "primary",
+        "loading",
+        "icon",
+        "shadcn"
+      ],
+      "stack": "shadcn",
+      "source": "shadcn-official",
+      "complexity": "组件",
+      "scene": [
+        "general",
+        "form"
+      ],
+      "status": "可用",
+      "usability": "copy-paste",
+      "deps": [
+        "@radix-ui/react-slot",
+        "class-variance-authority",
+        "lucide-react"
+      ],
+      "installCmd": "npm i @radix-ui/react-slot class-variance-authority lucide-react",
+      "targetDir": "src/components/ui",
+      "files": [
+        "registry-items/button-primary/index.tsx",
+        "registry-items/button-primary/demo.tsx"
+      ],
+      "demo": "registry-items/button-primary/demo.tsx",
+      "createdAt": "2026-09-16"
+    },
+    {
+      "id": "calendar",
+      "name": "日历",
+      "category": "05-data-display",
+      "tags": [
+        "calendar",
+        "date",
+        "picker"
+      ],
+      "stack": "shadcn",
+      "source": "shardkit",
+      "complexity": "组件",
+      "scene": [
+        "form",
+        "排期"
+      ],
+      "status": "可用",
+      "usability": "copy-paste",
+      "deps": [],
+      "installCmd": "",
+      "targetDir": "src/components/ui",
+      "files": [
+        "registry-items/calendar/demo.tsx"
+      ],
+      "demo": "registry-items/calendar/demo.tsx",
+      "createdAt": "2026-09-16"
+    },
+    {
+      "id": "card-basic",
+      "name": "基础卡片",
+      "category": "03-layout",
+      "tags": [
+        "card",
+        "layout",
+        "container",
+        "shadcn"
+      ],
+      "stack": "shadcn",
+      "source": "shadcn-official",
+      "complexity": "组件",
+      "scene": [
+        "general",
+        "dashboard",
+        "列表"
+      ],
+      "status": "可用",
+      "usability": "copy-paste",
+      "deps": [],
+      "targetDir": "src/components/ui",
+      "files": [
+        "registry-items/card-basic/demo.tsx"
+      ],
+      "demo": "registry-items/card-basic/demo.tsx",
+      "createdAt": "2026-09-16"
+    },
+    {
+      "id": "cascader",
+      "name": "级联选择",
+      "category": "02-form",
+      "tags": [
+        "cascader",
+        "cascade",
+        "tree",
+        "form"
+      ],
+      "stack": "shadcn",
+      "source": "shardkit",
+      "complexity": "组件",
+      "scene": [
+        "表单",
+        "多级分类"
+      ],
+      "status": "可用",
+      "usability": "copy-paste",
+      "targetDir": "src/components/ui",
+      "files": [
+        "registry-items/cascader/demo.tsx"
+      ],
+      "demo": "registry-items/cascader/demo.tsx",
+      "createdAt": "2026-09-16"
+    },
+    {
+      "id": "checkbox",
+      "name": "复选框",
+      "category": "02-form",
+      "tags": [
+        "checkbox",
+        "form",
+        "radix"
+      ],
+      "stack": "shadcn",
+      "source": "shardkit",
+      "complexity": "组件",
+      "scene": [
+        "form",
+        "多选"
+      ],
+      "status": "可用",
+      "usability": "需依赖",
+      "deps": [
+        "@radix-ui/react-checkbox"
+      ],
+      "installCmd": "npm i @radix-ui/react-checkbox",
+      "targetDir": "src/components/ui",
+      "files": [
+        "registry-items/checkbox/demo.tsx"
+      ],
+      "demo": "registry-items/checkbox/demo.tsx",
+      "createdAt": "2026-09-16"
+    },
+    {
+      "id": "color-picker",
+      "name": "颜色选择",
+      "category": "02-form",
+      "tags": [
+        "color-picker",
+        "color",
+        "palette",
+        "form"
+      ],
+      "stack": "shadcn",
+      "source": "shardkit",
+      "complexity": "组件",
+      "scene": [
+        "表单",
+        "主题色"
+      ],
+      "status": "可用",
+      "usability": "copy-paste",
+      "targetDir": "src/components/ui",
+      "files": [
+        "registry-items/color-picker/demo.tsx"
+      ],
+      "demo": "registry-items/color-picker/demo.tsx",
+      "createdAt": "2026-09-16"
+    },
+    {
+      "id": "combobox",
+      "name": "自动完成",
+      "category": "02-form",
+      "tags": [
+        "combobox",
+        "autocomplete",
+        "search",
+        "form"
+      ],
+      "stack": "shadcn",
+      "source": "shardkit",
+      "complexity": "组件",
+      "scene": [
+        "表单",
+        "搜索选择"
+      ],
+      "status": "可用",
+      "usability": "copy-paste",
+      "targetDir": "src/components/ui",
+      "files": [
+        "registry-items/combobox/demo.tsx"
+      ],
+      "demo": "registry-items/combobox/demo.tsx",
+      "createdAt": "2026-09-16"
+    },
+    {
+      "id": "content-frame",
+      "name": "内容白框（页面排版基元）",
+      "category": "03-layout",
+      "tags": [
+        "layout",
+        "frame",
+        "page",
+        "whitespace",
+        "shadcn"
+      ],
+      "stack": "shadcn",
+      "source": "shard-kit",
+      "complexity": "组件",
+      "scene": [
+        "general",
+        "列表",
+        "详情",
+        "dashboard"
+      ],
+      "status": "可用",
+      "usability": "copy-paste",
+      "deps": [],
+      "targetDir": "src/components/ui",
+      "files": [
+        "registry-items/content-frame/demo.tsx"
+      ],
+      "demo": "registry-items/content-frame/demo.tsx",
+      "createdAt": "2026-09-16"
+    },
+    {
+      "id": "date-picker",
+      "name": "日期选择",
+      "category": "02-form",
+      "tags": [
+        "date",
+        "calendar",
+        "popover",
+        "form"
+      ],
+      "stack": "shadcn",
+      "source": "shardkit",
+      "complexity": "组件",
+      "scene": [
+        "form"
+      ],
+      "status": "可用",
+      "usability": "需依赖",
+      "deps": [
+        "@radix-ui/react-popover"
+      ],
+      "installCmd": "npm i @radix-ui/react-popover",
+      "targetDir": "src/components/ui",
+      "files": [
+        "registry-items/date-picker/demo.tsx"
+      ],
+      "demo": "registry-items/date-picker/demo.tsx",
+      "createdAt": "2026-09-16"
+    },
+    {
+      "id": "dialog-basic",
+      "name": "对话框",
+      "category": "07-overlay",
+      "tags": [
+        "dialog",
+        "modal",
+        "overlay",
+        "shadcn"
+      ],
+      "stack": "shadcn",
+      "source": "shadcn-official",
+      "complexity": "组件",
+      "scene": [
+        "form",
+        "general"
+      ],
+      "status": "可用",
+      "usability": "copy-paste",
+      "deps": [
+        "@radix-ui/react-dialog",
+        "lucide-react"
+      ],
+      "installCmd": "npm i @radix-ui/react-dialog lucide-react",
+      "targetDir": "src/components/ui",
+      "files": [
+        "registry-items/dialog-basic/demo.tsx"
+      ],
+      "demo": "registry-items/dialog-basic/demo.tsx",
+      "createdAt": "2026-09-16"
+    },
+    {
+      "id": "empty-state-basic",
+      "name": "空态",
+      "category": "06-feedback",
+      "tags": [
+        "empty",
+        "state",
+        "placeholder",
+        "反馈"
+      ],
+      "stack": "shadcn",
+      "source": "shardkit",
+      "complexity": "片段",
+      "scene": [
+        "general",
+        "列表",
+        "dashboard"
+      ],
+      "status": "可用",
+      "usability": "copy-paste",
+      "deps": [],
+      "targetDir": "src/components/ui",
+      "files": [
+        "registry-items/empty-state-basic/demo.tsx"
+      ],
+      "demo": "registry-items/empty-state-basic/demo.tsx",
+      "createdAt": "2026-09-16"
+    },
+    {
+      "id": "input-basic",
+      "name": "基础输入框",
+      "category": "02-form",
+      "tags": [
+        "input",
+        "form",
+        "text",
+        "shadcn"
+      ],
+      "stack": "shadcn",
+      "source": "shadcn-official",
+      "complexity": "组件",
+      "scene": [
+        "form",
+        "general"
+      ],
+      "status": "可用",
+      "usability": "copy-paste",
+      "deps": [],
+      "targetDir": "src/components/ui",
+      "files": [
+        "registry-items/input-basic/demo.tsx"
+      ],
+      "demo": "registry-items/input-basic/demo.tsx",
+      "createdAt": "2026-09-16"
+    },
+    {
+      "id": "input-number",
+      "name": "数字输入框",
+      "category": "02-form",
+      "tags": [
+        "input-number",
+        "number",
+        "stepper",
+        "form"
+      ],
+      "stack": "shadcn",
+      "source": "shardkit",
+      "complexity": "组件",
+      "scene": [
+        "表单",
+        "数量"
+      ],
+      "status": "可用",
+      "usability": "copy-paste",
+      "targetDir": "src/components/ui",
+      "files": [
+        "registry-items/input-number/demo.tsx"
+      ],
+      "demo": "registry-items/input-number/demo.tsx",
+      "createdAt": "2026-09-16"
+    },
+    {
+      "id": "input-tag",
+      "name": "标签输入",
+      "category": "02-form",
+      "tags": [
+        "input-tag",
+        "tags",
+        "chips",
+        "form"
+      ],
+      "stack": "shadcn",
+      "source": "shardkit",
+      "complexity": "组件",
+      "scene": [
+        "表单",
+        "多值"
+      ],
+      "status": "可用",
+      "usability": "copy-paste",
+      "targetDir": "src/components/ui",
+      "files": [
+        "registry-items/input-tag/demo.tsx"
+      ],
+      "demo": "registry-items/input-tag/demo.tsx",
+      "createdAt": "2026-09-16"
+    },
+    {
+      "id": "label-basic",
+      "name": "表单标签",
+      "category": "02-form",
+      "tags": [
+        "label",
+        "form",
+        "a11y",
+        "shadcn"
+      ],
+      "stack": "shadcn",
+      "source": "shadcn-official",
+      "complexity": "片段",
+      "scene": [
+        "form"
+      ],
+      "status": "可用",
+      "usability": "copy-paste",
+      "deps": [
+        "@radix-ui/react-label"
+      ],
+      "installCmd": "npm i @radix-ui/react-label",
+      "targetDir": "src/components/ui",
+      "files": [
+        "registry-items/label-basic/demo.tsx"
+      ],
+      "demo": "registry-items/label-basic/demo.tsx",
+      "createdAt": "2026-09-16"
+    },
+    {
+      "id": "markdown-editor",
+      "name": "Markdown 编辑器",
+      "category": "08-advanced",
+      "tags": [
+        "markdown",
+        "editor",
+        "preview"
+      ],
+      "stack": "shadcn",
+      "source": "shardkit",
+      "complexity": "组件",
+      "scene": [
+        "form",
+        "文档"
+      ],
+      "status": "可用",
+      "usability": "需依赖",
+      "deps": [
+        "@uiw/react-md-editor"
+      ],
+      "installCmd": "npm i @uiw/react-md-editor",
+      "targetDir": "src/components/ui",
+      "files": [
+        "registry-items/markdown-editor/demo.tsx"
+      ],
+      "demo": "registry-items/markdown-editor/demo.tsx",
+      "createdAt": "2026-09-16"
+    },
+    {
+      "id": "pagination",
+      "name": "分页",
+      "category": "04-navigation",
+      "tags": [
+        "pagination",
+        "pager",
+        "nav"
+      ],
+      "stack": "shadcn",
+      "source": "shardkit",
+      "complexity": "组件",
+      "scene": [
+        "列表",
+        "导航"
+      ],
+      "status": "可用",
+      "usability": "copy-paste",
+      "targetDir": "src/components/ui",
+      "files": [
+        "registry-items/pagination/demo.tsx"
+      ],
+      "demo": "registry-items/pagination/demo.tsx",
+      "createdAt": "2026-09-16"
+    },
+    {
+      "id": "popover",
+      "name": "浮层",
+      "category": "07-overlay",
+      "tags": [
+        "popover",
+        "overlay",
+        "radix"
+      ],
+      "stack": "shadcn",
+      "source": "shardkit",
+      "complexity": "组件",
+      "scene": [
+        "浮层",
+        "气泡"
+      ],
+      "status": "可用",
+      "usability": "需依赖",
+      "deps": [
+        "@radix-ui/react-popover"
+      ],
+      "installCmd": "npm i @radix-ui/react-popover",
+      "targetDir": "src/components/ui",
+      "files": [
+        "registry-items/popover/demo.tsx"
+      ],
+      "demo": "registry-items/popover/demo.tsx",
+      "createdAt": "2026-09-16"
+    },
+    {
+      "id": "progress-basic",
+      "name": "进度条",
+      "category": "06-feedback",
+      "tags": [
+        "progress",
+        "loading",
+        "feedback"
+      ],
+      "stack": "shadcn",
+      "source": "shadcn-official",
+      "complexity": "片段",
+      "scene": [
+        "general",
+        "dashboard",
+        "上传"
+      ],
+      "status": "可用",
+      "usability": "copy-paste",
+      "deps": [],
+      "targetDir": "src/components/ui",
+      "files": [
+        "registry-items/progress-basic/demo.tsx"
+      ],
+      "demo": "registry-items/progress-basic/demo.tsx",
+      "createdAt": "2026-09-16"
+    },
+    {
+      "id": "radio-group",
+      "name": "单选组",
+      "category": "02-form",
+      "tags": [
+        "radio",
+        "form",
+        "radix"
+      ],
+      "stack": "shadcn",
+      "source": "shardkit",
+      "complexity": "组件",
+      "scene": [
+        "form"
+      ],
+      "status": "可用",
+      "usability": "需依赖",
+      "deps": [
+        "@radix-ui/react-radio-group"
+      ],
+      "installCmd": "npm i @radix-ui/react-radio-group",
+      "targetDir": "src/components/ui",
+      "files": [
+        "registry-items/radio-group/demo.tsx"
+      ],
+      "demo": "registry-items/radio-group/demo.tsx",
+      "createdAt": "2026-09-16"
+    },
+    {
+      "id": "rate",
+      "name": "评分",
+      "category": "02-form",
+      "tags": [
+        "rate",
+        "star",
+        "score",
+        "form"
+      ],
+      "stack": "shadcn",
+      "source": "shardkit",
+      "complexity": "组件",
+      "scene": [
+        "表单",
+        "评价"
+      ],
+      "status": "可用",
+      "usability": "copy-paste",
+      "targetDir": "src/components/ui",
+      "files": [
+        "registry-items/rate/demo.tsx"
+      ],
+      "demo": "registry-items/rate/demo.tsx",
+      "createdAt": "2026-09-16"
+    },
+    {
+      "id": "rich-text-editor",
+      "name": "富文本编辑器",
+      "category": "08-advanced",
+      "tags": [
+        "tiptap",
+        "editor",
+        "richtext"
+      ],
+      "stack": "shadcn",
+      "source": "shardkit",
+      "complexity": "组件",
+      "scene": [
+        "form",
+        "内容"
+      ],
+      "status": "可用",
+      "usability": "需依赖",
+      "deps": [
+        "@tiptap/react",
+        "@tiptap/starter-kit",
+        "@tiptap/extension-link",
+        "@tiptap/extension-placeholder",
+        "@tiptap/extension-underline",
+        "@tiptap/extension-text-align"
+      ],
+      "installCmd": "npm i @tiptap/react @tiptap/starter-kit @tiptap/extension-link @tiptap/extension-placeholder @tiptap/extension-underline @tiptap/extension-text-align",
+      "targetDir": "src/components/ui",
+      "files": [
+        "registry-items/rich-text-editor/demo.tsx"
+      ],
+      "demo": "registry-items/rich-text-editor/demo.tsx",
+      "createdAt": "2026-09-16"
+    },
+    {
+      "id": "select",
+      "name": "下拉选择",
+      "category": "02-form",
+      "tags": [
+        "select",
+        "dropdown",
+        "form",
+        "radix",
+        "shadcn"
+      ],
+      "stack": "shadcn",
+      "source": "shardkit",
+      "complexity": "组件",
+      "scene": [
+        "form",
+        "筛选"
+      ],
+      "status": "可用",
+      "usability": "需依赖",
+      "deps": [
+        "@radix-ui/react-select"
+      ],
+      "installCmd": "npm i @radix-ui/react-select",
+      "targetDir": "src/components/ui",
+      "files": [
+        "registry-items/select/demo.tsx"
+      ],
+      "demo": "registry-items/select/demo.tsx",
+      "createdAt": "2026-09-16"
+    },
+    {
+      "id": "separator-basic",
+      "name": "分隔线",
+      "category": "03-layout",
+      "tags": [
+        "separator",
+        "divider",
+        "layout"
+      ],
+      "stack": "shadcn",
+      "source": "shadcn-official",
+      "complexity": "片段",
+      "scene": [
+        "general"
+      ],
+      "status": "可用",
+      "usability": "copy-paste",
+      "deps": [],
+      "targetDir": "src/components/ui",
+      "files": [
+        "registry-items/separator-basic/demo.tsx"
+      ],
+      "demo": "registry-items/separator-basic/demo.tsx",
+      "createdAt": "2026-09-16"
+    },
+    {
+      "id": "skeleton-basic",
+      "name": "骨架屏",
+      "category": "06-feedback",
+      "tags": [
+        "skeleton",
+        "loading",
+        "placeholder"
+      ],
+      "stack": "shadcn",
+      "source": "shadcn-official",
+      "complexity": "片段",
+      "scene": [
+        "general",
+        "列表",
+        "dashboard"
+      ],
+      "status": "可用",
+      "usability": "copy-paste",
+      "deps": [],
+      "targetDir": "src/components/ui",
+      "files": [
+        "registry-items/skeleton-basic/demo.tsx"
+      ],
+      "demo": "registry-items/skeleton-basic/demo.tsx",
+      "createdAt": "2026-09-16"
+    },
+    {
+      "id": "slider",
+      "name": "滑块",
+      "category": "02-form",
+      "tags": [
+        "slider",
+        "form",
+        "radix"
+      ],
+      "stack": "shadcn",
+      "source": "shardkit",
+      "complexity": "组件",
+      "scene": [
+        "form",
+        "阈值"
+      ],
+      "status": "可用",
+      "usability": "需依赖",
+      "deps": [
+        "@radix-ui/react-slider"
+      ],
+      "installCmd": "npm i @radix-ui/react-slider",
+      "targetDir": "src/components/ui",
+      "files": [
+        "registry-items/slider/demo.tsx"
+      ],
+      "demo": "registry-items/slider/demo.tsx",
+      "createdAt": "2026-09-16"
+    },
+    {
+      "id": "switch-basic",
+      "name": "开关",
+      "category": "02-form",
+      "tags": [
+        "switch",
+        "toggle",
+        "form",
+        "shadcn"
+      ],
+      "stack": "shadcn",
+      "source": "shadcn-official",
+      "complexity": "组件",
+      "scene": [
+        "form",
+        "设置"
+      ],
+      "status": "可用",
+      "usability": "copy-paste",
+      "deps": [
+        "@radix-ui/react-switch"
+      ],
+      "installCmd": "npm i @radix-ui/react-switch",
+      "targetDir": "src/components/ui",
+      "files": [
+        "registry-items/switch-basic/demo.tsx"
+      ],
+      "demo": "registry-items/switch-basic/demo.tsx",
+      "createdAt": "2026-09-16"
+    },
+    {
+      "id": "table-basic",
+      "name": "数据表格",
+      "category": "05-data-display",
+      "tags": [
+        "table",
+        "datagrid",
+        "list",
+        "shadcn"
+      ],
+      "stack": "shadcn",
+      "source": "shadcn-official",
+      "complexity": "组件",
+      "scene": [
+        "列表",
+        "dashboard"
+      ],
+      "status": "可用",
+      "usability": "copy-paste",
+      "deps": [],
+      "targetDir": "src/components/ui",
+      "files": [
+        "registry-items/table-basic/demo.tsx"
+      ],
+      "demo": "registry-items/table-basic/demo.tsx",
+      "createdAt": "2026-09-16"
+    },
+    {
+      "id": "tabs-basic",
+      "name": "标签页",
+      "category": "03-layout",
+      "tags": [
+        "tabs",
+        "navigation",
+        "switch",
+        "shadcn"
+      ],
+      "stack": "shadcn",
+      "source": "shadcn-official",
+      "complexity": "组件",
+      "scene": [
+        "general",
+        "dashboard",
+        "详情"
+      ],
+      "status": "可用",
+      "usability": "copy-paste",
+      "deps": [
+        "@radix-ui/react-tabs"
+      ],
+      "installCmd": "npm i @radix-ui/react-tabs",
+      "targetDir": "src/components/ui",
+      "files": [
+        "registry-items/tabs-basic/demo.tsx"
+      ],
+      "demo": "registry-items/tabs-basic/demo.tsx",
+      "createdAt": "2026-09-16"
+    },
+    {
+      "id": "task-recipe-card",
+      "name": "任务配方卡片",
+      "category": "08-advanced",
+      "tags": [
+        "task-recipe",
+        "card",
+        "agent",
+        "win3"
+      ],
+      "stack": "shadcn",
+      "source": "自研",
+      "complexity": "区块",
+      "scene": [
+        "dashboard",
+        "recipe-builder"
+      ],
+      "status": "待整理",
+      "usability": "需适配",
+      "files": [],
+      "createdAt": "2026-09-16"
+    },
+    {
+      "id": "textarea-basic",
+      "name": "多行文本域",
+      "category": "02-form",
+      "tags": [
+        "textarea",
+        "form",
+        "text",
+        "shadcn"
+      ],
+      "stack": "shadcn",
+      "source": "shadcn-official",
+      "complexity": "组件",
+      "scene": [
+        "form",
+        "general"
+      ],
+      "status": "可用",
+      "usability": "copy-paste",
+      "deps": [],
+      "targetDir": "src/components/ui",
+      "files": [
+        "registry-items/textarea-basic/demo.tsx"
+      ],
+      "demo": "registry-items/textarea-basic/demo.tsx",
+      "createdAt": "2026-09-16"
+    },
+    {
+      "id": "time-picker",
+      "name": "时间选择",
+      "category": "02-form",
+      "tags": [
+        "time-picker",
+        "time",
+        "clock",
+        "form"
+      ],
+      "stack": "shadcn",
+      "source": "shardkit",
+      "complexity": "组件",
+      "scene": [
+        "表单",
+        "时间"
+      ],
+      "status": "可用",
+      "usability": "copy-paste",
+      "targetDir": "src/components/ui",
+      "files": [
+        "registry-items/time-picker/demo.tsx"
+      ],
+      "demo": "registry-items/time-picker/demo.tsx",
+      "createdAt": "2026-09-16"
+    },
+    {
+      "id": "tooltip",
+      "name": "文字提示",
+      "category": "07-overlay",
+      "tags": [
+        "tooltip",
+        "hint",
+        "overlay",
+        "radix"
+      ],
+      "stack": "shadcn",
+      "source": "shardkit",
+      "complexity": "组件",
+      "scene": [
+        "提示",
+        "浮层"
+      ],
+      "status": "可用",
+      "usability": "需依赖",
+      "deps": [
+        "@radix-ui/react-tooltip"
+      ],
+      "installCmd": "npm i @radix-ui/react-tooltip",
+      "targetDir": "src/components/ui",
+      "files": [
+        "registry-items/tooltip/demo.tsx"
+      ],
+      "demo": "registry-items/tooltip/demo.tsx",
+      "createdAt": "2026-09-16"
+    },
+    {
+      "id": "transfer",
+      "name": "穿梭框",
+      "category": "02-form",
+      "tags": [
+        "transfer",
+        "form",
+        "shuttle"
+      ],
+      "stack": "shadcn",
+      "source": "shardkit",
+      "complexity": "组件",
+      "scene": [
+        "form",
+        "权限分配"
+      ],
+      "status": "可用",
+      "usability": "需依赖",
+      "deps": [
+        "@radix-ui/react-checkbox"
+      ],
+      "installCmd": "npm i @radix-ui/react-checkbox",
+      "targetDir": "src/components/ui",
+      "files": [
+        "registry-items/transfer/demo.tsx"
+      ],
+      "demo": "registry-items/transfer/demo.tsx",
+      "createdAt": "2026-09-16"
+    },
+    {
+      "id": "tree-select",
+      "name": "树选择",
+      "category": "02-form",
+      "tags": [
+        "tree-select",
+        "tree",
+        "form"
+      ],
+      "stack": "shadcn",
+      "source": "shardkit",
+      "complexity": "组件",
+      "scene": [
+        "表单",
+        "层级选择"
+      ],
+      "status": "可用",
+      "usability": "copy-paste",
+      "targetDir": "src/components/ui",
+      "files": [
+        "registry-items/tree-select/demo.tsx"
+      ],
+      "demo": "registry-items/tree-select/demo.tsx",
+      "createdAt": "2026-09-16"
+    },
+    {
+      "id": "upload",
+      "name": "文件上传",
+      "category": "02-form",
+      "tags": [
+        "upload",
+        "file",
+        "form"
+      ],
+      "stack": "shadcn",
+      "source": "shardkit",
+      "complexity": "组件",
+      "scene": [
+        "表单",
+        "文件"
+      ],
+      "status": "可用",
+      "usability": "copy-paste",
+      "targetDir": "src/components/ui",
+      "files": [
+        "registry-items/upload/demo.tsx"
+      ],
+      "demo": "registry-items/upload/demo.tsx",
+      "createdAt": "2026-09-16"
+    },
+    {
+      "id": "waterfall",
+      "name": "瀑布流",
+      "category": "03-layout",
+      "tags": [
+        "waterfall",
+        "masonry",
+        "layout",
+        "infinite-scroll"
+      ],
+      "stack": "shardkit",
+      "source": "shardkit",
+      "complexity": "组件",
+      "scene": [
+        "画廊",
+        "图片流",
+        "信息流"
+      ],
+      "status": "可用",
+      "usability": "开箱可用",
+      "deps": [],
+      "installCmd": "",
+      "targetDir": "src/components/ui",
+      "files": [
+        "registry-items/waterfall/demo.tsx"
+      ],
+      "demo": "registry-items/waterfall/demo.tsx",
+      "createdAt": "2026-09-16"
+    }
+  ]
+}

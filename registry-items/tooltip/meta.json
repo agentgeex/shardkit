@@ -1,0 +1,25 @@
+{
+  "id": "tooltip",
+  "name": "文字提示",
+  "category": "07-overlay",
+  "tags": [
+    "tooltip",
+    "hint",
+    "overlay",
+    "radix"
+  ],
+  "stack": "shadcn",
+  "source": "shardkit",
+  "complexity": "组件",
+  "scene": [
+    "提示",
+    "浮层"
+  ],
+  "status": "可用",
+  "usability": "需依赖",
+  "deps": [
+    "@radix-ui/react-tooltip"
+  ],
+  "installCmd": "npm i @radix-ui/react-tooltip",
+  "targetDir": "src/components/ui"
+}

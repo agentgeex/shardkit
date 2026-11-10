@@ -1,0 +1,21 @@
+{
+  "id": "rate",
+  "name": "评分",
+  "category": "02-form",
+  "tags": [
+    "rate",
+    "star",
+    "score",
+    "form"
+  ],
+  "stack": "shadcn",
+  "source": "shardkit",
+  "complexity": "组件",
+  "scene": [
+    "表单",
+    "评价"
+  ],
+  "status": "可用",
+  "usability": "copy-paste",
+  "targetDir": "src/components/ui"
+}

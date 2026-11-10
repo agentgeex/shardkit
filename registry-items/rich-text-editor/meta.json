@@ -1,0 +1,29 @@
+{
+  "id": "rich-text-editor",
+  "name": "富文本编辑器",
+  "category": "08-advanced",
+  "tags": [
+    "tiptap",
+    "editor",
+    "richtext"
+  ],
+  "stack": "shadcn",
+  "source": "shardkit",
+  "complexity": "组件",
+  "scene": [
+    "form",
+    "内容"
+  ],
+  "status": "可用",
+  "usability": "需依赖",
+  "deps": [
+    "@tiptap/react",
+    "@tiptap/starter-kit",
+    "@tiptap/extension-link",
+    "@tiptap/extension-placeholder",
+    "@tiptap/extension-underline",
+    "@tiptap/extension-text-align"
+  ],
+  "installCmd": "npm i @tiptap/react @tiptap/starter-kit @tiptap/extension-link @tiptap/extension-placeholder @tiptap/extension-underline @tiptap/extension-text-align",
+  "targetDir": "src/components/ui"
+}

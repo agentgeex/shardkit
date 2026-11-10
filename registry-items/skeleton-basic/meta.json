@@ -1,0 +1,14 @@
+{
+  "id": "skeleton-basic",
+  "name": "骨架屏",
+  "category": "06-feedback",
+  "tags": ["skeleton", "loading", "placeholder"],
+  "stack": "shadcn",
+  "source": "shadcn-official",
+  "complexity": "片段",
+  "scene": ["general", "列表", "dashboard"],
+  "status": "可用",
+  "usability": "copy-paste",
+  "deps": [],
+  "targetDir": "src/components/ui"
+}

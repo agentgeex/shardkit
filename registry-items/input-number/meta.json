@@ -1,0 +1,21 @@
+{
+  "id": "input-number",
+  "name": "数字输入框",
+  "category": "02-form",
+  "tags": [
+    "input-number",
+    "number",
+    "stepper",
+    "form"
+  ],
+  "stack": "shadcn",
+  "source": "shardkit",
+  "complexity": "组件",
+  "scene": [
+    "表单",
+    "数量"
+  ],
+  "status": "可用",
+  "usability": "copy-paste",
+  "targetDir": "src/components/ui"
+}

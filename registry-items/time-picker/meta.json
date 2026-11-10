@@ -1,0 +1,21 @@
+{
+  "id": "time-picker",
+  "name": "时间选择",
+  "category": "02-form",
+  "tags": [
+    "time-picker",
+    "time",
+    "clock",
+    "form"
+  ],
+  "stack": "shadcn",
+  "source": "shardkit",
+  "complexity": "组件",
+  "scene": [
+    "表单",
+    "时间"
+  ],
+  "status": "可用",
+  "usability": "copy-paste",
+  "targetDir": "src/components/ui"
+}

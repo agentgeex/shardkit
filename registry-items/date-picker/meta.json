@@ -1,0 +1,24 @@
+{
+  "id": "date-picker",
+  "name": "日期选择",
+  "category": "02-form",
+  "tags": [
+    "date",
+    "calendar",
+    "popover",
+    "form"
+  ],
+  "stack": "shadcn",
+  "source": "shardkit",
+  "complexity": "组件",
+  "scene": [
+    "form"
+  ],
+  "status": "可用",
+  "usability": "需依赖",
+  "deps": [
+    "@radix-ui/react-popover"
+  ],
+  "installCmd": "npm i @radix-ui/react-popover",
+  "targetDir": "src/components/ui"
+}

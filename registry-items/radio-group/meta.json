@@ -1,0 +1,23 @@
+{
+  "id": "radio-group",
+  "name": "单选组",
+  "category": "02-form",
+  "tags": [
+    "radio",
+    "form",
+    "radix"
+  ],
+  "stack": "shadcn",
+  "source": "shardkit",
+  "complexity": "组件",
+  "scene": [
+    "form"
+  ],
+  "status": "可用",
+  "usability": "需依赖",
+  "deps": [
+    "@radix-ui/react-radio-group"
+  ],
+  "installCmd": "npm i @radix-ui/react-radio-group",
+  "targetDir": "src/components/ui"
+}

@@ -1,0 +1,14 @@
+{
+  "id": "content-frame",
+  "name": "内容白框（页面排版基元）",
+  "category": "03-layout",
+  "tags": ["layout", "frame", "page", "whitespace", "shadcn"],
+  "stack": "shadcn",
+  "source": "shard-kit",
+  "complexity": "组件",
+  "scene": ["general", "列表", "详情", "dashboard"],
+  "status": "可用",
+  "usability": "copy-paste",
+  "deps": [],
+  "targetDir": "src/components/ui"
+}

@@ -1,0 +1,14 @@
+{
+  "id": "empty-state-basic",
+  "name": "空态",
+  "category": "06-feedback",
+  "tags": ["empty", "state", "placeholder", "反馈"],
+  "stack": "shadcn",
+  "source": "shardkit",
+  "complexity": "片段",
+  "scene": ["general", "列表", "dashboard"],
+  "status": "可用",
+  "usability": "copy-paste",
+  "deps": [],
+  "targetDir": "src/components/ui"
+}

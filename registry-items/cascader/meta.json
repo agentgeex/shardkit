@@ -1,0 +1,21 @@
+{
+  "id": "cascader",
+  "name": "级联选择",
+  "category": "02-form",
+  "tags": [
+    "cascader",
+    "cascade",
+    "tree",
+    "form"
+  ],
+  "stack": "shadcn",
+  "source": "shardkit",
+  "complexity": "组件",
+  "scene": [
+    "表单",
+    "多级分类"
+  ],
+  "status": "可用",
+  "usability": "copy-paste",
+  "targetDir": "src/components/ui"
+}

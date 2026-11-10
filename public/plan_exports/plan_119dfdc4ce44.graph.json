@@ -1,0 +1,2548 @@
+{
+  "plan_id": "plan_119dfdc4ce44",
+  "project_id": "proj_db47457ce25d",
+  "activate_mode": "chain",
+  "start_task_run_uuid": "run_quality_write_ch10_119dfd",
+  "mode": "full",
+  "chapter": "ch10",
+  "n_top_steps": 137,
+  "n_nodes_expanded": 137,
+  "nodes": [
+    {
+      "run_uuid": "run_quality_write_ch10_119dfd",
+      "task_id": "task_0e9b2b685cb4",
+      "agent_id": "book_planner_458073",
+      "plan_section": null,
+      "depth": 0,
+      "parent_run_uuid": "",
+      "prev_task": "",
+      "next_task": "run_review_r1_entry_ch10_119dfd",
+      "children": [
+        "run_w_ch10_s01_119dfd",
+        "run_w_ch10_s02_119dfd",
+        "run_w_ch10_s03_119dfd",
+        "run_w_ch10_s04_119dfd",
+        "run_w_ch10_s05_119dfd",
+        "run_w_ch10_s06_119dfd",
+        "run_w_ch10_s07_119dfd",
+        "run_w_ch10_s08_119dfd",
+        "run_w_ch10_s09_119dfd",
+        "run_w_ch10_s10_119dfd",
+        "run_w_ch10_s11_119dfd",
+        "run_w_ch10_s12_119dfd"
+      ],
+      "n_children": 12
+    },
+    {
+      "run_uuid": "run_w_ch10_s01_119dfd",
+      "task_id": "task_cb1609f4977e",
+      "agent_id": "book_writer_0ab73b",
+      "plan_section": "s01",
+      "depth": 0,
+      "parent_run_uuid": "run_quality_write_ch10_119dfd",
+      "prev_task": "",
+      "next_task": "",
+      "children": [],
+      "n_children": 0
+    },
+    {
+      "run_uuid": "run_w_ch10_s02_119dfd",
+      "task_id": "task_cb1609f4977e",
+      "agent_id": "book_writer_0ab73b",
+      "plan_section": "s02",
+      "depth": 0,
+      "parent_run_uuid": "run_quality_write_ch10_119dfd",
+      "prev_task": "",
+      "next_task": "",
+      "children": [],
+      "n_children": 0
+    },
+    {
+      "run_uuid": "run_w_ch10_s03_119dfd",
+      "task_id": "task_cb1609f4977e",
+      "agent_id": "book_writer_0ab73b",
+      "plan_section": "s03",
+      "depth": 0,
+      "parent_run_uuid": "run_quality_write_ch10_119dfd",
+      "prev_task": "",
+      "next_task": "",
+      "children": [],
+      "n_children": 0
+    },
+    {
+      "run_uuid": "run_w_ch10_s04_119dfd",
+      "task_id": "task_cb1609f4977e",
+      "agent_id": "book_writer_0ab73b",
+      "plan_section": "s04",
+      "depth": 0,
+      "parent_run_uuid": "run_quality_write_ch10_119dfd",
+      "prev_task": "",
+      "next_task": "",
+      "children": [],
+      "n_children": 0
+    },
+    {
+      "run_uuid": "run_w_ch10_s05_119dfd",
+      "task_id": "task_cb1609f4977e",
+      "agent_id": "book_writer_0ab73b",
+      "plan_section": "s05",
+      "depth": 0,
+      "parent_run_uuid": "run_quality_write_ch10_119dfd",
+      "prev_task": "",
+      "next_task": "",
+      "children": [],
+      "n_children": 0
+    },
+    {
+      "run_uuid": "run_w_ch10_s06_119dfd",
+      "task_id": "task_cb1609f4977e",
+      "agent_id": "book_writer_0ab73b",
+      "plan_section": "s06",
+      "depth": 0,
+      "parent_run_uuid": "run_quality_write_ch10_119dfd",
+      "prev_task": "",
+      "next_task": "",
+      "children": [],
+      "n_children": 0
+    },
+    {
+      "run_uuid": "run_w_ch10_s07_119dfd",
+      "task_id": "task_cb1609f4977e",
+      "agent_id": "book_writer_0ab73b",
+      "plan_section": "s07",
+      "depth": 0,
+      "parent_run_uuid": "run_quality_write_ch10_119dfd",
+      "prev_task": "",
+      "next_task": "",
+      "children": [],
+      "n_children": 0
+    },
+    {
+      "run_uuid": "run_w_ch10_s08_119dfd",
+      "task_id": "task_cb1609f4977e",
+      "agent_id": "book_writer_0ab73b",
+      "plan_section": "s08",
+      "depth": 0,
+      "parent_run_uuid": "run_quality_write_ch10_119dfd",
+      "prev_task": "",
+      "next_task": "",
+      "children": [],
+      "n_children": 0
+    },
+    {
+      "run_uuid": "run_w_ch10_s09_119dfd",
+      "task_id": "task_cb1609f4977e",
+      "agent_id": "book_writer_0ab73b",
+      "plan_section": "s09",
+      "depth": 0,
+      "parent_run_uuid": "run_quality_write_ch10_119dfd",
+      "prev_task": "",
+      "next_task": "",
+      "children": [],
+      "n_children": 0
+    },
+    {
+      "run_uuid": "run_w_ch10_s10_119dfd",
+      "task_id": "task_cb1609f4977e",
+      "agent_id": "book_writer_0ab73b",
+      "plan_section": "s10",
+      "depth": 0,
+      "parent_run_uuid": "run_quality_write_ch10_119dfd",
+      "prev_task": "",
+      "next_task": "",
+      "children": [],
+      "n_children": 0
+    },
+    {
+      "run_uuid": "run_w_ch10_s11_119dfd",
+      "task_id": "task_cb1609f4977e",
+      "agent_id": "book_writer_0ab73b",
+      "plan_section": "s11",
+      "depth": 0,
+      "parent_run_uuid": "run_quality_write_ch10_119dfd",
+      "prev_task": "",
+      "next_task": "",
+      "children": [],
+      "n_children": 0
+    },
+    {
+      "run_uuid": "run_w_ch10_s12_119dfd",
+      "task_id": "task_cb1609f4977e",
+      "agent_id": "book_writer_0ab73b",
+      "plan_section": "s12",
+      "depth": 0,
+      "parent_run_uuid": "run_quality_write_ch10_119dfd",
+      "prev_task": "",
+      "next_task": "",
+      "children": [],
+      "n_children": 0
+    },
+    {
+      "run_uuid": "run_review_r1_entry_ch10_119dfd",
+      "task_id": "task_0e9b2b685cb4",
+      "agent_id": "book_planner_458073",
+      "plan_section": null,
+      "depth": 0,
+      "parent_run_uuid": "",
+      "prev_task": "run_quality_write_ch10_119dfd",
+      "next_task": "run_integrate_r1_ch10_119dfd",
+      "children": [
+        "run_review_r1_ch10_s01_119dfd",
+        "run_review_r1_ch10_s02_119dfd",
+        "run_review_r1_ch10_s03_119dfd",
+        "run_review_r1_ch10_s04_119dfd",
+        "run_review_r1_ch10_s05_119dfd",
+        "run_review_r1_ch10_s06_119dfd",
+        "run_review_r1_ch10_s07_119dfd",
+        "run_review_r1_ch10_s08_119dfd",
+        "run_review_r1_ch10_s09_119dfd",
+        "run_review_r1_ch10_s10_119dfd",
+        "run_review_r1_ch10_s11_119dfd",
+        "run_review_r1_ch10_s12_119dfd"
+      ],
+      "n_children": 12
+    },
+    {
+      "run_uuid": "run_review_r1_ch10_s01_119dfd",
+      "task_id": "task_17e78fa7b7f8",
+      "agent_id": "book_reviewer_1aace8",
+      "plan_section": null,
+      "depth": 0,
+      "parent_run_uuid": "run_review_r1_entry_ch10_119dfd",
+      "prev_task": "",
+      "next_task": "",
+      "children": [],
+      "n_children": 0
+    },
+    {
+      "run_uuid": "run_review_r1_ch10_s02_119dfd",
+      "task_id": "task_17e78fa7b7f8",
+      "agent_id": "book_reviewer_1aace8",
+      "plan_section": null,
+      "depth": 0,
+      "parent_run_uuid": "run_review_r1_entry_ch10_119dfd",
+      "prev_task": "",
+      "next_task": "",
+      "children": [],
+      "n_children": 0
+    },
+    {
+      "run_uuid": "run_review_r1_ch10_s03_119dfd",
+      "task_id": "task_17e78fa7b7f8",
+      "agent_id": "book_reviewer_1aace8",
+      "plan_section": null,
+      "depth": 0,
+      "parent_run_uuid": "run_review_r1_entry_ch10_119dfd",
+      "prev_task": "",
+      "next_task": "",
+      "children": [],
+      "n_children": 0
+    },
+    {
+      "run_uuid": "run_review_r1_ch10_s04_119dfd",
+      "task_id": "task_17e78fa7b7f8",
+      "agent_id": "book_reviewer_1aace8",
+      "plan_section": null,
+      "depth": 0,
+      "parent_run_uuid": "run_review_r1_entry_ch10_119dfd",
+      "prev_task": "",
+      "next_task": "",
+      "children": [],
+      "n_children": 0
+    },
+    {
+      "run_uuid": "run_review_r1_ch10_s05_119dfd",
+      "task_id": "task_17e78fa7b7f8",
+      "agent_id": "book_reviewer_1aace8",
+      "plan_section": null,
+      "depth": 0,
+      "parent_run_uuid": "run_review_r1_entry_ch10_119dfd",
+      "prev_task": "",
+      "next_task": "",
+      "children": [],
+      "n_children": 0
+    },
+    {
+      "run_uuid": "run_review_r1_ch10_s06_119dfd",
+      "task_id": "task_17e78fa7b7f8",
+      "agent_id": "book_reviewer_1aace8",
+      "plan_section": null,
+      "depth": 0,
+      "parent_run_uuid": "run_review_r1_entry_ch10_119dfd",
+      "prev_task": "",
+      "next_task": "",
+      "children": [],
+      "n_children": 0
+    },
+    {
+      "run_uuid": "run_review_r1_ch10_s07_119dfd",
+      "task_id": "task_17e78fa7b7f8",
+      "agent_id": "book_reviewer_1aace8",
+      "plan_section": null,
+      "depth": 0,
+      "parent_run_uuid": "run_review_r1_entry_ch10_119dfd",
+      "prev_task": "",
+      "next_task": "",
+      "children": [],
+      "n_children": 0
+    },
+    {
+      "run_uuid": "run_review_r1_ch10_s08_119dfd",
+      "task_id": "task_17e78fa7b7f8",
+      "agent_id": "book_reviewer_1aace8",
+      "plan_section": null,
+      "depth": 0,
+      "parent_run_uuid": "run_review_r1_entry_ch10_119dfd",
+      "prev_task": "",
+      "next_task": "",
+      "children": [],
+      "n_children": 0
+    },
+    {
+      "run_uuid": "run_review_r1_ch10_s09_119dfd",
+      "task_id": "task_17e78fa7b7f8",
+      "agent_id": "book_reviewer_1aace8",
+      "plan_section": null,
+      "depth": 0,
+      "parent_run_uuid": "run_review_r1_entry_ch10_119dfd",
+      "prev_task": "",
+      "next_task": "",
+      "children": [],
+      "n_children": 0
+    },
+    {
+      "run_uuid": "run_review_r1_ch10_s10_119dfd",
+      "task_id": "task_17e78fa7b7f8",
+      "agent_id": "book_reviewer_1aace8",
+      "plan_section": null,
+      "depth": 0,
+      "parent_run_uuid": "run_review_r1_entry_ch10_119dfd",
+      "prev_task": "",
+      "next_task": "",
+      "children": [],
+      "n_children": 0
+    },
+    {
+      "run_uuid": "run_review_r1_ch10_s11_119dfd",
+      "task_id": "task_17e78fa7b7f8",
+      "agent_id": "book_reviewer_1aace8",
+      "plan_section": null,
+      "depth": 0,
+      "parent_run_uuid": "run_review_r1_entry_ch10_119dfd",
+      "prev_task": "",
+      "next_task": "",
+      "children": [],
+      "n_children": 0
+    },
+    {
+      "run_uuid": "run_review_r1_ch10_s12_119dfd",
+      "task_id": "task_17e78fa7b7f8",
+      "agent_id": "book_reviewer_1aace8",
+      "plan_section": null,
+      "depth": 0,
+      "parent_run_uuid": "run_review_r1_entry_ch10_119dfd",
+      "prev_task": "",
+      "next_task": "",
+      "children": [],
+      "n_children": 0
+    },
+    {
+      "run_uuid": "run_integrate_r1_ch10_119dfd",
+      "task_id": "task_63a1bc25dd44",
+      "agent_id": "book_reviewer_1aace8",
+      "plan_section": null,
+      "depth": 0,
+      "parent_run_uuid": "",
+      "prev_task": "run_review_r1_entry_ch10_119dfd",
+      "next_task": "run_revise_r1_entry_ch10_119dfd",
+      "children": [],
+      "n_children": 0
+    },
+    {
+      "run_uuid": "run_revise_r1_entry_ch10_119dfd",
+      "task_id": "task_0e9b2b685cb4",
+      "agent_id": "book_planner_458073",
+      "plan_section": null,
+      "depth": 0,
+      "parent_run_uuid": "",
+      "prev_task": "run_integrate_r1_ch10_119dfd",
+      "next_task": "run_beta_r1_entry_ch10_119dfd",
+      "children": [
+        "run_revise_r1_ch10_s01_119dfd",
+        "run_revise_r1_ch10_s02_119dfd",
+        "run_revise_r1_ch10_s03_119dfd",
+        "run_revise_r1_ch10_s04_119dfd",
+        "run_revise_r1_ch10_s05_119dfd",
+        "run_revise_r1_ch10_s06_119dfd",
+        "run_revise_r1_ch10_s07_119dfd",
+        "run_revise_r1_ch10_s08_119dfd",
+        "run_revise_r1_ch10_s09_119dfd",
+        "run_revise_r1_ch10_s10_119dfd",
+        "run_revise_r1_ch10_s11_119dfd",
+        "run_revise_r1_ch10_s12_119dfd"
+      ],
+      "n_children": 12
+    },
+    {
+      "run_uuid": "run_revise_r1_ch10_s01_119dfd",
+      "task_id": "task_aa5db9fc1c89",
+      "agent_id": "book_writer_0ab73b",
+      "plan_section": null,
+      "depth": 0,
+      "parent_run_uuid": "run_revise_r1_entry_ch10_119dfd",
+      "prev_task": "",
+      "next_task": "",
+      "children": [],
+      "n_children": 0
+    },
+    {
+      "run_uuid": "run_revise_r1_ch10_s02_119dfd",
+      "task_id": "task_aa5db9fc1c89",
+      "agent_id": "book_writer_0ab73b",
+      "plan_section": null,
+      "depth": 0,
+      "parent_run_uuid": "run_revise_r1_entry_ch10_119dfd",
+      "prev_task": "",
+      "next_task": "",
+      "children": [],
+      "n_children": 0
+    },
+    {
+      "run_uuid": "run_revise_r1_ch10_s03_119dfd",
+      "task_id": "task_aa5db9fc1c89",
+      "agent_id": "book_writer_0ab73b",
+      "plan_section": null,
+      "depth": 0,
+      "parent_run_uuid": "run_revise_r1_entry_ch10_119dfd",
+      "prev_task": "",
+      "next_task": "",
+      "children": [],
+      "n_children": 0
+    },
+    {
+      "run_uuid": "run_revise_r1_ch10_s04_119dfd",
+      "task_id": "task_aa5db9fc1c89",
+      "agent_id": "book_writer_0ab73b",
+      "plan_section": null,
+      "depth": 0,
+      "parent_run_uuid": "run_revise_r1_entry_ch10_119dfd",
+      "prev_task": "",
+      "next_task": "",
+      "children": [],
+      "n_children": 0
+    },
+    {
+      "run_uuid": "run_revise_r1_ch10_s05_119dfd",
+      "task_id": "task_aa5db9fc1c89",
+      "agent_id": "book_writer_0ab73b",
+      "plan_section": null,
+      "depth": 0,
+      "parent_run_uuid": "run_revise_r1_entry_ch10_119dfd",
+      "prev_task": "",
+      "next_task": "",
+      "children": [],
+      "n_children": 0
+    },
+    {
+      "run_uuid": "run_revise_r1_ch10_s06_119dfd",
+      "task_id": "task_aa5db9fc1c89",
+      "agent_id": "book_writer_0ab73b",
+      "plan_section": null,
+      "depth": 0,
+      "parent_run_uuid": "run_revise_r1_entry_ch10_119dfd",
+      "prev_task": "",
+      "next_task": "",
+      "children": [],
+      "n_children": 0
+    },
+    {
+      "run_uuid": "run_revise_r1_ch10_s07_119dfd",
+      "task_id": "task_aa5db9fc1c89",
+      "agent_id": "book_writer_0ab73b",
+      "plan_section": null,
+      "depth": 0,
+      "parent_run_uuid": "run_revise_r1_entry_ch10_119dfd",
+      "prev_task": "",
+      "next_task": "",
+      "children": [],
+      "n_children": 0
+    },
+    {
+      "run_uuid": "run_revise_r1_ch10_s08_119dfd",
+      "task_id": "task_aa5db9fc1c89",
+      "agent_id": "book_writer_0ab73b",
+      "plan_section": null,
+      "depth": 0,
+      "parent_run_uuid": "run_revise_r1_entry_ch10_119dfd",
+      "prev_task": "",
+      "next_task": "",
+      "children": [],
+      "n_children": 0
+    },
+    {
+      "run_uuid": "run_revise_r1_ch10_s09_119dfd",
+      "task_id": "task_aa5db9fc1c89",
+      "agent_id": "book_writer_0ab73b",
+      "plan_section": null,
+      "depth": 0,
+      "parent_run_uuid": "run_revise_r1_entry_ch10_119dfd",
+      "prev_task": "",
+      "next_task": "",
+      "children": [],
+      "n_children": 0
+    },
+    {
+      "run_uuid": "run_revise_r1_ch10_s10_119dfd",
+      "task_id": "task_aa5db9fc1c89",
+      "agent_id": "book_writer_0ab73b",
+      "plan_section": null,
+      "depth": 0,
+      "parent_run_uuid": "run_revise_r1_entry_ch10_119dfd",
+      "prev_task": "",
+      "next_task": "",
+      "children": [],
+      "n_children": 0
+    },
+    {
+      "run_uuid": "run_revise_r1_ch10_s11_119dfd",
+      "task_id": "task_aa5db9fc1c89",
+      "agent_id": "book_writer_0ab73b",
+      "plan_section": null,
+      "depth": 0,
+      "parent_run_uuid": "run_revise_r1_entry_ch10_119dfd",
+      "prev_task": "",
+      "next_task": "",
+      "children": [],
+      "n_children": 0
+    },
+    {
+      "run_uuid": "run_revise_r1_ch10_s12_119dfd",
+      "task_id": "task_aa5db9fc1c89",
+      "agent_id": "book_writer_0ab73b",
+      "plan_section": null,
+      "depth": 0,
+      "parent_run_uuid": "run_revise_r1_entry_ch10_119dfd",
+      "prev_task": "",
+      "next_task": "",
+      "children": [],
+      "n_children": 0
+    },
+    {
+      "run_uuid": "run_beta_r1_entry_ch10_119dfd",
+      "task_id": "task_0e9b2b685cb4",
+      "agent_id": "book_planner_458073",
+      "plan_section": null,
+      "depth": 0,
+      "parent_run_uuid": "",
+      "prev_task": "run_revise_r1_entry_ch10_119dfd",
+      "next_task": "run_quality_judge_r1_ch10_119dfd",
+      "children": [
+        "run_beta_r1_ch10_s01_119dfd",
+        "run_beta_r1_ch10_s02_119dfd",
+        "run_beta_r1_ch10_s03_119dfd",
+        "run_beta_r1_ch10_s04_119dfd",
+        "run_beta_r1_ch10_s05_119dfd",
+        "run_beta_r1_ch10_s06_119dfd",
+        "run_beta_r1_ch10_s07_119dfd",
+        "run_beta_r1_ch10_s08_119dfd",
+        "run_beta_r1_ch10_s09_119dfd",
+        "run_beta_r1_ch10_s10_119dfd",
+        "run_beta_r1_ch10_s11_119dfd",
+        "run_beta_r1_ch10_s12_119dfd"
+      ],
+      "n_children": 12
+    },
+    {
+      "run_uuid": "run_beta_r1_ch10_s01_119dfd",
+      "task_id": "task_71c033f0f8ef",
+      "agent_id": "book_beta_reader_374207",
+      "plan_section": null,
+      "depth": 0,
+      "parent_run_uuid": "run_beta_r1_entry_ch10_119dfd",
+      "prev_task": "",
+      "next_task": "",
+      "children": [],
+      "n_children": 0
+    },
+    {
+      "run_uuid": "run_beta_r1_ch10_s02_119dfd",
+      "task_id": "task_71c033f0f8ef",
+      "agent_id": "book_beta_reader_374207",
+      "plan_section": null,
+      "depth": 0,
+      "parent_run_uuid": "run_beta_r1_entry_ch10_119dfd",
+      "prev_task": "",
+      "next_task": "",
+      "children": [],
+      "n_children": 0
+    },
+    {
+      "run_uuid": "run_beta_r1_ch10_s03_119dfd",
+      "task_id": "task_71c033f0f8ef",
+      "agent_id": "book_beta_reader_374207",
+      "plan_section": null,
+      "depth": 0,
+      "parent_run_uuid": "run_beta_r1_entry_ch10_119dfd",
+      "prev_task": "",
+      "next_task": "",
+      "children": [],
+      "n_children": 0
+    },
+    {
+      "run_uuid": "run_beta_r1_ch10_s04_119dfd",
+      "task_id": "task_71c033f0f8ef",
+      "agent_id": "book_beta_reader_374207",
+      "plan_section": null,
+      "depth": 0,
+      "parent_run_uuid": "run_beta_r1_entry_ch10_119dfd",
+      "prev_task": "",
+      "next_task": "",
+      "children": [],
+      "n_children": 0
+    },
+    {
+      "run_uuid": "run_beta_r1_ch10_s05_119dfd",
+      "task_id": "task_71c033f0f8ef",
+      "agent_id": "book_beta_reader_374207",
+      "plan_section": null,
+      "depth": 0,
+      "parent_run_uuid": "run_beta_r1_entry_ch10_119dfd",
+      "prev_task": "",
+      "next_task": "",
+      "children": [],
+      "n_children": 0
+    },
+    {
+      "run_uuid": "run_beta_r1_ch10_s06_119dfd",
+      "task_id": "task_71c033f0f8ef",
+      "agent_id": "book_beta_reader_374207",
+      "plan_section": null,
+      "depth": 0,
+      "parent_run_uuid": "run_beta_r1_entry_ch10_119dfd",
+      "prev_task": "",
+      "next_task": "",
+      "children": [],
+      "n_children": 0
+    },
+    {
+      "run_uuid": "run_beta_r1_ch10_s07_119dfd",
+      "task_id": "task_71c033f0f8ef",
+      "agent_id": "book_beta_reader_374207",
+      "plan_section": null,
+      "depth": 0,
+      "parent_run_uuid": "run_beta_r1_entry_ch10_119dfd",
+      "prev_task": "",
+      "next_task": "",
+      "children": [],
+      "n_children": 0
+    },
+    {
+      "run_uuid": "run_beta_r1_ch10_s08_119dfd",
+      "task_id": "task_71c033f0f8ef",
+      "agent_id": "book_beta_reader_374207",
+      "plan_section": null,
+      "depth": 0,
+      "parent_run_uuid": "run_beta_r1_entry_ch10_119dfd",
+      "prev_task": "",
+      "next_task": "",
+      "children": [],
+      "n_children": 0
+    },
+    {
+      "run_uuid": "run_beta_r1_ch10_s09_119dfd",
+      "task_id": "task_71c033f0f8ef",
+      "agent_id": "book_beta_reader_374207",
+      "plan_section": null,
+      "depth": 0,
+      "parent_run_uuid": "run_beta_r1_entry_ch10_119dfd",
+      "prev_task": "",
+      "next_task": "",
+      "children": [],
+      "n_children": 0
+    },
+    {
+      "run_uuid": "run_beta_r1_ch10_s10_119dfd",
+      "task_id": "task_71c033f0f8ef",
+      "agent_id": "book_beta_reader_374207",
+      "plan_section": null,
+      "depth": 0,
+      "parent_run_uuid": "run_beta_r1_entry_ch10_119dfd",
+      "prev_task": "",
+      "next_task": "",
+      "children": [],
+      "n_children": 0
+    },
+    {
+      "run_uuid": "run_beta_r1_ch10_s11_119dfd",
+      "task_id": "task_71c033f0f8ef",
+      "agent_id": "book_beta_reader_374207",
+      "plan_section": null,
+      "depth": 0,
+      "parent_run_uuid": "run_beta_r1_entry_ch10_119dfd",
+      "prev_task": "",
+      "next_task": "",
+      "children": [],
+      "n_children": 0
+    },
+    {
+      "run_uuid": "run_beta_r1_ch10_s12_119dfd",
+      "task_id": "task_71c033f0f8ef",
+      "agent_id": "book_beta_reader_374207",
+      "plan_section": null,
+      "depth": 0,
+      "parent_run_uuid": "run_beta_r1_entry_ch10_119dfd",
+      "prev_task": "",
+      "next_task": "",
+      "children": [],
+      "n_children": 0
+    },
+    {
+      "run_uuid": "run_quality_judge_r1_ch10_119dfd",
+      "task_id": "task_0e9b2b685cb4",
+      "agent_id": "book_planner_458073",
+      "plan_section": null,
+      "depth": 0,
+      "parent_run_uuid": "",
+      "prev_task": "run_beta_r1_entry_ch10_119dfd",
+      "next_task": "run_review_r2_entry_ch10_119dfd",
+      "children": [],
+      "n_children": 0
+    },
+    {
+      "run_uuid": "run_review_r2_entry_ch10_119dfd",
+      "task_id": "task_0e9b2b685cb4",
+      "agent_id": "book_planner_458073",
+      "plan_section": null,
+      "depth": 0,
+      "parent_run_uuid": "",
+      "prev_task": "run_quality_judge_r1_ch10_119dfd",
+      "next_task": "run_integrate_r2_ch10_119dfd",
+      "children": [
+        "run_review_r2_ch10_s01_119dfd",
+        "run_review_r2_ch10_s02_119dfd",
+        "run_review_r2_ch10_s03_119dfd",
+        "run_review_r2_ch10_s04_119dfd",
+        "run_review_r2_ch10_s05_119dfd",
+        "run_review_r2_ch10_s06_119dfd",
+        "run_review_r2_ch10_s07_119dfd",
+        "run_review_r2_ch10_s08_119dfd",
+        "run_review_r2_ch10_s09_119dfd",
+        "run_review_r2_ch10_s10_119dfd",
+        "run_review_r2_ch10_s11_119dfd",
+        "run_review_r2_ch10_s12_119dfd"
+      ],
+      "n_children": 12
+    },
+    {
+      "run_uuid": "run_review_r2_ch10_s01_119dfd",
+      "task_id": "task_17e78fa7b7f8",
+      "agent_id": "book_reviewer_1aace8",
+      "plan_section": null,
+      "depth": 0,
+      "parent_run_uuid": "run_review_r2_entry_ch10_119dfd",
+      "prev_task": "",
+      "next_task": "",
+      "children": [],
+      "n_children": 0
+    },
+    {
+      "run_uuid": "run_review_r2_ch10_s02_119dfd",
+      "task_id": "task_17e78fa7b7f8",
+      "agent_id": "book_reviewer_1aace8",
+      "plan_section": null,
+      "depth": 0,
+      "parent_run_uuid": "run_review_r2_entry_ch10_119dfd",
+      "prev_task": "",
+      "next_task": "",
+      "children": [],
+      "n_children": 0
+    },
+    {
+      "run_uuid": "run_review_r2_ch10_s03_119dfd",
+      "task_id": "task_17e78fa7b7f8",
+      "agent_id": "book_reviewer_1aace8",
+      "plan_section": null,
+      "depth": 0,
+      "parent_run_uuid": "run_review_r2_entry_ch10_119dfd",
+      "prev_task": "",
+      "next_task": "",
+      "children": [],
+      "n_children": 0
+    },
+    {
+      "run_uuid": "run_review_r2_ch10_s04_119dfd",
+      "task_id": "task_17e78fa7b7f8",
+      "agent_id": "book_reviewer_1aace8",
+      "plan_section": null,
+      "depth": 0,
+      "parent_run_uuid": "run_review_r2_entry_ch10_119dfd",
+      "prev_task": "",
+      "next_task": "",
+      "children": [],
+      "n_children": 0
+    },
+    {
+      "run_uuid": "run_review_r2_ch10_s05_119dfd",
+      "task_id": "task_17e78fa7b7f8",
+      "agent_id": "book_reviewer_1aace8",
+      "plan_section": null,
+      "depth": 0,
+      "parent_run_uuid": "run_review_r2_entry_ch10_119dfd",
+      "prev_task": "",
+      "next_task": "",
+      "children": [],
+      "n_children": 0
+    },
+    {
+      "run_uuid": "run_review_r2_ch10_s06_119dfd",
+      "task_id": "task_17e78fa7b7f8",
+      "agent_id": "book_reviewer_1aace8",
+      "plan_section": null,
+      "depth": 0,
+      "parent_run_uuid": "run_review_r2_entry_ch10_119dfd",
+      "prev_task": "",
+      "next_task": "",
+      "children": [],
+      "n_children": 0
+    },
+    {
+      "run_uuid": "run_review_r2_ch10_s07_119dfd",
+      "task_id": "task_17e78fa7b7f8",
+      "agent_id": "book_reviewer_1aace8",
+      "plan_section": null,
+      "depth": 0,
+      "parent_run_uuid": "run_review_r2_entry_ch10_119dfd",
+      "prev_task": "",
+      "next_task": "",
+      "children": [],
+      "n_children": 0
+    },
+    {
+      "run_uuid": "run_review_r2_ch10_s08_119dfd",
+      "task_id": "task_17e78fa7b7f8",
+      "agent_id": "book_reviewer_1aace8",
+      "plan_section": null,
+      "depth": 0,
+      "parent_run_uuid": "run_review_r2_entry_ch10_119dfd",
+      "prev_task": "",
+      "next_task": "",
+      "children": [],
+      "n_children": 0
+    },
+    {
+      "run_uuid": "run_review_r2_ch10_s09_119dfd",
+      "task_id": "task_17e78fa7b7f8",
+      "agent_id": "book_reviewer_1aace8",
+      "plan_section": null,
+      "depth": 0,
+      "parent_run_uuid": "run_review_r2_entry_ch10_119dfd",
+      "prev_task": "",
+      "next_task": "",
+      "children": [],
+      "n_children": 0
+    },
+    {
+      "run_uuid": "run_review_r2_ch10_s10_119dfd",
+      "task_id": "task_17e78fa7b7f8",
+      "agent_id": "book_reviewer_1aace8",
+      "plan_section": null,
+      "depth": 0,
+      "parent_run_uuid": "run_review_r2_entry_ch10_119dfd",
+      "prev_task": "",
+      "next_task": "",
+      "children": [],
+      "n_children": 0
+    },
+    {
+      "run_uuid": "run_review_r2_ch10_s11_119dfd",
+      "task_id": "task_17e78fa7b7f8",
+      "agent_id": "book_reviewer_1aace8",
+      "plan_section": null,
+      "depth": 0,
+      "parent_run_uuid": "run_review_r2_entry_ch10_119dfd",
+      "prev_task": "",
+      "next_task": "",
+      "children": [],
+      "n_children": 0
+    },
+    {
+      "run_uuid": "run_review_r2_ch10_s12_119dfd",
+      "task_id": "task_17e78fa7b7f8",
+      "agent_id": "book_reviewer_1aace8",
+      "plan_section": null,
+      "depth": 0,
+      "parent_run_uuid": "run_review_r2_entry_ch10_119dfd",
+      "prev_task": "",
+      "next_task": "",
+      "children": [],
+      "n_children": 0
+    },
+    {
+      "run_uuid": "run_integrate_r2_ch10_119dfd",
+      "task_id": "task_63a1bc25dd44",
+      "agent_id": "book_reviewer_1aace8",
+      "plan_section": null,
+      "depth": 0,
+      "parent_run_uuid": "",
+      "prev_task": "run_review_r2_entry_ch10_119dfd",
+      "next_task": "run_revise_r2_entry_ch10_119dfd",
+      "children": [],
+      "n_children": 0
+    },
+    {
+      "run_uuid": "run_revise_r2_entry_ch10_119dfd",
+      "task_id": "task_0e9b2b685cb4",
+      "agent_id": "book_planner_458073",
+      "plan_section": null,
+      "depth": 0,
+      "parent_run_uuid": "",
+      "prev_task": "run_integrate_r2_ch10_119dfd",
+      "next_task": "run_beta_r2_entry_ch10_119dfd",
+      "children": [
+        "run_revise_r2_ch10_s01_119dfd",
+        "run_revise_r2_ch10_s02_119dfd",
+        "run_revise_r2_ch10_s03_119dfd",
+        "run_revise_r2_ch10_s04_119dfd",
+        "run_revise_r2_ch10_s05_119dfd",
+        "run_revise_r2_ch10_s06_119dfd",
+        "run_revise_r2_ch10_s07_119dfd",
+        "run_revise_r2_ch10_s08_119dfd",
+        "run_revise_r2_ch10_s09_119dfd",
+        "run_revise_r2_ch10_s10_119dfd",
+        "run_revise_r2_ch10_s11_119dfd",
+        "run_revise_r2_ch10_s12_119dfd"
+      ],
+      "n_children": 12
+    },
+    {
+      "run_uuid": "run_revise_r2_ch10_s01_119dfd",
+      "task_id": "task_aa5db9fc1c89",
+      "agent_id": "book_writer_0ab73b",
+      "plan_section": null,
+      "depth": 0,
+      "parent_run_uuid": "run_revise_r2_entry_ch10_119dfd",
+      "prev_task": "",
+      "next_task": "",
+      "children": [],
+      "n_children": 0
+    },
+    {
+      "run_uuid": "run_revise_r2_ch10_s02_119dfd",
+      "task_id": "task_aa5db9fc1c89",
+      "agent_id": "book_writer_0ab73b",
+      "plan_section": null,
+      "depth": 0,
+      "parent_run_uuid": "run_revise_r2_entry_ch10_119dfd",
+      "prev_task": "",
+      "next_task": "",
+      "children": [],
+      "n_children": 0
+    },
+    {
+      "run_uuid": "run_revise_r2_ch10_s03_119dfd",
+      "task_id": "task_aa5db9fc1c89",
+      "agent_id": "book_writer_0ab73b",
+      "plan_section": null,
+      "depth": 0,
+      "parent_run_uuid": "run_revise_r2_entry_ch10_119dfd",
+      "prev_task": "",
+      "next_task": "",
+      "children": [],
+      "n_children": 0
+    },
+    {
+      "run_uuid": "run_revise_r2_ch10_s04_119dfd",
+      "task_id": "task_aa5db9fc1c89",
+      "agent_id": "book_writer_0ab73b",
+      "plan_section": null,
+      "depth": 0,
+      "parent_run_uuid": "run_revise_r2_entry_ch10_119dfd",
+      "prev_task": "",
+      "next_task": "",
+      "children": [],
+      "n_children": 0
+    },
+    {
+      "run_uuid": "run_revise_r2_ch10_s05_119dfd",
+      "task_id": "task_aa5db9fc1c89",
+      "agent_id": "book_writer_0ab73b",
+      "plan_section": null,
+      "depth": 0,
+      "parent_run_uuid": "run_revise_r2_entry_ch10_119dfd",
+      "prev_task": "",
+      "next_task": "",
+      "children": [],
+      "n_children": 0
+    },
+    {
+      "run_uuid": "run_revise_r2_ch10_s06_119dfd",
+      "task_id": "task_aa5db9fc1c89",
+      "agent_id": "book_writer_0ab73b",
+      "plan_section": null,
+      "depth": 0,
+      "parent_run_uuid": "run_revise_r2_entry_ch10_119dfd",
+      "prev_task": "",
+      "next_task": "",
+      "children": [],
+      "n_children": 0
+    },
+    {
+      "run_uuid": "run_revise_r2_ch10_s07_119dfd",
+      "task_id": "task_aa5db9fc1c89",
+      "agent_id": "book_writer_0ab73b",
+      "plan_section": null,
+      "depth": 0,
+      "parent_run_uuid": "run_revise_r2_entry_ch10_119dfd",
+      "prev_task": "",
+      "next_task": "",
+      "children": [],
+      "n_children": 0
+    },
+    {
+      "run_uuid": "run_revise_r2_ch10_s08_119dfd",
+      "task_id": "task_aa5db9fc1c89",
+      "agent_id": "book_writer_0ab73b",
+      "plan_section": null,
+      "depth": 0,
+      "parent_run_uuid": "run_revise_r2_entry_ch10_119dfd",
+      "prev_task": "",
+      "next_task": "",
+      "children": [],
+      "n_children": 0
+    },
+    {
+      "run_uuid": "run_revise_r2_ch10_s09_119dfd",
+      "task_id": "task_aa5db9fc1c89",
+      "agent_id": "book_writer_0ab73b",
+      "plan_section": null,
+      "depth": 0,
+      "parent_run_uuid": "run_revise_r2_entry_ch10_119dfd",
+      "prev_task": "",
+      "next_task": "",
+      "children": [],
+      "n_children": 0
+    },
+    {
+      "run_uuid": "run_revise_r2_ch10_s10_119dfd",
+      "task_id": "task_aa5db9fc1c89",
+      "agent_id": "book_writer_0ab73b",
+      "plan_section": null,
+      "depth": 0,
+      "parent_run_uuid": "run_revise_r2_entry_ch10_119dfd",
+      "prev_task": "",
+      "next_task": "",
+      "children": [],
+      "n_children": 0
+    },
+    {
+      "run_uuid": "run_revise_r2_ch10_s11_119dfd",
+      "task_id": "task_aa5db9fc1c89",
+      "agent_id": "book_writer_0ab73b",
+      "plan_section": null,
+      "depth": 0,
+      "parent_run_uuid": "run_revise_r2_entry_ch10_119dfd",
+      "prev_task": "",
+      "next_task": "",
+      "children": [],
+      "n_children": 0
+    },
+    {
+      "run_uuid": "run_revise_r2_ch10_s12_119dfd",
+      "task_id": "task_aa5db9fc1c89",
+      "agent_id": "book_writer_0ab73b",
+      "plan_section": null,
+      "depth": 0,
+      "parent_run_uuid": "run_revise_r2_entry_ch10_119dfd",
+      "prev_task": "",
+      "next_task": "",
+      "children": [],
+      "n_children": 0
+    },
+    {
+      "run_uuid": "run_beta_r2_entry_ch10_119dfd",
+      "task_id": "task_0e9b2b685cb4",
+      "agent_id": "book_planner_458073",
+      "plan_section": null,
+      "depth": 0,
+      "parent_run_uuid": "",
+      "prev_task": "run_revise_r2_entry_ch10_119dfd",
+      "next_task": "run_quality_judge_r2_ch10_119dfd",
+      "children": [
+        "run_beta_r2_ch10_s01_119dfd",
+        "run_beta_r2_ch10_s02_119dfd",
+        "run_beta_r2_ch10_s03_119dfd",
+        "run_beta_r2_ch10_s04_119dfd",
+        "run_beta_r2_ch10_s05_119dfd",
+        "run_beta_r2_ch10_s06_119dfd",
+        "run_beta_r2_ch10_s07_119dfd",
+        "run_beta_r2_ch10_s08_119dfd",
+        "run_beta_r2_ch10_s09_119dfd",
+        "run_beta_r2_ch10_s10_119dfd",
+        "run_beta_r2_ch10_s11_119dfd",
+        "run_beta_r2_ch10_s12_119dfd"
+      ],
+      "n_children": 12
+    },
+    {
+      "run_uuid": "run_beta_r2_ch10_s01_119dfd",
+      "task_id": "task_71c033f0f8ef",
+      "agent_id": "book_beta_reader_374207",
+      "plan_section": null,
+      "depth": 0,
+      "parent_run_uuid": "run_beta_r2_entry_ch10_119dfd",
+      "prev_task": "",
+      "next_task": "",
+      "children": [],
+      "n_children": 0
+    },
+    {
+      "run_uuid": "run_beta_r2_ch10_s02_119dfd",
+      "task_id": "task_71c033f0f8ef",
+      "agent_id": "book_beta_reader_374207",
+      "plan_section": null,
+      "depth": 0,
+      "parent_run_uuid": "run_beta_r2_entry_ch10_119dfd",
+      "prev_task": "",
+      "next_task": "",
+      "children": [],
+      "n_children": 0
+    },
+    {
+      "run_uuid": "run_beta_r2_ch10_s03_119dfd",
+      "task_id": "task_71c033f0f8ef",
+      "agent_id": "book_beta_reader_374207",
+      "plan_section": null,
+      "depth": 0,
+      "parent_run_uuid": "run_beta_r2_entry_ch10_119dfd",
+      "prev_task": "",
+      "next_task": "",
+      "children": [],
+      "n_children": 0
+    },
+    {
+      "run_uuid": "run_beta_r2_ch10_s04_119dfd",
+      "task_id": "task_71c033f0f8ef",
+      "agent_id": "book_beta_reader_374207",
+      "plan_section": null,
+      "depth": 0,
+      "parent_run_uuid": "run_beta_r2_entry_ch10_119dfd",
+      "prev_task": "",
+      "next_task": "",
+      "children": [],
+      "n_children": 0
+    },
+    {
+      "run_uuid": "run_beta_r2_ch10_s05_119dfd",
+      "task_id": "task_71c033f0f8ef",
+      "agent_id": "book_beta_reader_374207",
+      "plan_section": null,
+      "depth": 0,
+      "parent_run_uuid": "run_beta_r2_entry_ch10_119dfd",
+      "prev_task": "",
+      "next_task": "",
+      "children": [],
+      "n_children": 0
+    },
+    {
+      "run_uuid": "run_beta_r2_ch10_s06_119dfd",
+      "task_id": "task_71c033f0f8ef",
+      "agent_id": "book_beta_reader_374207",
+      "plan_section": null,
+      "depth": 0,
+      "parent_run_uuid": "run_beta_r2_entry_ch10_119dfd",
+      "prev_task": "",
+      "next_task": "",
+      "children": [],
+      "n_children": 0
+    },
+    {
+      "run_uuid": "run_beta_r2_ch10_s07_119dfd",
+      "task_id": "task_71c033f0f8ef",
+      "agent_id": "book_beta_reader_374207",
+      "plan_section": null,
+      "depth": 0,
+      "parent_run_uuid": "run_beta_r2_entry_ch10_119dfd",
+      "prev_task": "",
+      "next_task": "",
+      "children": [],
+      "n_children": 0
+    },
+    {
+      "run_uuid": "run_beta_r2_ch10_s08_119dfd",
+      "task_id": "task_71c033f0f8ef",
+      "agent_id": "book_beta_reader_374207",
+      "plan_section": null,
+      "depth": 0,
+      "parent_run_uuid": "run_beta_r2_entry_ch10_119dfd",
+      "prev_task": "",
+      "next_task": "",
+      "children": [],
+      "n_children": 0
+    },
+    {
+      "run_uuid": "run_beta_r2_ch10_s09_119dfd",
+      "task_id": "task_71c033f0f8ef",
+      "agent_id": "book_beta_reader_374207",
+      "plan_section": null,
+      "depth": 0,
+      "parent_run_uuid": "run_beta_r2_entry_ch10_119dfd",
+      "prev_task": "",
+      "next_task": "",
+      "children": [],
+      "n_children": 0
+    },
+    {
+      "run_uuid": "run_beta_r2_ch10_s10_119dfd",
+      "task_id": "task_71c033f0f8ef",
+      "agent_id": "book_beta_reader_374207",
+      "plan_section": null,
+      "depth": 0,
+      "parent_run_uuid": "run_beta_r2_entry_ch10_119dfd",
+      "prev_task": "",
+      "next_task": "",
+      "children": [],
+      "n_children": 0
+    },
+    {
+      "run_uuid": "run_beta_r2_ch10_s11_119dfd",
+      "task_id": "task_71c033f0f8ef",
+      "agent_id": "book_beta_reader_374207",
+      "plan_section": null,
+      "depth": 0,
+      "parent_run_uuid": "run_beta_r2_entry_ch10_119dfd",
+      "prev_task": "",
+      "next_task": "",
+      "children": [],
+      "n_children": 0
+    },
+    {
+      "run_uuid": "run_beta_r2_ch10_s12_119dfd",
+      "task_id": "task_71c033f0f8ef",
+      "agent_id": "book_beta_reader_374207",
+      "plan_section": null,
+      "depth": 0,
+      "parent_run_uuid": "run_beta_r2_entry_ch10_119dfd",
+      "prev_task": "",
+      "next_task": "",
+      "children": [],
+      "n_children": 0
+    },
+    {
+      "run_uuid": "run_quality_judge_r2_ch10_119dfd",
+      "task_id": "task_0e9b2b685cb4",
+      "agent_id": "book_planner_458073",
+      "plan_section": null,
+      "depth": 0,
+      "parent_run_uuid": "",
+      "prev_task": "run_beta_r2_entry_ch10_119dfd",
+      "next_task": "run_review_r3_entry_ch10_119dfd",
+      "children": [],
+      "n_children": 0
+    },
+    {
+      "run_uuid": "run_review_r3_entry_ch10_119dfd",
+      "task_id": "task_0e9b2b685cb4",
+      "agent_id": "book_planner_458073",
+      "plan_section": null,
+      "depth": 0,
+      "parent_run_uuid": "",
+      "prev_task": "run_quality_judge_r2_ch10_119dfd",
+      "next_task": "run_integrate_r3_ch10_119dfd",
+      "children": [
+        "run_review_r3_ch10_s01_119dfd",
+        "run_review_r3_ch10_s02_119dfd",
+        "run_review_r3_ch10_s03_119dfd",
+        "run_review_r3_ch10_s04_119dfd",
+        "run_review_r3_ch10_s05_119dfd",
+        "run_review_r3_ch10_s06_119dfd",
+        "run_review_r3_ch10_s07_119dfd",
+        "run_review_r3_ch10_s08_119dfd",
+        "run_review_r3_ch10_s09_119dfd",
+        "run_review_r3_ch10_s10_119dfd",
+        "run_review_r3_ch10_s11_119dfd",
+        "run_review_r3_ch10_s12_119dfd"
+      ],
+      "n_children": 12
+    },
+    {
+      "run_uuid": "run_review_r3_ch10_s01_119dfd",
+      "task_id": "task_17e78fa7b7f8",
+      "agent_id": "book_reviewer_1aace8",
+      "plan_section": null,
+      "depth": 0,
+      "parent_run_uuid": "run_review_r3_entry_ch10_119dfd",
+      "prev_task": "",
+      "next_task": "",
+      "children": [],
+      "n_children": 0
+    },
+    {
+      "run_uuid": "run_review_r3_ch10_s02_119dfd",
+      "task_id": "task_17e78fa7b7f8",
+      "agent_id": "book_reviewer_1aace8",
+      "plan_section": null,
+      "depth": 0,
+      "parent_run_uuid": "run_review_r3_entry_ch10_119dfd",
+      "prev_task": "",
+      "next_task": "",
+      "children": [],
+      "n_children": 0
+    },
+    {
+      "run_uuid": "run_review_r3_ch10_s03_119dfd",
+      "task_id": "task_17e78fa7b7f8",
+      "agent_id": "book_reviewer_1aace8",
+      "plan_section": null,
+      "depth": 0,
+      "parent_run_uuid": "run_review_r3_entry_ch10_119dfd",
+      "prev_task": "",
+      "next_task": "",
+      "children": [],
+      "n_children": 0
+    },
+    {
+      "run_uuid": "run_review_r3_ch10_s04_119dfd",
+      "task_id": "task_17e78fa7b7f8",
+      "agent_id": "book_reviewer_1aace8",
+      "plan_section": null,
+      "depth": 0,
+      "parent_run_uuid": "run_review_r3_entry_ch10_119dfd",
+      "prev_task": "",
+      "next_task": "",
+      "children": [],
+      "n_children": 0
+    },
+    {
+      "run_uuid": "run_review_r3_ch10_s05_119dfd",
+      "task_id": "task_17e78fa7b7f8",
+      "agent_id": "book_reviewer_1aace8",
+      "plan_section": null,
+      "depth": 0,
+      "parent_run_uuid": "run_review_r3_entry_ch10_119dfd",
+      "prev_task": "",
+      "next_task": "",
+      "children": [],
+      "n_children": 0
+    },
+    {
+      "run_uuid": "run_review_r3_ch10_s06_119dfd",
+      "task_id": "task_17e78fa7b7f8",
+      "agent_id": "book_reviewer_1aace8",
+      "plan_section": null,
+      "depth": 0,
+      "parent_run_uuid": "run_review_r3_entry_ch10_119dfd",
+      "prev_task": "",
+      "next_task": "",
+      "children": [],
+      "n_children": 0
+    },
+    {
+      "run_uuid": "run_review_r3_ch10_s07_119dfd",
+      "task_id": "task_17e78fa7b7f8",
+      "agent_id": "book_reviewer_1aace8",
+      "plan_section": null,
+      "depth": 0,
+      "parent_run_uuid": "run_review_r3_entry_ch10_119dfd",
+      "prev_task": "",
+      "next_task": "",
+      "children": [],
+      "n_children": 0
+    },
+    {
+      "run_uuid": "run_review_r3_ch10_s08_119dfd",
+      "task_id": "task_17e78fa7b7f8",
+      "agent_id": "book_reviewer_1aace8",
+      "plan_section": null,
+      "depth": 0,
+      "parent_run_uuid": "run_review_r3_entry_ch10_119dfd",
+      "prev_task": "",
+      "next_task": "",
+      "children": [],
+      "n_children": 0
+    },
+    {
+      "run_uuid": "run_review_r3_ch10_s09_119dfd",
+      "task_id": "task_17e78fa7b7f8",
+      "agent_id": "book_reviewer_1aace8",
+      "plan_section": null,
+      "depth": 0,
+      "parent_run_uuid": "run_review_r3_entry_ch10_119dfd",
+      "prev_task": "",
+      "next_task": "",
+      "children": [],
+      "n_children": 0
+    },
+    {
+      "run_uuid": "run_review_r3_ch10_s10_119dfd",
+      "task_id": "task_17e78fa7b7f8",
+      "agent_id": "book_reviewer_1aace8",
+      "plan_section": null,
+      "depth": 0,
+      "parent_run_uuid": "run_review_r3_entry_ch10_119dfd",
+      "prev_task": "",
+      "next_task": "",
+      "children": [],
+      "n_children": 0
+    },
+    {
+      "run_uuid": "run_review_r3_ch10_s11_119dfd",
+      "task_id": "task_17e78fa7b7f8",
+      "agent_id": "book_reviewer_1aace8",
+      "plan_section": null,
+      "depth": 0,
+      "parent_run_uuid": "run_review_r3_entry_ch10_119dfd",
+      "prev_task": "",
+      "next_task": "",
+      "children": [],
+      "n_children": 0
+    },
+    {
+      "run_uuid": "run_review_r3_ch10_s12_119dfd",
+      "task_id": "task_17e78fa7b7f8",
+      "agent_id": "book_reviewer_1aace8",
+      "plan_section": null,
+      "depth": 0,
+      "parent_run_uuid": "run_review_r3_entry_ch10_119dfd",
+      "prev_task": "",
+      "next_task": "",
+      "children": [],
+      "n_children": 0
+    },
+    {
+      "run_uuid": "run_integrate_r3_ch10_119dfd",
+      "task_id": "task_63a1bc25dd44",
+      "agent_id": "book_reviewer_1aace8",
+      "plan_section": null,
+      "depth": 0,
+      "parent_run_uuid": "",
+      "prev_task": "run_review_r3_entry_ch10_119dfd",
+      "next_task": "run_revise_r3_entry_ch10_119dfd",
+      "children": [],
+      "n_children": 0
+    },
+    {
+      "run_uuid": "run_revise_r3_entry_ch10_119dfd",
+      "task_id": "task_0e9b2b685cb4",
+      "agent_id": "book_planner_458073",
+      "plan_section": null,
+      "depth": 0,
+      "parent_run_uuid": "",
+      "prev_task": "run_integrate_r3_ch10_119dfd",
+      "next_task": "run_beta_r3_entry_ch10_119dfd",
+      "children": [
+        "run_revise_r3_ch10_s01_119dfd",
+        "run_revise_r3_ch10_s02_119dfd",
+        "run_revise_r3_ch10_s03_119dfd",
+        "run_revise_r3_ch10_s04_119dfd",
+        "run_revise_r3_ch10_s05_119dfd",
+        "run_revise_r3_ch10_s06_119dfd",
+        "run_revise_r3_ch10_s07_119dfd",
+        "run_revise_r3_ch10_s08_119dfd",
+        "run_revise_r3_ch10_s09_119dfd",
+        "run_revise_r3_ch10_s10_119dfd",
+        "run_revise_r3_ch10_s11_119dfd",
+        "run_revise_r3_ch10_s12_119dfd"
+      ],
+      "n_children": 12
+    },
+    {
+      "run_uuid": "run_revise_r3_ch10_s01_119dfd",
+      "task_id": "task_aa5db9fc1c89",
+      "agent_id": "book_writer_0ab73b",
+      "plan_section": null,
+      "depth": 0,
+      "parent_run_uuid": "run_revise_r3_entry_ch10_119dfd",
+      "prev_task": "",
+      "next_task": "",
+      "children": [],
+      "n_children": 0
+    },
+    {
+      "run_uuid": "run_revise_r3_ch10_s02_119dfd",
+      "task_id": "task_aa5db9fc1c89",
+      "agent_id": "book_writer_0ab73b",
+      "plan_section": null,
+      "depth": 0,
+      "parent_run_uuid": "run_revise_r3_entry_ch10_119dfd",
+      "prev_task": "",
+      "next_task": "",
+      "children": [],
+      "n_children": 0
+    },
+    {
+      "run_uuid": "run_revise_r3_ch10_s03_119dfd",
+      "task_id": "task_aa5db9fc1c89",
+      "agent_id": "book_writer_0ab73b",
+      "plan_section": null,
+      "depth": 0,
+      "parent_run_uuid": "run_revise_r3_entry_ch10_119dfd",
+      "prev_task": "",
+      "next_task": "",
+      "children": [],
+      "n_children": 0
+    },
+    {
+      "run_uuid": "run_revise_r3_ch10_s04_119dfd",
+      "task_id": "task_aa5db9fc1c89",
+      "agent_id": "book_writer_0ab73b",
+      "plan_section": null,
+      "depth": 0,
+      "parent_run_uuid": "run_revise_r3_entry_ch10_119dfd",
+      "prev_task": "",
+      "next_task": "",
+      "children": [],
+      "n_children": 0
+    },
+    {
+      "run_uuid": "run_revise_r3_ch10_s05_119dfd",
+      "task_id": "task_aa5db9fc1c89",
+      "agent_id": "book_writer_0ab73b",
+      "plan_section": null,
+      "depth": 0,
+      "parent_run_uuid": "run_revise_r3_entry_ch10_119dfd",
+      "prev_task": "",
+      "next_task": "",
+      "children": [],
+      "n_children": 0
+    },
+    {
+      "run_uuid": "run_revise_r3_ch10_s06_119dfd",
+      "task_id": "task_aa5db9fc1c89",
+      "agent_id": "book_writer_0ab73b",
+      "plan_section": null,
+      "depth": 0,
+      "parent_run_uuid": "run_revise_r3_entry_ch10_119dfd",
+      "prev_task": "",
+      "next_task": "",
+      "children": [],
+      "n_children": 0
+    },
+    {
+      "run_uuid": "run_revise_r3_ch10_s07_119dfd",
+      "task_id": "task_aa5db9fc1c89",
+      "agent_id": "book_writer_0ab73b",
+      "plan_section": null,
+      "depth": 0,
+      "parent_run_uuid": "run_revise_r3_entry_ch10_119dfd",
+      "prev_task": "",
+      "next_task": "",
+      "children": [],
+      "n_children": 0
+    },
+    {
+      "run_uuid": "run_revise_r3_ch10_s08_119dfd",
+      "task_id": "task_aa5db9fc1c89",
+      "agent_id": "book_writer_0ab73b",
+      "plan_section": null,
+      "depth": 0,
+      "parent_run_uuid": "run_revise_r3_entry_ch10_119dfd",
+      "prev_task": "",
+      "next_task": "",
+      "children": [],
+      "n_children": 0
+    },
+    {
+      "run_uuid": "run_revise_r3_ch10_s09_119dfd",
+      "task_id": "task_aa5db9fc1c89",
+      "agent_id": "book_writer_0ab73b",
+      "plan_section": null,
+      "depth": 0,
+      "parent_run_uuid": "run_revise_r3_entry_ch10_119dfd",
+      "prev_task": "",
+      "next_task": "",
+      "children": [],
+      "n_children": 0
+    },
+    {
+      "run_uuid": "run_revise_r3_ch10_s10_119dfd",
+      "task_id": "task_aa5db9fc1c89",
+      "agent_id": "book_writer_0ab73b",
+      "plan_section": null,
+      "depth": 0,
+      "parent_run_uuid": "run_revise_r3_entry_ch10_119dfd",
+      "prev_task": "",
+      "next_task": "",
+      "children": [],
+      "n_children": 0
+    },
+    {
+      "run_uuid": "run_revise_r3_ch10_s11_119dfd",
+      "task_id": "task_aa5db9fc1c89",
+      "agent_id": "book_writer_0ab73b",
+      "plan_section": null,
+      "depth": 0,
+      "parent_run_uuid": "run_revise_r3_entry_ch10_119dfd",
+      "prev_task": "",
+      "next_task": "",
+      "children": [],
+      "n_children": 0
+    },
+    {
+      "run_uuid": "run_revise_r3_ch10_s12_119dfd",
+      "task_id": "task_aa5db9fc1c89",
+      "agent_id": "book_writer_0ab73b",
+      "plan_section": null,
+      "depth": 0,
+      "parent_run_uuid": "run_revise_r3_entry_ch10_119dfd",
+      "prev_task": "",
+      "next_task": "",
+      "children": [],
+      "n_children": 0
+    },
+    {
+      "run_uuid": "run_beta_r3_entry_ch10_119dfd",
+      "task_id": "task_0e9b2b685cb4",
+      "agent_id": "book_planner_458073",
+      "plan_section": null,
+      "depth": 0,
+      "parent_run_uuid": "",
+      "prev_task": "run_revise_r3_entry_ch10_119dfd",
+      "next_task": "run_quality_judge_r3_ch10_119dfd",
+      "children": [
+        "run_beta_r3_ch10_s01_119dfd",
+        "run_beta_r3_ch10_s02_119dfd",
+        "run_beta_r3_ch10_s03_119dfd",
+        "run_beta_r3_ch10_s04_119dfd",
+        "run_beta_r3_ch10_s05_119dfd",
+        "run_beta_r3_ch10_s06_119dfd",
+        "run_beta_r3_ch10_s07_119dfd",
+        "run_beta_r3_ch10_s08_119dfd",
+        "run_beta_r3_ch10_s09_119dfd",
+        "run_beta_r3_ch10_s10_119dfd",
+        "run_beta_r3_ch10_s11_119dfd",
+        "run_beta_r3_ch10_s12_119dfd"
+      ],
+      "n_children": 12
+    },
+    {
+      "run_uuid": "run_beta_r3_ch10_s01_119dfd",
+      "task_id": "task_71c033f0f8ef",
+      "agent_id": "book_beta_reader_374207",
+      "plan_section": null,
+      "depth": 0,
+      "parent_run_uuid": "run_beta_r3_entry_ch10_119dfd",
+      "prev_task": "",
+      "next_task": "",
+      "children": [],
+      "n_children": 0
+    },
+    {
+      "run_uuid": "run_beta_r3_ch10_s02_119dfd",
+      "task_id": "task_71c033f0f8ef",
+      "agent_id": "book_beta_reader_374207",
+      "plan_section": null,
+      "depth": 0,
+      "parent_run_uuid": "run_beta_r3_entry_ch10_119dfd",
+      "prev_task": "",
+      "next_task": "",
+      "children": [],
+      "n_children": 0
+    },
+    {
+      "run_uuid": "run_beta_r3_ch10_s03_119dfd",
+      "task_id": "task_71c033f0f8ef",
+      "agent_id": "book_beta_reader_374207",
+      "plan_section": null,
+      "depth": 0,
+      "parent_run_uuid": "run_beta_r3_entry_ch10_119dfd",
+      "prev_task": "",
+      "next_task": "",
+      "children": [],
+      "n_children": 0
+    },
+    {
+      "run_uuid": "run_beta_r3_ch10_s04_119dfd",
+      "task_id": "task_71c033f0f8ef",
+      "agent_id": "book_beta_reader_374207",
+      "plan_section": null,
+      "depth": 0,
+      "parent_run_uuid": "run_beta_r3_entry_ch10_119dfd",
+      "prev_task": "",
+      "next_task": "",
+      "children": [],
+      "n_children": 0
+    },
+    {
+      "run_uuid": "run_beta_r3_ch10_s05_119dfd",
+      "task_id": "task_71c033f0f8ef",
+      "agent_id": "book_beta_reader_374207",
+      "plan_section": null,
+      "depth": 0,
+      "parent_run_uuid": "run_beta_r3_entry_ch10_119dfd",
+      "prev_task": "",
+      "next_task": "",
+      "children": [],
+      "n_children": 0
+    },
+    {
+      "run_uuid": "run_beta_r3_ch10_s06_119dfd",
+      "task_id": "task_71c033f0f8ef",
+      "agent_id": "book_beta_reader_374207",
+      "plan_section": null,
+      "depth": 0,
+      "parent_run_uuid": "run_beta_r3_entry_ch10_119dfd",
+      "prev_task": "",
+      "next_task": "",
+      "children": [],
+      "n_children": 0
+    },
+    {
+      "run_uuid": "run_beta_r3_ch10_s07_119dfd",
+      "task_id": "task_71c033f0f8ef",
+      "agent_id": "book_beta_reader_374207",
+      "plan_section": null,
+      "depth": 0,
+      "parent_run_uuid": "run_beta_r3_entry_ch10_119dfd",
+      "prev_task": "",
+      "next_task": "",
+      "children": [],
+      "n_children": 0
+    },
+    {
+      "run_uuid": "run_beta_r3_ch10_s08_119dfd",
+      "task_id": "task_71c033f0f8ef",
+      "agent_id": "book_beta_reader_374207",
+      "plan_section": null,
+      "depth": 0,
+      "parent_run_uuid": "run_beta_r3_entry_ch10_119dfd",
+      "prev_task": "",
+      "next_task": "",
+      "children": [],
+      "n_children": 0
+    },
+    {
+      "run_uuid": "run_beta_r3_ch10_s09_119dfd",
+      "task_id": "task_71c033f0f8ef",
+      "agent_id": "book_beta_reader_374207",
+      "plan_section": null,
+      "depth": 0,
+      "parent_run_uuid": "run_beta_r3_entry_ch10_119dfd",
+      "prev_task": "",
+      "next_task": "",
+      "children": [],
+      "n_children": 0
+    },
+    {
+      "run_uuid": "run_beta_r3_ch10_s10_119dfd",
+      "task_id": "task_71c033f0f8ef",
+      "agent_id": "book_beta_reader_374207",
+      "plan_section": null,
+      "depth": 0,
+      "parent_run_uuid": "run_beta_r3_entry_ch10_119dfd",
+      "prev_task": "",
+      "next_task": "",
+      "children": [],
+      "n_children": 0
+    },
+    {
+      "run_uuid": "run_beta_r3_ch10_s11_119dfd",
+      "task_id": "task_71c033f0f8ef",
+      "agent_id": "book_beta_reader_374207",
+      "plan_section": null,
+      "depth": 0,
+      "parent_run_uuid": "run_beta_r3_entry_ch10_119dfd",
+      "prev_task": "",
+      "next_task": "",
+      "children": [],
+      "n_children": 0
+    },
+    {
+      "run_uuid": "run_beta_r3_ch10_s12_119dfd",
+      "task_id": "task_71c033f0f8ef",
+      "agent_id": "book_beta_reader_374207",
+      "plan_section": null,
+      "depth": 0,
+      "parent_run_uuid": "run_beta_r3_entry_ch10_119dfd",
+      "prev_task": "",
+      "next_task": "",
+      "children": [],
+      "n_children": 0
+    },
+    {
+      "run_uuid": "run_quality_judge_r3_ch10_119dfd",
+      "task_id": "task_0e9b2b685cb4",
+      "agent_id": "book_planner_458073",
+      "plan_section": null,
+      "depth": 0,
+      "parent_run_uuid": "",
+      "prev_task": "run_beta_r3_entry_ch10_119dfd",
+      "next_task": "run_merge_ch10_119dfd",
+      "children": [],
+      "n_children": 0
+    },
+    {
+      "run_uuid": "run_merge_ch10_119dfd",
+      "task_id": "task_180d51bce9d3",
+      "agent_id": "book_planner_458073",
+      "plan_section": null,
+      "depth": 0,
+      "parent_run_uuid": "",
+      "prev_task": "run_quality_judge_r3_ch10_119dfd",
+      "next_task": "",
+      "children": [],
+      "n_children": 0
+    }
+  ],
+  "edges": [
+    {
+      "from": "run_quality_write_ch10_119dfd",
+      "to": "run_review_r1_entry_ch10_119dfd",
+      "type": "next"
+    },
+    {
+      "from": "run_quality_write_ch10_119dfd",
+      "to": "run_w_ch10_s01_119dfd",
+      "type": "children"
+    },
+    {
+      "from": "run_quality_write_ch10_119dfd",
+      "to": "run_w_ch10_s02_119dfd",
+      "type": "children"
+    },
+    {
+      "from": "run_quality_write_ch10_119dfd",
+      "to": "run_w_ch10_s03_119dfd",
+      "type": "children"
+    },
+    {
+      "from": "run_quality_write_ch10_119dfd",
+      "to": "run_w_ch10_s04_119dfd",
+      "type": "children"
+    },
+    {
+      "from": "run_quality_write_ch10_119dfd",
+      "to": "run_w_ch10_s05_119dfd",
+      "type": "children"
+    },
+    {
+      "from": "run_quality_write_ch10_119dfd",
+      "to": "run_w_ch10_s06_119dfd",
+      "type": "children"
+    },
+    {
+      "from": "run_quality_write_ch10_119dfd",
+      "to": "run_w_ch10_s07_119dfd",
+      "type": "children"
+    },
+    {
+      "from": "run_quality_write_ch10_119dfd",
+      "to": "run_w_ch10_s08_119dfd",
+      "type": "children"
+    },
+    {
+      "from": "run_quality_write_ch10_119dfd",
+      "to": "run_w_ch10_s09_119dfd",
+      "type": "children"
+    },
+    {
+      "from": "run_quality_write_ch10_119dfd",
+      "to": "run_w_ch10_s10_119dfd",
+      "type": "children"
+    },
+    {
+      "from": "run_quality_write_ch10_119dfd",
+      "to": "run_w_ch10_s11_119dfd",
+      "type": "children"
+    },
+    {
+      "from": "run_quality_write_ch10_119dfd",
+      "to": "run_w_ch10_s12_119dfd",
+      "type": "children"
+    },
+    {
+      "from": "run_quality_write_ch10_119dfd",
+      "to": "run_review_r1_entry_ch10_119dfd",
+      "type": "prev"
+    },
+    {
+      "from": "run_review_r1_entry_ch10_119dfd",
+      "to": "run_integrate_r1_ch10_119dfd",
+      "type": "next"
+    },
+    {
+      "from": "run_review_r1_entry_ch10_119dfd",
+      "to": "run_review_r1_ch10_s01_119dfd",
+      "type": "children"
+    },
+    {
+      "from": "run_review_r1_entry_ch10_119dfd",
+      "to": "run_review_r1_ch10_s02_119dfd",
+      "type": "children"
+    },
+    {
+      "from": "run_review_r1_entry_ch10_119dfd",
+      "to": "run_review_r1_ch10_s03_119dfd",
+      "type": "children"
+    },
+    {
+      "from": "run_review_r1_entry_ch10_119dfd",
+      "to": "run_review_r1_ch10_s04_119dfd",
+      "type": "children"
+    },
+    {
+      "from": "run_review_r1_entry_ch10_119dfd",
+      "to": "run_review_r1_ch10_s05_119dfd",
+      "type": "children"
+    },
+    {
+      "from": "run_review_r1_entry_ch10_119dfd",
+      "to": "run_review_r1_ch10_s06_119dfd",
+      "type": "children"
+    },
+    {
+      "from": "run_review_r1_entry_ch10_119dfd",
+      "to": "run_review_r1_ch10_s07_119dfd",
+      "type": "children"
+    },
+    {
+      "from": "run_review_r1_entry_ch10_119dfd",
+      "to": "run_review_r1_ch10_s08_119dfd",
+      "type": "children"
+    },
+    {
+      "from": "run_review_r1_entry_ch10_119dfd",
+      "to": "run_review_r1_ch10_s09_119dfd",
+      "type": "children"
+    },
+    {
+      "from": "run_review_r1_entry_ch10_119dfd",
+      "to": "run_review_r1_ch10_s10_119dfd",
+      "type": "children"
+    },
+    {
+      "from": "run_review_r1_entry_ch10_119dfd",
+      "to": "run_review_r1_ch10_s11_119dfd",
+      "type": "children"
+    },
+    {
+      "from": "run_review_r1_entry_ch10_119dfd",
+      "to": "run_review_r1_ch10_s12_119dfd",
+      "type": "children"
+    },
+    {
+      "from": "run_review_r1_entry_ch10_119dfd",
+      "to": "run_integrate_r1_ch10_119dfd",
+      "type": "prev"
+    },
+    {
+      "from": "run_integrate_r1_ch10_119dfd",
+      "to": "run_revise_r1_entry_ch10_119dfd",
+      "type": "next"
+    },
+    {
+      "from": "run_integrate_r1_ch10_119dfd",
+      "to": "run_revise_r1_entry_ch10_119dfd",
+      "type": "prev"
+    },
+    {
+      "from": "run_revise_r1_entry_ch10_119dfd",
+      "to": "run_beta_r1_entry_ch10_119dfd",
+      "type": "next"
+    },
+    {
+      "from": "run_revise_r1_entry_ch10_119dfd",
+      "to": "run_revise_r1_ch10_s01_119dfd",
+      "type": "children"
+    },
+    {
+      "from": "run_revise_r1_entry_ch10_119dfd",
+      "to": "run_revise_r1_ch10_s02_119dfd",
+      "type": "children"
+    },
+    {
+      "from": "run_revise_r1_entry_ch10_119dfd",
+      "to": "run_revise_r1_ch10_s03_119dfd",
+      "type": "children"
+    },
+    {
+      "from": "run_revise_r1_entry_ch10_119dfd",
+      "to": "run_revise_r1_ch10_s04_119dfd",
+      "type": "children"
+    },
+    {
+      "from": "run_revise_r1_entry_ch10_119dfd",
+      "to": "run_revise_r1_ch10_s05_119dfd",
+      "type": "children"
+    },
+    {
+      "from": "run_revise_r1_entry_ch10_119dfd",
+      "to": "run_revise_r1_ch10_s06_119dfd",
+      "type": "children"
+    },
+    {
+      "from": "run_revise_r1_entry_ch10_119dfd",
+      "to": "run_revise_r1_ch10_s07_119dfd",
+      "type": "children"
+    },
+    {
+      "from": "run_revise_r1_entry_ch10_119dfd",
+      "to": "run_revise_r1_ch10_s08_119dfd",
+      "type": "children"
+    },
+    {
+      "from": "run_revise_r1_entry_ch10_119dfd",
+      "to": "run_revise_r1_ch10_s09_119dfd",
+      "type": "children"
+    },
+    {
+      "from": "run_revise_r1_entry_ch10_119dfd",
+      "to": "run_revise_r1_ch10_s10_119dfd",
+      "type": "children"
+    },
+    {
+      "from": "run_revise_r1_entry_ch10_119dfd",
+      "to": "run_revise_r1_ch10_s11_119dfd",
+      "type": "children"
+    },
+    {
+      "from": "run_revise_r1_entry_ch10_119dfd",
+      "to": "run_revise_r1_ch10_s12_119dfd",
+      "type": "children"
+    },
+    {
+      "from": "run_revise_r1_entry_ch10_119dfd",
+      "to": "run_beta_r1_entry_ch10_119dfd",
+      "type": "prev"
+    },
+    {
+      "from": "run_beta_r1_entry_ch10_119dfd",
+      "to": "run_quality_judge_r1_ch10_119dfd",
+      "type": "next"
+    },
+    {
+      "from": "run_beta_r1_entry_ch10_119dfd",
+      "to": "run_beta_r1_ch10_s01_119dfd",
+      "type": "children"
+    },
+    {
+      "from": "run_beta_r1_entry_ch10_119dfd",
+      "to": "run_beta_r1_ch10_s02_119dfd",
+      "type": "children"
+    },
+    {
+      "from": "run_beta_r1_entry_ch10_119dfd",
+      "to": "run_beta_r1_ch10_s03_119dfd",
+      "type": "children"
+    },
+    {
+      "from": "run_beta_r1_entry_ch10_119dfd",
+      "to": "run_beta_r1_ch10_s04_119dfd",
+      "type": "children"
+    },
+    {
+      "from": "run_beta_r1_entry_ch10_119dfd",
+      "to": "run_beta_r1_ch10_s05_119dfd",
+      "type": "children"
+    },
+    {
+      "from": "run_beta_r1_entry_ch10_119dfd",
+      "to": "run_beta_r1_ch10_s06_119dfd",
+      "type": "children"
+    },
+    {
+      "from": "run_beta_r1_entry_ch10_119dfd",
+      "to": "run_beta_r1_ch10_s07_119dfd",
+      "type": "children"
+    },
+    {
+      "from": "run_beta_r1_entry_ch10_119dfd",
+      "to": "run_beta_r1_ch10_s08_119dfd",
+      "type": "children"
+    },
+    {
+      "from": "run_beta_r1_entry_ch10_119dfd",
+      "to": "run_beta_r1_ch10_s09_119dfd",
+      "type": "children"
+    },
+    {
+      "from": "run_beta_r1_entry_ch10_119dfd",
+      "to": "run_beta_r1_ch10_s10_119dfd",
+      "type": "children"
+    },
+    {
+      "from": "run_beta_r1_entry_ch10_119dfd",
+      "to": "run_beta_r1_ch10_s11_119dfd",
+      "type": "children"
+    },
+    {
+      "from": "run_beta_r1_entry_ch10_119dfd",
+      "to": "run_beta_r1_ch10_s12_119dfd",
+      "type": "children"
+    },
+    {
+      "from": "run_beta_r1_entry_ch10_119dfd",
+      "to": "run_quality_judge_r1_ch10_119dfd",
+      "type": "prev"
+    },
+    {
+      "from": "run_quality_judge_r1_ch10_119dfd",
+      "to": "run_review_r2_entry_ch10_119dfd",
+      "type": "next"
+    },
+    {
+      "from": "run_quality_judge_r1_ch10_119dfd",
+      "to": "run_review_r2_entry_ch10_119dfd",
+      "type": "prev"
+    },
+    {
+      "from": "run_review_r2_entry_ch10_119dfd",
+      "to": "run_integrate_r2_ch10_119dfd",
+      "type": "next"
+    },
+    {
+      "from": "run_review_r2_entry_ch10_119dfd",
+      "to": "run_review_r2_ch10_s01_119dfd",
+      "type": "children"
+    },
+    {
+      "from": "run_review_r2_entry_ch10_119dfd",
+      "to": "run_review_r2_ch10_s02_119dfd",
+      "type": "children"
+    },
+    {
+      "from": "run_review_r2_entry_ch10_119dfd",
+      "to": "run_review_r2_ch10_s03_119dfd",
+      "type": "children"
+    },
+    {
+      "from": "run_review_r2_entry_ch10_119dfd",
+      "to": "run_review_r2_ch10_s04_119dfd",
+      "type": "children"
+    },
+    {
+      "from": "run_review_r2_entry_ch10_119dfd",
+      "to": "run_review_r2_ch10_s05_119dfd",
+      "type": "children"
+    },
+    {
+      "from": "run_review_r2_entry_ch10_119dfd",
+      "to": "run_review_r2_ch10_s06_119dfd",
+      "type": "children"
+    },
+    {
+      "from": "run_review_r2_entry_ch10_119dfd",
+      "to": "run_review_r2_ch10_s07_119dfd",
+      "type": "children"
+    },
+    {
+      "from": "run_review_r2_entry_ch10_119dfd",
+      "to": "run_review_r2_ch10_s08_119dfd",
+      "type": "children"
+    },
+    {
+      "from": "run_review_r2_entry_ch10_119dfd",
+      "to": "run_review_r2_ch10_s09_119dfd",
+      "type": "children"
+    },
+    {
+      "from": "run_review_r2_entry_ch10_119dfd",
+      "to": "run_review_r2_ch10_s10_119dfd",
+      "type": "children"
+    },
+    {
+      "from": "run_review_r2_entry_ch10_119dfd",
+      "to": "run_review_r2_ch10_s11_119dfd",
+      "type": "children"
+    },
+    {
+      "from": "run_review_r2_entry_ch10_119dfd",
+      "to": "run_review_r2_ch10_s12_119dfd",
+      "type": "children"
+    },
+    {
+      "from": "run_review_r2_entry_ch10_119dfd",
+      "to": "run_integrate_r2_ch10_119dfd",
+      "type": "prev"
+    },
+    {
+      "from": "run_integrate_r2_ch10_119dfd",
+      "to": "run_revise_r2_entry_ch10_119dfd",
+      "type": "next"
+    },
+    {
+      "from": "run_integrate_r2_ch10_119dfd",
+      "to": "run_revise_r2_entry_ch10_119dfd",
+      "type": "prev"
+    },
+    {
+      "from": "run_revise_r2_entry_ch10_119dfd",
+      "to": "run_beta_r2_entry_ch10_119dfd",
+      "type": "next"
+    },
+    {
+      "from": "run_revise_r2_entry_ch10_119dfd",
+      "to": "run_revise_r2_ch10_s01_119dfd",
+      "type": "children"
+    },
+    {
+      "from": "run_revise_r2_entry_ch10_119dfd",
+      "to": "run_revise_r2_ch10_s02_119dfd",
+      "type": "children"
+    },
+    {
+      "from": "run_revise_r2_entry_ch10_119dfd",
+      "to": "run_revise_r2_ch10_s03_119dfd",
+      "type": "children"
+    },
+    {
+      "from": "run_revise_r2_entry_ch10_119dfd",
+      "to": "run_revise_r2_ch10_s04_119dfd",
+      "type": "children"
+    },
+    {
+      "from": "run_revise_r2_entry_ch10_119dfd",
+      "to": "run_revise_r2_ch10_s05_119dfd",
+      "type": "children"
+    },
+    {
+      "from": "run_revise_r2_entry_ch10_119dfd",
+      "to": "run_revise_r2_ch10_s06_119dfd",
+      "type": "children"
+    },
+    {
+      "from": "run_revise_r2_entry_ch10_119dfd",
+      "to": "run_revise_r2_ch10_s07_119dfd",
+      "type": "children"
+    },
+    {
+      "from": "run_revise_r2_entry_ch10_119dfd",
+      "to": "run_revise_r2_ch10_s08_119dfd",
+      "type": "children"
+    },
+    {
+      "from": "run_revise_r2_entry_ch10_119dfd",
+      "to": "run_revise_r2_ch10_s09_119dfd",
+      "type": "children"
+    },
+    {
+      "from": "run_revise_r2_entry_ch10_119dfd",
+      "to": "run_revise_r2_ch10_s10_119dfd",
+      "type": "children"
+    },
+    {
+      "from": "run_revise_r2_entry_ch10_119dfd",
+      "to": "run_revise_r2_ch10_s11_119dfd",
+      "type": "children"
+    },
+    {
+      "from": "run_revise_r2_entry_ch10_119dfd",
+      "to": "run_revise_r2_ch10_s12_119dfd",
+      "type": "children"
+    },
+    {
+      "from": "run_revise_r2_entry_ch10_119dfd",
+      "to": "run_beta_r2_entry_ch10_119dfd",
+      "type": "prev"
+    },
+    {
+      "from": "run_beta_r2_entry_ch10_119dfd",
+      "to": "run_quality_judge_r2_ch10_119dfd",
+      "type": "next"
+    },
+    {
+      "from": "run_beta_r2_entry_ch10_119dfd",
+      "to": "run_beta_r2_ch10_s01_119dfd",
+      "type": "children"
+    },
+    {
+      "from": "run_beta_r2_entry_ch10_119dfd",
+      "to": "run_beta_r2_ch10_s02_119dfd",
+      "type": "children"
+    },
+    {
+      "from": "run_beta_r2_entry_ch10_119dfd",
+      "to": "run_beta_r2_ch10_s03_119dfd",
+      "type": "children"
+    },
+    {
+      "from": "run_beta_r2_entry_ch10_119dfd",
+      "to": "run_beta_r2_ch10_s04_119dfd",
+      "type": "children"
+    },
+    {
+      "from": "run_beta_r2_entry_ch10_119dfd",
+      "to": "run_beta_r2_ch10_s05_119dfd",
+      "type": "children"
+    },
+    {
+      "from": "run_beta_r2_entry_ch10_119dfd",
+      "to": "run_beta_r2_ch10_s06_119dfd",
+      "type": "children"
+    },
+    {
+      "from": "run_beta_r2_entry_ch10_119dfd",
+      "to": "run_beta_r2_ch10_s07_119dfd",
+      "type": "children"
+    },
+    {
+      "from": "run_beta_r2_entry_ch10_119dfd",
+      "to": "run_beta_r2_ch10_s08_119dfd",
+      "type": "children"
+    },
+    {
+      "from": "run_beta_r2_entry_ch10_119dfd",
+      "to": "run_beta_r2_ch10_s09_119dfd",
+      "type": "children"
+    },
+    {
+      "from": "run_beta_r2_entry_ch10_119dfd",
+      "to": "run_beta_r2_ch10_s10_119dfd",
+      "type": "children"
+    },
+    {
+      "from": "run_beta_r2_entry_ch10_119dfd",
+      "to": "run_beta_r2_ch10_s11_119dfd",
+      "type": "children"
+    },
+    {
+      "from": "run_beta_r2_entry_ch10_119dfd",
+      "to": "run_beta_r2_ch10_s12_119dfd",
+      "type": "children"
+    },
+    {
+      "from": "run_beta_r2_entry_ch10_119dfd",
+      "to": "run_quality_judge_r2_ch10_119dfd",
+      "type": "prev"
+    },
+    {
+      "from": "run_quality_judge_r2_ch10_119dfd",
+      "to": "run_review_r3_entry_ch10_119dfd",
+      "type": "next"
+    },
+    {
+      "from": "run_quality_judge_r2_ch10_119dfd",
+      "to": "run_review_r3_entry_ch10_119dfd",
+      "type": "prev"
+    },
+    {
+      "from": "run_review_r3_entry_ch10_119dfd",
+      "to": "run_integrate_r3_ch10_119dfd",
+      "type": "next"
+    },
+    {
+      "from": "run_review_r3_entry_ch10_119dfd",
+      "to": "run_review_r3_ch10_s01_119dfd",
+      "type": "children"
+    },
+    {
+      "from": "run_review_r3_entry_ch10_119dfd",
+      "to": "run_review_r3_ch10_s02_119dfd",
+      "type": "children"
+    },
+    {
+      "from": "run_review_r3_entry_ch10_119dfd",
+      "to": "run_review_r3_ch10_s03_119dfd",
+      "type": "children"
+    },
+    {
+      "from": "run_review_r3_entry_ch10_119dfd",
+      "to": "run_review_r3_ch10_s04_119dfd",
+      "type": "children"
+    },
+    {
+      "from": "run_review_r3_entry_ch10_119dfd",
+      "to": "run_review_r3_ch10_s05_119dfd",
+      "type": "children"
+    },
+    {
+      "from": "run_review_r3_entry_ch10_119dfd",
+      "to": "run_review_r3_ch10_s06_119dfd",
+      "type": "children"
+    },
+    {
+      "from": "run_review_r3_entry_ch10_119dfd",
+      "to": "run_review_r3_ch10_s07_119dfd",
+      "type": "children"
+    },
+    {
+      "from": "run_review_r3_entry_ch10_119dfd",
+      "to": "run_review_r3_ch10_s08_119dfd",
+      "type": "children"
+    },
+    {
+      "from": "run_review_r3_entry_ch10_119dfd",
+      "to": "run_review_r3_ch10_s09_119dfd",
+      "type": "children"
+    },
+    {
+      "from": "run_review_r3_entry_ch10_119dfd",
+      "to": "run_review_r3_ch10_s10_119dfd",
+      "type": "children"
+    },
+    {
+      "from": "run_review_r3_entry_ch10_119dfd",
+      "to": "run_review_r3_ch10_s11_119dfd",
+      "type": "children"
+    },
+    {
+      "from": "run_review_r3_entry_ch10_119dfd",
+      "to": "run_review_r3_ch10_s12_119dfd",
+      "type": "children"
+    },
+    {
+      "from": "run_review_r3_entry_ch10_119dfd",
+      "to": "run_integrate_r3_ch10_119dfd",
+      "type": "prev"
+    },
+    {
+      "from": "run_integrate_r3_ch10_119dfd",
+      "to": "run_revise_r3_entry_ch10_119dfd",
+      "type": "next"
+    },
+    {
+      "from": "run_integrate_r3_ch10_119dfd",
+      "to": "run_revise_r3_entry_ch10_119dfd",
+      "type": "prev"
+    },
+    {
+      "from": "run_revise_r3_entry_ch10_119dfd",
+      "to": "run_beta_r3_entry_ch10_119dfd",
+      "type": "next"
+    },
+    {
+      "from": "run_revise_r3_entry_ch10_119dfd",
+      "to": "run_revise_r3_ch10_s01_119dfd",
+      "type": "children"
+    },
+    {
+      "from": "run_revise_r3_entry_ch10_119dfd",
+      "to": "run_revise_r3_ch10_s02_119dfd",
+      "type": "children"
+    },
+    {
+      "from": "run_revise_r3_entry_ch10_119dfd",
+      "to": "run_revise_r3_ch10_s03_119dfd",
+      "type": "children"
+    },
+    {
+      "from": "run_revise_r3_entry_ch10_119dfd",
+      "to": "run_revise_r3_ch10_s04_119dfd",
+      "type": "children"
+    },
+    {
+      "from": "run_revise_r3_entry_ch10_119dfd",
+      "to": "run_revise_r3_ch10_s05_119dfd",
+      "type": "children"
+    },
+    {
+      "from": "run_revise_r3_entry_ch10_119dfd",
+      "to": "run_revise_r3_ch10_s06_119dfd",
+      "type": "children"
+    },
+    {
+      "from": "run_revise_r3_entry_ch10_119dfd",
+      "to": "run_revise_r3_ch10_s07_119dfd",
+      "type": "children"
+    },
+    {
+      "from": "run_revise_r3_entry_ch10_119dfd",
+      "to": "run_revise_r3_ch10_s08_119dfd",
+      "type": "children"
+    },
+    {
+      "from": "run_revise_r3_entry_ch10_119dfd",
+      "to": "run_revise_r3_ch10_s09_119dfd",
+      "type": "children"
+    },
+    {
+      "from": "run_revise_r3_entry_ch10_119dfd",
+      "to": "run_revise_r3_ch10_s10_119dfd",
+      "type": "children"
+    },
+    {
+      "from": "run_revise_r3_entry_ch10_119dfd",
+      "to": "run_revise_r3_ch10_s11_119dfd",
+      "type": "children"
+    },
+    {
+      "from": "run_revise_r3_entry_ch10_119dfd",
+      "to": "run_revise_r3_ch10_s12_119dfd",
+      "type": "children"
+    },
+    {
+      "from": "run_revise_r3_entry_ch10_119dfd",
+      "to": "run_beta_r3_entry_ch10_119dfd",
+      "type": "prev"
+    },
+    {
+      "from": "run_beta_r3_entry_ch10_119dfd",
+      "to": "run_quality_judge_r3_ch10_119dfd",
+      "type": "next"
+    },
+    {
+      "from": "run_beta_r3_entry_ch10_119dfd",
+      "to": "run_beta_r3_ch10_s01_119dfd",
+      "type": "children"
+    },
+    {
+      "from": "run_beta_r3_entry_ch10_119dfd",
+      "to": "run_beta_r3_ch10_s02_119dfd",
+      "type": "children"
+    },
+    {
+      "from": "run_beta_r3_entry_ch10_119dfd",
+      "to": "run_beta_r3_ch10_s03_119dfd",
+      "type": "children"
+    },
+    {
+      "from": "run_beta_r3_entry_ch10_119dfd",
+      "to": "run_beta_r3_ch10_s04_119dfd",
+      "type": "children"
+    },
+    {
+      "from": "run_beta_r3_entry_ch10_119dfd",
+      "to": "run_beta_r3_ch10_s05_119dfd",
+      "type": "children"
+    },
+    {
+      "from": "run_beta_r3_entry_ch10_119dfd",
+      "to": "run_beta_r3_ch10_s06_119dfd",
+      "type": "children"
+    },
+    {
+      "from": "run_beta_r3_entry_ch10_119dfd",
+      "to": "run_beta_r3_ch10_s07_119dfd",
+      "type": "children"
+    },
+    {
+      "from": "run_beta_r3_entry_ch10_119dfd",
+      "to": "run_beta_r3_ch10_s08_119dfd",
+      "type": "children"
+    },
+    {
+      "from": "run_beta_r3_entry_ch10_119dfd",
+      "to": "run_beta_r3_ch10_s09_119dfd",
+      "type": "children"
+    },
+    {
+      "from": "run_beta_r3_entry_ch10_119dfd",
+      "to": "run_beta_r3_ch10_s10_119dfd",
+      "type": "children"
+    },
+    {
+      "from": "run_beta_r3_entry_ch10_119dfd",
+      "to": "run_beta_r3_ch10_s11_119dfd",
+      "type": "children"
+    },
+    {
+      "from": "run_beta_r3_entry_ch10_119dfd",
+      "to": "run_beta_r3_ch10_s12_119dfd",
+      "type": "children"
+    },
+    {
+      "from": "run_beta_r3_entry_ch10_119dfd",
+      "to": "run_quality_judge_r3_ch10_119dfd",
+      "type": "prev"
+    },
+    {
+      "from": "run_quality_judge_r3_ch10_119dfd",
+      "to": "run_merge_ch10_119dfd",
+      "type": "next"
+    },
+    {
+      "from": "run_quality_judge_r3_ch10_119dfd",
+      "to": "run_merge_ch10_119dfd",
+      "type": "prev"
+    }
+  ]
+}

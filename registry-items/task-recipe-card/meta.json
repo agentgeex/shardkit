@@ -1,0 +1,12 @@
+{
+  "id": "task-recipe-card",
+  "name": "任务配方卡片",
+  "category": "08-advanced",
+  "tags": ["task-recipe", "card", "agent", "win3"],
+  "stack": "shadcn",
+  "source": "自研",
+  "complexity": "区块",
+  "scene": ["dashboard", "recipe-builder"],
+  "status": "待整理",
+  "usability": "需适配"
+}

@@ -1,0 +1,15 @@
+{
+  "id": "button-primary",
+  "name": "主按钮",
+  "category": "01-basic",
+  "tags": ["button", "primary", "loading", "icon", "shadcn"],
+  "stack": "shadcn",
+  "source": "shadcn-official",
+  "complexity": "组件",
+  "scene": ["general", "form"],
+  "status": "可用",
+  "usability": "copy-paste",
+  "deps": ["@radix-ui/react-slot", "class-variance-authority", "lucide-react"],
+  "installCmd": "npm i @radix-ui/react-slot class-variance-authority lucide-react",
+  "targetDir": "src/components/ui"
+}

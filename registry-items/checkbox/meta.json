@@ -1,0 +1,24 @@
+{
+  "id": "checkbox",
+  "name": "复选框",
+  "category": "02-form",
+  "tags": [
+    "checkbox",
+    "form",
+    "radix"
+  ],
+  "stack": "shadcn",
+  "source": "shardkit",
+  "complexity": "组件",
+  "scene": [
+    "form",
+    "多选"
+  ],
+  "status": "可用",
+  "usability": "需依赖",
+  "deps": [
+    "@radix-ui/react-checkbox"
+  ],
+  "installCmd": "npm i @radix-ui/react-checkbox",
+  "targetDir": "src/components/ui"
+}

@@ -1,0 +1,15 @@
+{
+  "id": "badge-basic",
+  "name": "徽标",
+  "category": "05-data-display",
+  "tags": ["badge", "tag", "status", "shadcn"],
+  "stack": "shadcn",
+  "source": "shadcn-official",
+  "complexity": "片段",
+  "scene": ["general", "列表", "dashboard"],
+  "status": "可用",
+  "usability": "copy-paste",
+  "deps": ["class-variance-authority"],
+  "installCmd": "npm i class-variance-authority",
+  "targetDir": "src/components/ui"
+}

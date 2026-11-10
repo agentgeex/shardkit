@@ -1,0 +1,14 @@
+{
+  "id": "progress-basic",
+  "name": "进度条",
+  "category": "06-feedback",
+  "tags": ["progress", "loading", "feedback"],
+  "stack": "shadcn",
+  "source": "shadcn-official",
+  "complexity": "片段",
+  "scene": ["general", "dashboard", "上传"],
+  "status": "可用",
+  "usability": "copy-paste",
+  "deps": [],
+  "targetDir": "src/components/ui"
+}

@@ -1,0 +1,9 @@
+{
+  "note": "UI 质量闸预算：只降不升。修一批 → 下调对应数字。",
+  "budgets": {
+    "rawPalette": 116,
+    "zArbitrary": 2,
+    "hScreen": 2,
+    "spaceXY": 86
+  }
+}

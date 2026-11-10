@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ShardKit — copy-in UI shard kit</title>
+    <!-- Favicon / App 图标（2026-11-05 定稿：public/logo.svg 为唯一源，全部尺寸由它栅格化
+         —— assets/favicon.ico 也是生成的（内含 16/32/48/64/128/256），不要手改 -->
+         图标就是主标「K + 小 s」，标签页与侧栏同一个文件，不分叉。 -->
+    <link rel="icon" href="/favicon.ico" sizes="any" />
+    <link rel="icon" type="image/svg+xml" href="/logo.svg" />
+    <link rel="alternate icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <meta name="theme-color" content="#0F172A" />
+    <meta
+      name="description"
+      content="ShardKit — 可检索、可预览、可复制取用的 UI 组件与案例集合。browse, preview, copy, ship."
+    />
+    <!-- 主题预置：首帧前应用已保存主题，避免刷新闪烁（含 /login 等 Shell 外路由） -->
+    <script>
+      (function () {
+        try {
+          var t = localStorage.getItem("shardkit.theme");
+          document.documentElement.classList.toggle("dark", t ? t === "dark" : true);
+        } catch (e) {
+          document.documentElement.classList.add("dark");
+        }
+      })();
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

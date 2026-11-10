@@ -1,0 +1,21 @@
+{
+  "id": "input-tag",
+  "name": "标签输入",
+  "category": "02-form",
+  "tags": [
+    "input-tag",
+    "tags",
+    "chips",
+    "form"
+  ],
+  "stack": "shadcn",
+  "source": "shardkit",
+  "complexity": "组件",
+  "scene": [
+    "表单",
+    "多值"
+  ],
+  "status": "可用",
+  "usability": "copy-paste",
+  "targetDir": "src/components/ui"
+}

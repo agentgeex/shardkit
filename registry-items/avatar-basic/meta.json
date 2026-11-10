@@ -1,0 +1,14 @@
+{
+  "id": "avatar-basic",
+  "name": "头像",
+  "category": "01-basic",
+  "tags": ["avatar", "user", "image", "fallback"],
+  "stack": "shadcn",
+  "source": "自研",
+  "complexity": "片段",
+  "scene": ["general", "dashboard", "列表"],
+  "status": "可用",
+  "usability": "copy-paste",
+  "deps": [],
+  "targetDir": "src/components/ui"
+}

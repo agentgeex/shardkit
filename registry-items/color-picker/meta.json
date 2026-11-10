@@ -1,0 +1,21 @@
+{
+  "id": "color-picker",
+  "name": "颜色选择",
+  "category": "02-form",
+  "tags": [
+    "color-picker",
+    "color",
+    "palette",
+    "form"
+  ],
+  "stack": "shadcn",
+  "source": "shardkit",
+  "complexity": "组件",
+  "scene": [
+    "表单",
+    "主题色"
+  ],
+  "status": "可用",
+  "usability": "copy-paste",
+  "targetDir": "src/components/ui"
+}

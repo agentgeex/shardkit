@@ -1,0 +1,14 @@
+{
+  "id": "card-basic",
+  "name": "基础卡片",
+  "category": "03-layout",
+  "tags": ["card", "layout", "container", "shadcn"],
+  "stack": "shadcn",
+  "source": "shadcn-official",
+  "complexity": "组件",
+  "scene": ["general", "dashboard", "列表"],
+  "status": "可用",
+  "usability": "copy-paste",
+  "deps": [],
+  "targetDir": "src/components/ui"
+}

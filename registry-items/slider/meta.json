@@ -1,0 +1,24 @@
+{
+  "id": "slider",
+  "name": "滑块",
+  "category": "02-form",
+  "tags": [
+    "slider",
+    "form",
+    "radix"
+  ],
+  "stack": "shadcn",
+  "source": "shardkit",
+  "complexity": "组件",
+  "scene": [
+    "form",
+    "阈值"
+  ],
+  "status": "可用",
+  "usability": "需依赖",
+  "deps": [
+    "@radix-ui/react-slider"
+  ],
+  "installCmd": "npm i @radix-ui/react-slider",
+  "targetDir": "src/components/ui"
+}

@@ -1,0 +1,15 @@
+{
+  "id": "dialog-basic",
+  "name": "对话框",
+  "category": "07-overlay",
+  "tags": ["dialog", "modal", "overlay", "shadcn"],
+  "stack": "shadcn",
+  "source": "shadcn-official",
+  "complexity": "组件",
+  "scene": ["form", "general"],
+  "status": "可用",
+  "usability": "copy-paste",
+  "deps": ["@radix-ui/react-dialog", "lucide-react"],
+  "installCmd": "npm i @radix-ui/react-dialog lucide-react",
+  "targetDir": "src/components/ui"
+}

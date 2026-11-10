@@ -1,0 +1,24 @@
+{
+  "id": "markdown-editor",
+  "name": "Markdown 编辑器",
+  "category": "08-advanced",
+  "tags": [
+    "markdown",
+    "editor",
+    "preview"
+  ],
+  "stack": "shadcn",
+  "source": "shardkit",
+  "complexity": "组件",
+  "scene": [
+    "form",
+    "文档"
+  ],
+  "status": "可用",
+  "usability": "需依赖",
+  "deps": [
+    "@uiw/react-md-editor"
+  ],
+  "installCmd": "npm i @uiw/react-md-editor",
+  "targetDir": "src/components/ui"
+}

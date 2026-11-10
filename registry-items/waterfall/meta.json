@@ -1,0 +1,15 @@
+{
+  "id": "waterfall",
+  "name": "瀑布流",
+  "category": "03-layout",
+  "tags": ["waterfall", "masonry", "layout", "infinite-scroll"],
+  "stack": "shardkit",
+  "source": "shardkit",
+  "complexity": "组件",
+  "scene": ["画廊", "图片流", "信息流"],
+  "status": "可用",
+  "usability": "开箱可用",
+  "deps": [],
+  "installCmd": "",
+  "targetDir": "src/components/ui"
+}

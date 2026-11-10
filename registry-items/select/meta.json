@@ -1,0 +1,26 @@
+{
+  "id": "select",
+  "name": "下拉选择",
+  "category": "02-form",
+  "tags": [
+    "select",
+    "dropdown",
+    "form",
+    "radix",
+    "shadcn"
+  ],
+  "stack": "shadcn",
+  "source": "shardkit",
+  "complexity": "组件",
+  "scene": [
+    "form",
+    "筛选"
+  ],
+  "status": "可用",
+  "usability": "需依赖",
+  "deps": [
+    "@radix-ui/react-select"
+  ],
+  "installCmd": "npm i @radix-ui/react-select",
+  "targetDir": "src/components/ui"
+}

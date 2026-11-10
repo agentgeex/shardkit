@@ -1,0 +1,24 @@
+{
+  "id": "popover",
+  "name": "浮层",
+  "category": "07-overlay",
+  "tags": [
+    "popover",
+    "overlay",
+    "radix"
+  ],
+  "stack": "shadcn",
+  "source": "shardkit",
+  "complexity": "组件",
+  "scene": [
+    "浮层",
+    "气泡"
+  ],
+  "status": "可用",
+  "usability": "需依赖",
+  "deps": [
+    "@radix-ui/react-popover"
+  ],
+  "installCmd": "npm i @radix-ui/react-popover",
+  "targetDir": "src/components/ui"
+}

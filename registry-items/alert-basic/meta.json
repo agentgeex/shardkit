@@ -1,0 +1,14 @@
+{
+  "id": "alert-basic",
+  "name": "提示条",
+  "category": "06-feedback",
+  "tags": ["alert", "feedback", "notice", "shadcn"],
+  "stack": "shadcn",
+  "source": "shadcn-official",
+  "complexity": "组件",
+  "scene": ["general", "form"],
+  "status": "可用",
+  "usability": "copy-paste",
+  "deps": [],
+  "targetDir": "src/components/ui"
+}
