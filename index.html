@@ -16,14 +16,15 @@
       name="description"
       content="ShardKit — 可检索、可预览、可复制取用的 UI 组件与案例集合。browse, preview, copy, ship."
     />
-    <!-- 主题预置：首帧前应用已保存主题，避免刷新闪烁（含 /login 等 Shell 外路由） -->
+    <!-- 主题预置：首帧前应用已保存主题，避免刷新闪烁（含 /login 等 Shell 外路由）
+         默认亮色（2026-11-27 老冯定）；只有用户主动切过、且存的是 dark 才走暗色。 -->
     <script>
       (function () {
         try {
           var t = localStorage.getItem("shardkit.theme");
-          document.documentElement.classList.toggle("dark", t ? t === "dark" : true);
+          document.documentElement.classList.toggle("dark", t === "dark");
         } catch (e) {
-          document.documentElement.classList.add("dark");
+          document.documentElement.classList.remove("dark");
         }
       })();
     </script>
