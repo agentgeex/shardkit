@@ -20,6 +20,7 @@
   <img alt="Copy-in entries" src="https://img.shields.io/badge/copy--in%20entries-40-8B5CF6?style=flat-square" />
   <img alt="UI primitives" src="https://img.shields.io/badge/ui%20primitives-42-8B5CF6?style=flat-square" />
   <img alt="Locales" src="https://img.shields.io/badge/i18n-zh--CN%20%7C%20en--US-teal?style=flat-square" />
+  <img alt="已被 AgentGeeX 采用" src="https://img.shields.io/badge/adopted%20by-AgentGeeX-2EA043?style=flat-square" />
 </p>
 
 <p align="center">
@@ -84,6 +85,38 @@ UI 组件的知识/资产散落在无数历史项目与代码库中，缺乏统�
 2. **每个条目显式标注**：`deps`（需装的依赖）、`files`（复制哪些文件）、`usability`（复用成本）
 3. **消费方用法**：从本仓对应条目目录，把 `index.tsx` 复制进你的工程（放到约定目录），
    按 `deps` 装依赖即可运行 —— **无需把整个 ShardKit 作为依赖安装**。
+
+## 谁在用 ShardKit（2026-11-27 实测）
+
+copy-in 这套模型只有真被人用起来才算数。现在有一个。
+
+**[AgentGeeX](https://github.com/agentgeex/agentgeex_core)** —— 自托管的 MCP 编排控制面
+（Apache-2.0；Python 引擎 + React 控制台）。它的 Web 控制台 `webtools/client` 就是建在本套件
+的基元和技术栈之上的。
+
+2026-11-27 逐文件对比两边的代码，结果：
+
+| 核对项 | 结果 |
+|---|---|
+| AgentGeeX 里 `packages/ui` 组件数 | 14 |
+| 与 ShardKit `src/components/ui` **字节级完全相同** | **8 个** |
+| 有差异 —— ShardKit 在他们复制之后又往前走了一步 | 6 个 |
+| 共用技术栈 | Refine 4.57 · React Flow 12 · TanStack Query 5.59 · Radix · CVA · lucide 0.454 |
+
+那 6 个有差异的**不是分叉**，是「他们复制的是旧快照，ShardKit 后来又长出来的东西」：
+
+| 组件 | AgentGeeX 那份还没有的改进 |
+|---|---|
+| `button.tsx` | 所有按钮统一加边框 + 按用途分色 |
+| `dialog.tsx` | `surface="canvas"` 双档弹窗外壳（`DialogBody` 自动套白框） |
+| `table.tsx` | `striped` 斑马线（context 下发），容器圆角边框 |
+| `card.tsx` | `data-card` 降噪标记 + `shadow-surface` 令牌 |
+| `separator.tsx` | 改用 Radix 基元重写 |
+| `badge.tsx` | `success` / `warning` / `info` 三档变体 |
+
+这正是 copy-in 模型该有的样子：**他们拿走一个快照、发布上线，ShardKit 继续演进，而不会把他们弄坏。**
+
+> 你也在用 ShardKit？开个 issue 附上链接，会列在这里。
 
 ## 核心机制
 
@@ -335,6 +368,7 @@ node scripts/verify_pagecrud_smoke.mjs                  # 全路由 smoke（16 �
 
 - [x] **M0** 骨架：目录结构 + registry schema + build 脚本
 - [x] **M1** 仓库 SPA（Refine + Tailwind + shadcn）+ 案例页 + 注册表驱动闭环（首批 16 个条目）
+- [x] **M1.5** 第一个外部使用方上线 —— AgentGeeX Web 控制台
 - [ ] **M2** 检索（Fuse.js）+ 多维筛选
 - [x] **M3** 案例集：8 个成品页面案例（列表页 Dialog / Page 两套完整 CRUD，两个并列菜单入口）
 - [ ] **M4** 治理 + 静态发布

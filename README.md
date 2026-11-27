@@ -20,6 +20,7 @@
   <img alt="Copy-in entries" src="https://img.shields.io/badge/copy--in%20entries-40-8B5CF6?style=flat-square" />
   <img alt="UI primitives" src="https://img.shields.io/badge/ui%20primitives-42-8B5CF6?style=flat-square" />
   <img alt="Locales" src="https://img.shields.io/badge/i18n-zh--CN%20%7C%20en--US-teal?style=flat-square" />
+  <img alt="Adopted by AgentGeeX" src="https://img.shields.io/badge/adopted%20by-AgentGeeX-2EA043?style=flat-square" />
 </p>
 
 <p align="center">
@@ -87,6 +88,39 @@ Same philosophy as shadcn/ui. ShardKit is its *organizing + searching* layer.
 2. Every entry declares its dependencies and placement explicitly.
 3. To consume: copy `index.tsx` into your project, install the declared `deps`, done.
    **You never add ShardKit as a dependency.**
+
+## Built with ShardKit
+
+The copy-in model only counts if someone actually ships with it. One does.
+
+**[AgentGeeX](https://github.com/agentgeex/agentgeex_core)** — a self-hosted MCP orchestration
+control plane (Apache-2.0; Python engine + React console). Its web console `webtools/client`
+is built on this kit's primitives and stack.
+
+Verified **2026-11-27** by diffing the two trees file by file:
+
+| Check | Result |
+|---|---|
+| `packages/ui` components in AgentGeeX | 14 |
+| **Byte-identical** to ShardKit's `src/components/ui` | **8** |
+| Diverged — ShardKit moved ahead after the copy | 6 |
+| Shared stack | Refine 4.57 · React Flow 12 · TanStack Query 5.59 · Radix · CVA · lucide 0.454 |
+
+The 6 diverged files are not forks — they are what ShardKit became *after* the snapshot:
+
+| Component | What AgentGeeX's copy predates |
+|---|---|
+| `button.tsx` | unified border on every button, plus purpose-based colour split |
+| `dialog.tsx` | `surface="canvas"` two-tier dialog shell (`DialogBody` auto-frames) |
+| `table.tsx` | `striped` zebra rows via context, rounded container |
+| `card.tsx` | `data-card` marker + `shadow-surface` token |
+| `separator.tsx` | rewritten on the Radix primitive |
+| `badge.tsx` | `success` / `warning` / `info` variants |
+
+That is the consumption model working as designed: they took a snapshot, shipped it,
+and ShardKit kept moving **without breaking them**.
+
+> Using ShardKit somewhere? Open an issue with a link — it gets listed here.
 
 ## Features
 
@@ -256,6 +290,7 @@ Most scripts need the dev server running on port 5178.
 
 - [x] **M0** Skeleton: directory layout, registry schema, build scripts
 - [x] **M1** Gallery SPA (Refine + Tailwind + shadcn) + registry-driven loop
+- [x] **M1.5** First external consumer ships — AgentGeeX web console
 - [x] **M3** Page cases: dialog CRUD, page CRUD, dashboard, forms, tables, plan flow
 - [ ] **M2** Fuzzy search (Fuse.js) + multi-facet filtering
 - [ ] **M4** Governance + static publishing
