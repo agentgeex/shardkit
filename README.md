@@ -8,6 +8,8 @@
 
 ![ShardKit — case index](./assets/screenshots/en/case-index.png)
 
+**▶ [Live demo](https://agentgeex.github.io/shardkit/)** — no install, no signup, runs entirely in the browser.
+
 > **A copy-in UI shard kit — browse, preview, ship.**
 > A searchable, previewable gallery of **finished page cases** and UI components.
 > Not an npm dependency. You **copy the code in**.
@@ -16,6 +18,7 @@
 > or for an **AI agent** to assemble a page straight from the machine-readable registry.
 
 <p align="center">
+  <a href="https://agentgeex.github.io/shardkit/"><img alt="Live demo" src="https://img.shields.io/badge/live%20demo-open%20%E2%86%97-2EA043?style=flat-square" /></a>
   <a href="./LICENSE"><img alt="License: MIT" src="https://img.shields.io/badge/license-MIT-blue?style=flat-square" /></a>
   <img alt="Version" src="https://img.shields.io/badge/version-0.1.0-orange?style=flat-square" />
   <img alt="Status" src="https://img.shields.io/badge/status-stable-00C853?style=flat-square" />

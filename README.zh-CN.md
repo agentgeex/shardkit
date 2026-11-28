@@ -8,6 +8,8 @@
 
 ![ShardKit — case index](./assets/screenshots/zh-CN/case-index.png)
 
+**▶ [在线 Demo](https://agentgeex.github.io/shardkit/)** —— 不用装、不用注册，打开就能点。
+
 > **A copy-in UI shard kit — browse, preview, ship.**
 > 一个**可检索、可预览**的 UI 组件与**成品页面案例集**（"活样板间"）。
 > 从根上解决"找按钮 / 找交互 / 调页面"难题。
@@ -16,6 +18,7 @@
 > 仪表盘、详情页、查询页——也可以让 **AI agent** 直接读 registry 自己装配页面。
 
 <p align="center">
+  <a href="https://agentgeex.github.io/shardkit/"><img alt="在线 Demo" src="https://img.shields.io/badge/%E5%9C%A8%E7%BA%BF%20demo-%E7%AB%8B%E5%8D%B3%E6%89%93%E5%BC%80%20%E2%86%97-2EA043?style=flat-square" /></a>
   <a href="./LICENSE"><img alt="License: MIT" src="https://img.shields.io/badge/license-MIT-blue?style=flat-square" /></a>
   <img alt="Version" src="https://img.shields.io/badge/version-0.1.0-orange?style=flat-square" />
   <img alt="Status" src="https://img.shields.io/badge/status-stable-00C853?style=flat-square" />
