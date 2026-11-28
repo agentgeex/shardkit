@@ -11,6 +11,9 @@
 > **A copy-in UI shard kit — browse, preview, ship.**
 > A searchable, previewable gallery of **finished page cases** and UI components.
 > Not an npm dependency. You **copy the code in**.
+>
+> Built for **admin dashboards**, **admin panels**, **backoffice** and **internal tools** —
+> or for an **AI agent** to assemble a page straight from the machine-readable registry.
 
 <p align="center">
   <a href="./LICENSE"><img alt="License: MIT" src="https://img.shields.io/badge/license-MIT-blue?style=flat-square" /></a>
@@ -60,6 +63,27 @@ Baseline stack: **Refine (headless) + Tailwind CSS + shadcn/ui**. The registry i
 other stacks can be indexed the same way.
 
 ---
+
+## What you can build with it
+
+The cases here are not toy demos. Each one is a complete page you can lift into a real
+**admin dashboard**, **admin panel**, **backoffice**, or **internal tool** — pull the directory
+in, point it at your API, done.
+
+| You need… | Start from | Route |
+|---|---|---|
+| A CRUD **admin panel** with dialog forms | Dialog-based list case | `/list` |
+| A CRUD **admin panel** with full-page forms | Page-based list case | `/list-page` |
+| A **dashboard** with KPI cards and charts | Dashboard case | `/dashboard` |
+| An **admin table** with sorting, filtering, bulk actions | Table cases (incl. striped) | `/table` |
+| A **search / query** page with a filter bar | Query cases | `/search` |
+| A read-only **detail** page | Descriptions case | `/detail-view` |
+| A **DAG / workflow** view with playback | Plan flow | `/plan-flow` |
+| A **form** page with validation | Form cases | `/form` |
+
+**Building an AI agent console?** The registry is machine-readable: `registry.json` lists every
+entry with its declared `deps` and `files`, so an agent can pick a shard and wire it in
+without crawling the DOM or guessing imports.
 
 ## Why
 

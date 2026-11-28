@@ -11,6 +11,9 @@
 > **A copy-in UI shard kit — browse, preview, ship.**
 > 一个**可检索、可预览**的 UI 组件与**成品页面案例集**（"活样板间"）。
 > 从根上解决"找按钮 / 找交互 / 调页面"难题。
+>
+> 拿来就能用的**管理后台 / 后台管理系统 / 中后台**页面：CRUD 增删改查、表格、表单、
+> 仪表盘、详情页、查询页——也可以让 **AI agent** 直接读 registry 自己装配页面。
 
 <p align="center">
   <a href="./LICENSE"><img alt="License: MIT" src="https://img.shields.io/badge/license-MIT-blue?style=flat-square" /></a>
@@ -58,6 +61,25 @@
 技术栈基线：**Refine (Headless) + Tailwind CSS + shadcn/ui**（可扩展 index 其它技术栈资产）。
 
 ---
+
+## 能用它做什么
+
+这里的案例不是玩具 demo —— 每一个都是能直接搬进真实**管理后台**、**后台管理系统**、
+**中后台**、**内部工具**的完整页面。把目录拷过去、接上你的 API，就能跑。
+
+| 你要… | 从哪个案例拄 | 路由 |
+|---|---|---|
+| 带弹窗表单的 CRUD **管理后台** | 弹窗式列表案例 | `/list` |
+| 带整页表单的 CRUD **管理后台** | 整页式列表案例 | `/list-page` |
+| 带 KPI 卡片和图表的**仪表盘** | Dashboard 案例 | `/dashboard` |
+| 带排序 / 筛选 / 批量操作的**后台表格** | 表格案例（含斑马线） | `/table` |
+| 带筛选栏的**查询页 / 列表搜索页** | 查询案例 | `/search` |
+| 只读**详情页 / 查看页** | 描述列表案例 | `/detail-view` |
+| 带播放回放的 **DAG / 工作流图** | 计划流程图 | `/plan-flow` |
+| 带校验的**表单页** | 表单案例 | `/form` |
+
+**要做 AI agent 控制台？** registry 是机器可读的：`registry.json` 列出了每个条目的
+依赖与文件清单，agent 可以直接选一个作把拼到页面里，不用爬 DOM、不用猜 import。
 
 ## 为什么做（Problem）
 
