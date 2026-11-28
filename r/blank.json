@@ -1,0 +1,35 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "blank",
+  "type": "registry:page",
+  "title": "空白页",
+  "description": "ShardKit 案例：空白页",
+  "registryDependencies": [
+    "card"
+  ],
+  "dependencies": [
+    "lucide-react"
+  ],
+  "files": [
+    {
+      "path": "src/pages/cases/blank.tsx",
+      "target": "src/pages/Blank.tsx",
+      "type": "registry:page"
+    },
+    {
+      "path": "src/components/ui/card.tsx",
+      "target": "@ui/card.tsx",
+      "type": "registry:ui"
+    }
+  ],
+  "categories": [
+    "shardkit",
+    "page"
+  ],
+  "meta": {
+    "shardkit": {
+      "kind": "page",
+      "target": "src/pages/Blank.tsx"
+    }
+  }
+}

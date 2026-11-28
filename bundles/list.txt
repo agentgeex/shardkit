@@ -1,0 +1,1071 @@
+=== ShardKit Bundle: 列表页 (list) ===
+# 用法：把下面每段写入对应"目标路径"，再按需 npm install。
+# 本包含 12 个文件 + 3 个 npm 依赖。
+
+[npm]  npm install lucide-react @radix-ui/react-select @radix-ui/react-checkbox
+
+--- 目标路径清单 ---
+  src/pages/ProductList.tsx
+  @ui/table.tsx
+  @ui/input.tsx
+  @ui/button.tsx
+  @ui/badge.tsx
+  @ui/card.tsx
+  @ui/select.tsx
+  @ui/checkbox.tsx
+  @ui/separator.tsx
+  @components/page-header.tsx
+  @components/status-badge.tsx
+  src/mock/data.ts
+
+--- src/pages/ProductList.tsx ---
+/**
+ * ██ 案例目录：列表页 · 弹窗式 CRUD（dialog-crud/）
+ * ────────────────────────────────────────────────────────────────────────
+ * 本目录 = 一套**完全自洽、零共享**的弹窗式 CRUD 范例（对齐参照项目
+ * vue-admin-tpl 的 src/views/Example/Dialog/ 语义）。
+ *
+ * 本目录范式：所有增删改查动作都在**列表页内以 Dialog 弹窗**完成，从不离开列表页。
+ *   新建 → ProductDialog(create)  编辑 → ProductDialog(edit)（回填当前行）
+ *   详情 → DetailDialog（只读）    删除 → DeleteConfirmDialog（二次确认，单条/批量共用）
+ *
+ * 与姊妹目录 page-crud/ 的区别（两者刻意不共享任何文件，重复也在所不惜）：
+ *   - dialog-crud/（本目录，入口 /list）      ：动作在列表内弹窗完成；
+ *   - page-crud/  （入口 /list-page）        ：新建/编辑/详情跳到独立页面完成。
+ *   两套各自的 ProductForm / productStore / 弹窗组件都是**本目录私有的副本**，
+ *   互不 import，数据也各自独立（不同 store 实例）。
+ *
+ * 入口路由：/list   （侧边栏「列表页 · 弹窗式 CRUD」）
+ *
+ * 本目录文件：
+ *   index.tsx               列表页（含全部弹窗入口 + 行内工具条 + 批量操作）
+ *   ProductForm.tsx         本案例私有的受控表单（+ 校验 / 与 store 的双向转换）
+ *   productStore.ts         本案例私有的内存 mock 数据层（增删改查 / 分页 / 筛选 / 排序）
+ *   ProductDialog.tsx       新建 / 编辑弹窗（共用外壳）
+ *   DetailDialog.tsx        详情弹窗（只读）
+ *   DeleteConfirmDialog.tsx 删除二次确认弹窗（单条 / 批量共用）
+ *
+ * 一个「和真实应用一样完整」的后台列表页：
+ *   - 工具条：关键字搜索、类目下拉筛选、状态筛选、列排序
+ *   - 表格：勾选行、状态徽标、行内 详情 / 编辑 / 删除
+ *   - 批量操作条：选中行后出现「批量删除 / 导出选中」
+ *   - 分页：上一页 / 下一页 + 页码 + 每页条数
+ *   - CRUD（弹窗式，全部在列表页内完成）：
+ *       新建   → ProductDialog(create)
+ *       编辑   → ProductDialog(edit)（回填当前行）
+ *       详情   → DetailDialog（只读全字段）
+ *       删除   → DeleteConfirmDialog（二次确认；单条 / 批量共用）
+ *     保存 / 删除后列表即时刷新，并弹 toast 反馈。
+ *
+ * 数据层：本目录 productStore.ts（内存 mock，刷新重置；与 page-crud 各自独立）
+ * 表单层：本目录 ProductForm.tsx（本案例私有副本，不外借）
+ *
+ * 依赖：shadcn {table,input,button,badge,card,select,checkbox,separator,dialog}
+ *       + page-header / status-badge + useToast
+ */
+import * as React from "react";
+import { useTranslation } from "react-i18next";
+import { Link } from "react-router-dom";
+import {
+  Plus, Search, Download, Pencil, Trash2, Eye, ChevronUp, ChevronDown, X, FilePlus2, List,
+} from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Badge } from "@/components/ui/badge";
+import { Checkbox } from "@/components/ui/checkbox";
+import { Separator } from "@/components/ui/separator";
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { ContentFrame } from "@/components/ui/content-frame";
+import { Pagination } from "@/components/ui/pagination";
+import { StatusBadge } from "@/components/status-badge";
+import { useToast } from "@/components/ui/toast";
+import type { Product } from "@/mock/data";
+import {
+  CATEGORY_ALL,
+  PRODUCT_STATUS_OPTIONS,
+  productStore,
+  useProductAll,
+  type ProductSortKey,
+} from "./productStore";
+import { toCreateInput, toPatch, type ProductFormValues } from "./ProductForm";
+import { ProductDialog, type ProductDialogMode } from "./ProductDialog";
+import { DetailDialog } from "./DetailDialog";
+import { DeleteConfirmDialog } from "./DeleteConfirmDialog";
+
+type SortKey = Extract<ProductSortKey, "id" | "name" | "price" | "updatedAt">;
+
+const STATUS: { value: string; label: string }[] = [
+  { value: "all", label: "全部状态" },
+  ...PRODUCT_STATUS_OPTIONS,
+];
+
+export default function ListCase() {
+  const { t } = useTranslation();
+  const { toast } = useToast();
+
+  const [q, setQ] = React.useState("");
+  const [category, setCategory] = React.useState(CATEGORY_ALL);
+  const [status, setStatus] = React.useState("all");
+  const [page, setPage] = React.useState(1);
+  const [pageSize, setPageSize] = React.useState(10);
+  const [sort, setSort] = React.useState<{ key: SortKey; dir: "asc" | "desc" }>({ key: "id", dir: "asc" });
+  const [selected, setSelected] = React.useState<string[]>([]);
+
+  // 订阅 store：任何写操作（增删改）都会换引用 → 触发重算
+  const storeRows = useProductAll();
+
+  // Dialog 状态机
+  const [formOpen, setFormOpen] = React.useState(false);
+  const [formMode, setFormMode] = React.useState<ProductDialogMode>("create");
+  const [editing, setEditing] = React.useState<Product | null>(null);
+  const [detailOpen, setDetailOpen] = React.useState(false);
+  const [viewing, setViewing] = React.useState<Product | null>(null);
+  const [deleteOpen, setDeleteOpen] = React.useState(false);
+  const [deleteIds, setDeleteIds] = React.useState<string[]>([]);
+
+  const categories = React.useMemo(() => productStore.categories(storeRows), [storeRows]);
+
+  React.useEffect(() => setPage(1), [q, category, status, pageSize]);
+
+  const paged = React.useMemo(
+    () =>
+      productStore.list({
+        keyword: q,
+        category,
+        status: status as Product["status"] | "all",
+        page,
+        pageSize,
+        sort,
+      }),
+    [storeRows, q, category, status, page, pageSize, sort]
+  );
+
+  const { rows: current, total, totalPages } = paged;
+
+  // 删除后页码可能越界：钳制到最后一页
+  React.useEffect(() => {
+    setPage((p) => Math.min(p, totalPages));
+  }, [totalPages]);
+
+  const allOnPageSelected = current.length > 0 && current.every((p) => selected.includes(p.id));
+  const someOnPageSelected = current.some((p) => selected.includes(p.id));
+  const headerChecked: boolean | "indeterminate" =
+    allOnPageSelected ? true : someOnPageSelected ? "indeterminate" : false;
+
+  const toggleSort = (key: SortKey) =>
+    setSort((s) => (s.key === key ? { key, dir: s.dir === "asc" ? "desc" : "asc" } : { key, dir: "asc" }));
+
+  const toggleRow = (id: string) =>
+    setSelected((s) => (s.includes(id) ? s.filter((x) => x !== id) : [...s, id]));
+
+  const toggleAllOnPage = () =>
+    setSelected((s) =>
+      allOnPageSelected
+        ? s.filter((id) => !current.some((p) => p.id === id))
+        : Array.from(new Set([...s, ...current.map((p) => p.id)]))
+    );
+
+  const resetFilters = () => {
+    setQ("");
+    setCategory(CATEGORY_ALL);
+    setStatus("all");
+  };
+
+  const hasFilters = q !== "" || category !== CATEGORY_ALL || status !== "all";
+
+  /* ── CRUD 动作（弹窗式：全部在列表页内完成） ───────────── */
+
+  // 弹窗式新增（列表页内）
+  const openCreateDialog = () => {
+    setFormMode("create");
+    setEditing(null);
+    setFormOpen(true);
+  };
+
+  const openEdit = (product: Product) => {
+    setFormMode("edit");
+    setEditing(product);
+    setDetailOpen(false);
+    setFormOpen(true);
+  };
+
+  const openDetail = (product: Product) => {
+    setViewing(product);
+    setDetailOpen(true);
+  };
+
+  const handleSubmit = (values: ProductFormValues) => {
+    if (formMode === "edit" && editing) {
+      const updated = productStore.update(editing.id, toPatch(values));
+      if (updated) {
+        toast({ title: t("crud.saved"), description: `${updated.id} · ${updated.name}`, variant: "success" });
+      } else {
+        toast({ title: t("crud.saveFailed"), description: t("crud.recordMissing"), variant: "destructive" });
+      }
+    } else {
+      const created = productStore.create(toCreateInput(values));
+      toast({ title: t("crud.created"), description: `${created.id} · ${created.name}`, variant: "success" });
+    }
+    setFormOpen(false);
+  };
+
+  const openDeleteSingle = (product: Product) => {
+    setDeleteIds([product.id]);
+    setDeleteOpen(true);
+  };
+
+  const openDeleteBatch = () => {
+    setDeleteIds(selected);
+    setDeleteOpen(true);
+  };
+
+  const confirmDelete = () => {
+    const ids = deleteIds;
+    const removed = ids.length === 1 ? (productStore.remove(ids[0]) ? 1 : 0) : productStore.removeMany(ids);
+    setDeleteOpen(false);
+    setDeleteIds([]);
+    setSelected((s) => s.filter((id) => !ids.includes(id)));
+    toast(
+      removed > 0
+        ? { title: t("crud.deleted"), description: t("crud.deletedDesc", { count: removed }), variant: "success" }
+        : { title: t("crud.deleteFailed"), description: t("crud.deleteFailedDesc"), variant: "destructive" }
+    );
+  };
+
+  const deleteNames = deleteIds
+    .map((id) => productStore.get(id)?.name)
+    .filter((n): n is string => Boolean(n));
+
+  const SortHead = ({ k, children, className }: { k: SortKey; children: React.ReactNode; className?: string }) => (
+    <TableHead className={className}>
+      <button className="inline-flex items-center gap-1 hover:text-foreground" onClick={() => toggleSort(k)}>
+        {children}
+        {sort.key === k ? (
+          sort.dir === "asc" ? <ChevronUp className="h-3 w-3" /> : <ChevronDown className="h-3 w-3" />
+        ) : (
+          <ChevronDown className="h-3 w-3 opacity-20" />
+        )}
+      </button>
+    </TableHead>
+  );
+
+  return (
+    <div data-testid="list-case">
+
+      <ContentFrame>
+        {/* 工具条：搜索 + 筛选 */}
+        <div className="mb-4 flex flex-wrap items-center gap-2">
+          <div className="relative min-w-[220px] flex-1">
+            <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
+            <Input
+              value={q}
+              onChange={(e) => setQ(e.target.value)}
+              placeholder={t("crud.searchPlaceholder")}
+              className="pl-8"
+              data-testid="list-search"
+            />
+          </div>
+          <Select value={category} onValueChange={setCategory}>
+            <SelectTrigger className="w-[160px]" data-testid="list-category"><SelectValue /></SelectTrigger>
+            <SelectContent>
+              {categories.map((c) => (<SelectItem key={c} value={c}>{c === CATEGORY_ALL ? t("crud.allCategories") : c}</SelectItem>))}
+            </SelectContent>
+          </Select>
+          <Select value={status} onValueChange={setStatus}>
+            <SelectTrigger className="w-[150px]" data-testid="list-status"><SelectValue /></SelectTrigger>
+            <SelectContent>
+              {STATUS.map((s) => (<SelectItem key={s.value} value={s.value}>{s.value === "all" ? t("crud.allStatus") : s.label}</SelectItem>))}
+            </SelectContent>
+          </Select>
+          {hasFilters && (
+            <Button variant="ghost" size="sm" onClick={resetFilters} data-testid="list-reset">
+              <X className="h-3.5 w-3.5" /> {t("crud.clearFilters")}
+            </Button>
+          )}
+          <Badge variant="secondary" className="ml-auto font-normal" data-testid="list-total">{t("crud.total", { count: total })}</Badge>
+          {/* ↓ 原页头里的动作，去页头后必须搬到这里（否则功能凭空消失） */}
+          <div className="flex items-center gap-2">
+            <Link to="/list-page">
+              <Button variant="secondary" size="sm" data-testid="goto-list-page" title={t("crud.switchToPage")}>
+                <List className="h-4 w-4" /> {t("crud.pageCrud")}
+              </Button>
+            </Link>
+            <Button variant="secondary" size="sm" data-testid="list-export">
+              <Download className="h-4 w-4" /> {t("crud.export")}
+            </Button>
+            <Button size="sm" onClick={openCreateDialog} data-testid="create-product" title={t("crud.createInDialog")}>
+              <Plus className="h-4 w-4" /> {t("crud.createProduct")}
+            </Button>
+          </div>
+        </div>
+
+        {/* 批量操作条 */}
+        {selected.length > 0 && (
+          <>
+            <div className="mb-3 flex items-center gap-3 rounded-lg border border-primary/30 bg-primary/5 px-3 py-2 text-sm" data-testid="batch-bar">
+              <span>{t("crud.selected")} <b className="tabular-nums">{selected.length}</b> {t("crud.items", { count: selected.length })}</span>
+              <Separator orientation="vertical" className="h-4" />
+              <Button variant="ghost" size="sm"><Download className="h-3.5 w-3.5" /> {t("crud.exportSelected")}</Button>
+              <Button
+                variant="ghost"
+                size="sm"
+                className="text-destructive"
+                onClick={openDeleteBatch}
+                data-testid="batch-delete"
+              >
+                <Trash2 className="h-3.5 w-3.5" /> {t("crud.batchDelete")}
+              </Button>
+              <Button variant="ghost" size="sm" className="ml-auto" onClick={() => setSelected([])}>
+                <X className="h-3.5 w-3.5" /> {t("crud.clearSelection")}
+              </Button>
+            </div>
+          </>
+        )}
+
+        <Table>
+          <TableHeader>
+            <TableRow>
+              <TableHead className="w-[44px]">
+                <Checkbox checked={headerChecked} onCheckedChange={toggleAllOnPage} aria-label={t("crud.selectAllPage")} />
+              </TableHead>
+              <SortHead k="id">{t("field.productId")}</SortHead>
+              <SortHead k="name">{t("field.name")}</SortHead>
+              <TableHead>HS6</TableHead>
+              <TableHead>{t("field.category")}</TableHead>
+              <TableHead>{t("field.platform")}</TableHead>
+              <SortHead k="price" className="text-right">{t("field.priceUsd")}</SortHead>
+              <TableHead>{t("field.status")}</TableHead>
+              <TableHead className="text-right">{t("field.actionsDialog")}</TableHead>
+            </TableRow>
+          </TableHeader>
+          <TableBody striped>
+            {current.map((p) => (
+              <TableRow key={p.id} data-state={selected.includes(p.id) ? "selected" : undefined} data-testid={`row-${p.id}`}>
+                <TableCell>
+                  <Checkbox
+                    checked={selected.includes(p.id)}
+                    onCheckedChange={() => toggleRow(p.id)}
+                    aria-label={t("crud.selectRow", { name: p.name })}
+                  />
+                </TableCell>
+                <TableCell className="font-mono text-xs">{p.id}</TableCell>
+                <TableCell className="font-medium">{p.name}</TableCell>
+                <TableCell className="font-mono text-xs text-muted-foreground">{p.hs6}</TableCell>
+                <TableCell>{p.category}</TableCell>
+                <TableCell><Badge variant="outline" className="font-normal">{p.platform}</Badge></TableCell>
+                <TableCell className="text-right tabular-nums">{p.price.toFixed(2)}</TableCell>
+                <TableCell><StatusBadge status={p.status} /></TableCell>
+                <TableCell className="text-right">
+                  <div className="flex justify-end gap-1">
+                    <Button
+                      variant="view"
+                      size="icon"
+                      aria-label={t("common.detail")}
+                      data-testid={`detail-${p.id}`}
+                      onClick={() => openDetail(p)}
+                    >
+                      <Eye className="h-3.5 w-3.5" />
+                    </Button>
+                    <Button
+                      variant="edit"
+                      size="icon"
+                      aria-label={t("common.edit")}
+                      data-testid={`edit-${p.id}`}
+                      onClick={() => openEdit(p)}
+                    >
+                      <Pencil className="h-3.5 w-3.5" />
+                    </Button>
+                    <Button
+                      variant="destructive"
+                      size="icon"
+                      aria-label={t("common.delete")}
+                      data-testid={`delete-${p.id}`}
+                      onClick={() => openDeleteSingle(p)}
+                    >
+                      <Trash2 className="h-3.5 w-3.5" />
+                    </Button>
+                  </div>
+                </TableCell>
+              </TableRow>
+            ))}
+            {current.length === 0 && (
+              <TableRow>
+                <TableCell colSpan={9} className="h-24 text-center text-muted-foreground" data-testid="list-empty">
+                  {hasFilters ? t("crud.emptyFiltered") : t("crud.emptyPlain")}
+                </TableCell>
+              </TableRow>
+            )}
+          </TableBody>
+        </Table>
+
+        {/* 分页（统一采用 Pagination 组件 · 表单页同款） */}
+        <Pagination
+          className="mt-4"
+          page={page}
+          pageSize={pageSize}
+          total={total}
+          onPageChange={setPage}
+          onPageSizeChange={setPageSize}
+          pageSizeOptions={[10, 20, 30, 50, 100, 500]}
+        />
+      </ContentFrame>
+
+      {/* 新建 / 编辑 */}
+      <ProductDialog
+        open={formOpen}
+        mode={formMode}
+        product={editing}
+        onOpenChange={setFormOpen}
+        onSubmit={handleSubmit}
+      />
+
+      {/* 详情（只读） */}
+      <DetailDialog
+        open={detailOpen}
+        product={viewing}
+        onOpenChange={setDetailOpen}
+        onEdit={openEdit}
+      />
+
+      {/* 删除二次确认（单条 / 批量共用） */}
+      <DeleteConfirmDialog
+        open={deleteOpen}
+        names={deleteNames}
+        onOpenChange={setDeleteOpen}
+        onConfirm={confirmDelete}
+      />
+    </div>
+  );
+}
+
+--- @ui/table.tsx ---
+import * as React from "react";
+import { cn } from "@/lib/utils";
+
+/** TableBody 的斑马线开关通过 context 下发给 TableRow（才能在 tr 上生成 even: 变体，保证 hover 可覆盖） */
+const TableStripedContext = React.createContext(false);
+
+const Table = React.forwardRef<HTMLTableElement, React.HTMLAttributes<HTMLTableElement>>(
+  ({ className, ...props }, ref) => (
+    <div className="relative w-full overflow-auto rounded-lg border border-border">
+      <table ref={ref} className={cn("w-full caption-bottom text-sm", className)} {...props} />
+    </div>
+  )
+);
+Table.displayName = "Table";
+
+const TableHeader = React.forwardRef<
+  HTMLTableSectionElement,
+  React.HTMLAttributes<HTMLTableSectionElement>
+>(({ className, ...props }, ref) => (
+  <thead ref={ref} className={cn("[&_tr]:border-b bg-muted/40", className)} {...props} />
+));
+TableHeader.displayName = "TableHeader";
+
+type TableBodyProps = React.HTMLAttributes<HTMLTableSectionElement> & {
+  /** 斑马线：偶数行加浅底色（语义 token bg-muted/30，深色模式自动适配；hover 仍可覆盖） */
+  striped?: boolean;
+};
+
+const TableBody = React.forwardRef<HTMLTableSectionElement, TableBodyProps>(
+  ({ className, striped = false, ...props }, ref) => (
+    <TableStripedContext.Provider value={striped}>
+      <tbody ref={ref} className={cn("[&_tr:last-child]:border-0", className)} {...props} />
+    </TableStripedContext.Provider>
+  )
+);
+TableBody.displayName = "TableBody";
+
+const TableRow = React.forwardRef<HTMLTableRowElement, React.HTMLAttributes<HTMLTableRowElement>>(
+  ({ className, ...props }, ref) => {
+    const striped = React.useContext(TableStripedContext);
+    return (
+      <tr
+        ref={ref}
+        className={cn(
+          "border-b transition-colors hover:bg-muted/50 data-[state=selected]:bg-muted",
+          striped && "even:bg-muted/30",
+          className
+        )}
+        {...props}
+      />
+    );
+  }
+);
+TableRow.displayName = "TableRow";
+
+const TableHead = React.forwardRef<
+  HTMLTableCellElement,
+  React.ThHTMLAttributes<HTMLTableCellElement>
+>(({ className, ...props }, ref) => (
+  <th
+    ref={ref}
+    className={cn(
+      // 2026-10-30：表头字重 500 → 600（老冯要求所有表头加粗；只动字重，字号/颜色/高度一律不变）。
+      // 600 = 本项目字重阶梯既有档位（/detail-view 标签列即 600），不擅自上 700。
+      "h-10 border-r border-border/60 px-3 text-left align-middle text-xs font-semibold text-muted-foreground last:border-r-0 [&:has([role=checkbox])]:pr-0",
+      className
+    )}
+    {...props}
+  />
+));
+TableHead.displayName = "TableHead";
+
+const TableCell = React.forwardRef<
+  HTMLTableCellElement,
+  React.TdHTMLAttributes<HTMLTableCellElement>
+>(({ className, ...props }, ref) => (
+  <td
+    ref={ref}
+    className={cn("border-r border-border/60 p-3 align-middle last:border-r-0 [&:has([role=checkbox])]:pr-0", className)}
+    {...props}
+  />
+));
+TableCell.displayName = "TableCell";
+
+const TableCaption = React.forwardRef<
+  HTMLTableCaptionElement,
+  React.HTMLAttributes<HTMLTableCaptionElement>
+>(({ className, ...props }, ref) => (
+  <caption ref={ref} className={cn("mt-4 text-sm text-muted-foreground", className)} {...props} />
+));
+TableCaption.displayName = "TableCaption";
+
+export { Table, TableHeader, TableBody, TableHead, TableRow, TableCell, TableCaption };
+
+--- @ui/input.tsx ---
+import * as React from "react";
+import { cn } from "@/lib/utils";
+
+export interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {}
+
+const Input = React.forwardRef<HTMLInputElement, InputProps>(
+  ({ className, type, ...props }, ref) => {
+    return (
+      <input
+        type={type}
+        className={cn(
+          "flex h-9 w-full rounded-md border border-input bg-transparent px-3 py-1 text-sm shadow-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50",
+          className
+        )}
+        ref={ref}
+        {...props}
+      />
+    );
+  }
+);
+Input.displayName = "Input";
+
+export { Input };
+
+--- @ui/button.tsx ---
+import * as React from "react";
+import { Slot } from "@radix-ui/react-slot";
+import { cva, type VariantProps } from "class-variance-authority";
+import { cn } from "@/lib/utils";
+
+const buttonVariants = cva(
+  // 基础：所有按钮统一加一层边框（老冯验收反馈 2026-09-28：每个按钮都要有边框）
+  "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md border text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 [&_svg]:size-4 [&_svg]:shrink-0",
+  {
+    variants: {
+      variant: {
+        default: "border-primary/20 bg-primary text-primary-foreground shadow hover:bg-primary/90",
+        destructive: "border-destructive/30 bg-destructive text-destructive-foreground shadow-sm hover:bg-destructive/90",
+        outline: "border-input bg-background shadow-sm hover:bg-accent hover:text-accent-foreground",
+        secondary: "border-input bg-secondary text-secondary-foreground shadow-sm hover:bg-secondary/80",
+        // ── 按钮用途分色（2026-10-28 采纳《页面排版-白框模式》§6）──────────────
+        // 白底页面上 ghost/outline 描边按钮基本看不见（对向项目返工三次）→ 可见按钮
+        // 一律实底 + 白字，靠**色相**区分用途。对比度：按钮 ≥3:1、正文 ≥4.5:1，必须实测。
+        //   default 蓝 = 新建/保存/确认/提交   run 绿 = 运行/重跑/重试
+        //   view    青 = 详情/打开/流程图       edit 橙 = 编辑/修改/配置
+        //   back    紫 = 返回/后退             destructive 红 = 删除/归档
+        run: "border-action-run/40 bg-action-run text-action-run-foreground shadow-sm hover:bg-action-run/90",
+        view: "border-action-view/40 bg-action-view text-action-view-foreground shadow-sm hover:bg-action-view/90",
+        edit: "border-warning/50 bg-warning text-warning-foreground shadow-sm hover:bg-warning/90",
+        back: "border-action-back/60 bg-action-back text-action-back-foreground shadow-sm hover:bg-action-back/90",
+        ghost: "border-input bg-transparent hover:bg-accent hover:text-accent-foreground",
+        link: "border-input bg-transparent text-primary underline-offset-4 hover:underline",
+      },
+      size: {
+        default: "h-9 px-4 py-2",
+        sm: "h-8 rounded-md px-3 text-xs",
+        lg: "h-10 rounded-md px-8",
+        icon: "h-9 w-9",
+      },
+    },
+    defaultVariants: { variant: "default", size: "default" },
+  }
+);
+
+export interface ButtonProps
+  extends React.ButtonHTMLAttributes<HTMLButtonElement>,
+    VariantProps<typeof buttonVariants> {
+  asChild?: boolean;
+}
+
+const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
+  ({ className, variant, size, asChild = false, ...props }, ref) => {
+    const Comp = asChild ? Slot : "button";
+    return <Comp className={cn(buttonVariants({ variant, size, className }))} ref={ref} {...props} />;
+  }
+);
+Button.displayName = "Button";
+
+export { Button, buttonVariants };
+
+--- @ui/badge.tsx ---
+import * as React from "react";
+import { cva, type VariantProps } from "class-variance-authority";
+import { cn } from "@/lib/utils";
+
+const badgeVariants = cva(
+  "inline-flex items-center rounded-md border px-2 py-0.5 text-xs font-medium transition-colors focus:outline-none",
+  {
+    variants: {
+      variant: {
+        default: "border-transparent bg-primary text-primary-foreground",
+        secondary: "border-transparent bg-secondary text-secondary-foreground",
+        destructive: "border-transparent bg-destructive text-destructive-foreground",
+        outline: "text-foreground",
+        success: "border-success/30 bg-success/15 text-success",
+        warning: "border-warning/30 bg-warning/15 text-warning",
+        info: "border-info/30 bg-info/15 text-info",
+      },
+    },
+    defaultVariants: { variant: "default" },
+  }
+);
+
+export interface BadgeProps
+  extends React.HTMLAttributes<HTMLDivElement>,
+    VariantProps<typeof badgeVariants> {}
+
+export function Badge({ className, variant, ...props }: BadgeProps) {
+  return <div className={cn(badgeVariants({ variant }), className)} {...props} />;
+}
+
+export { badgeVariants };
+
+--- @ui/card.tsx ---
+import * as React from "react";
+import { cn } from "@/lib/utils";
+
+const Card = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(
+  ({ className, ...props }, ref) => (
+    <div
+      ref={ref}
+      data-card=""
+      className={cn("rounded-xl border bg-card text-card-foreground shadow-surface", className)}
+      {...props}
+    />
+  )
+);
+Card.displayName = "Card";
+
+const CardHeader = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(
+  ({ className, ...props }, ref) => (
+    <div ref={ref} className={cn("flex flex-col space-y-1.5 p-6", className)} {...props} />
+  )
+);
+CardHeader.displayName = "CardHeader";
+
+const CardTitle = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(
+  ({ className, ...props }, ref) => (
+    <div
+      ref={ref}
+      className={cn("text-base font-semibold leading-none tracking-tight", className)}
+      {...props}
+    />
+  )
+);
+CardTitle.displayName = "CardTitle";
+
+const CardDescription = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(
+  ({ className, ...props }, ref) => (
+    <div ref={ref} className={cn("text-sm text-muted-foreground", className)} {...props} />
+  )
+);
+CardDescription.displayName = "CardDescription";
+
+const CardContent = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(
+  ({ className, ...props }, ref) => (
+    <div ref={ref} className={cn("p-6 pt-0", className)} {...props} />
+  )
+);
+CardContent.displayName = "CardContent";
+
+const CardFooter = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(
+  ({ className, ...props }, ref) => (
+    <div ref={ref} className={cn("flex items-center p-6 pt-0", className)} {...props} />
+  )
+);
+CardFooter.displayName = "CardFooter";
+
+export { Card, CardHeader, CardFooter, CardTitle, CardDescription, CardContent };
+
+--- @ui/select.tsx ---
+import * as React from "react";
+import * as SelectPrimitive from "@radix-ui/react-select";
+import { Check, ChevronDown, ChevronUp } from "lucide-react";
+import { cn } from "@/lib/utils";
+
+/** 下拉选择（Radix Select）—— 支持分组 / 分组标签 / 禁用项 / 滚动按钮 */
+const Select = SelectPrimitive.Root;
+const SelectGroup = SelectPrimitive.Group;
+const SelectValue = SelectPrimitive.Value;
+
+const SelectTrigger = React.forwardRef<
+  React.ElementRef<typeof SelectPrimitive.Trigger>,
+  React.ComponentPropsWithoutRef<typeof SelectPrimitive.Trigger>
+>(({ className, children, ...props }, ref) => (
+  <SelectPrimitive.Trigger
+    ref={ref}
+    className={cn(
+      "flex h-9 w-full items-center justify-between whitespace-nowrap rounded-md border border-input bg-transparent px-3 py-2 text-sm shadow-sm ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-1 focus:ring-ring disabled:cursor-not-allowed disabled:opacity-50 [&>span]:line-clamp-1",
+      className
+    )}
+    {...props}
+  >
+    {children}
+    <SelectPrimitive.Icon asChild>
+      <ChevronDown className="h-4 w-4 opacity-50" />
+    </SelectPrimitive.Icon>
+  </SelectPrimitive.Trigger>
+));
+SelectTrigger.displayName = SelectPrimitive.Trigger.displayName;
+
+const SelectScrollUpButton = React.forwardRef<
+  React.ElementRef<typeof SelectPrimitive.ScrollUpButton>,
+  React.ComponentPropsWithoutRef<typeof SelectPrimitive.ScrollUpButton>
+>(({ className, ...props }, ref) => (
+  <SelectPrimitive.ScrollUpButton
+    ref={ref}
+    className={cn("flex cursor-default items-center justify-center py-1", className)}
+    {...props}
+  >
+    <ChevronUp className="h-4 w-4" />
+  </SelectPrimitive.ScrollUpButton>
+));
+SelectScrollUpButton.displayName = SelectPrimitive.ScrollUpButton.displayName;
+
+const SelectScrollDownButton = React.forwardRef<
+  React.ElementRef<typeof SelectPrimitive.ScrollDownButton>,
+  React.ComponentPropsWithoutRef<typeof SelectPrimitive.ScrollDownButton>
+>(({ className, ...props }, ref) => (
+  <SelectPrimitive.ScrollDownButton
+    ref={ref}
+    className={cn("flex cursor-default items-center justify-center py-1", className)}
+    {...props}
+  >
+    <ChevronDown className="h-4 w-4" />
+  </SelectPrimitive.ScrollDownButton>
+));
+SelectScrollDownButton.displayName = SelectPrimitive.ScrollDownButton.displayName;
+
+const SelectContent = React.forwardRef<
+  React.ElementRef<typeof SelectPrimitive.Content>,
+  React.ComponentPropsWithoutRef<typeof SelectPrimitive.Content>
+>(({ className, children, position = "popper", ...props }, ref) => (
+  <SelectPrimitive.Portal>
+    <SelectPrimitive.Content
+      ref={ref}
+      className={cn(
+        "relative z-50 max-h-96 min-w-[8rem] overflow-hidden rounded-md border bg-popover text-popover-foreground shadow-md data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95",
+        position === "popper" &&
+          "data-[side=bottom]:translate-y-1 data-[side=left]:-translate-x-1 data-[side=right]:translate-x-1 data-[side=top]:-translate-y-1",
+        className
+      )}
+      position={position}
+      {...props}
+    >
+      <SelectScrollUpButton />
+      <SelectPrimitive.Viewport
+        className={cn(
+          "p-1",
+          position === "popper" &&
+            "h-[var(--radix-select-trigger-height)] w-full min-w-[var(--radix-select-trigger-width)]"
+        )}
+      >
+        {children}
+      </SelectPrimitive.Viewport>
+      <SelectScrollDownButton />
+    </SelectPrimitive.Content>
+  </SelectPrimitive.Portal>
+));
+SelectContent.displayName = SelectPrimitive.Content.displayName;
+
+const SelectLabel = React.forwardRef<
+  React.ElementRef<typeof SelectPrimitive.Label>,
+  React.ComponentPropsWithoutRef<typeof SelectPrimitive.Label>
+>(({ className, ...props }, ref) => (
+  <SelectPrimitive.Label
+    ref={ref}
+    className={cn("px-2 py-1.5 text-xs font-semibold text-muted-foreground", className)}
+    {...props}
+  />
+));
+SelectLabel.displayName = SelectPrimitive.Label.displayName;
+
+const SelectItem = React.forwardRef<
+  React.ElementRef<typeof SelectPrimitive.Item>,
+  React.ComponentPropsWithoutRef<typeof SelectPrimitive.Item>
+>(({ className, children, ...props }, ref) => (
+  <SelectPrimitive.Item
+    ref={ref}
+    className={cn(
+      "relative flex w-full cursor-default select-none items-center rounded-sm py-1.5 pl-2 pr-8 text-sm outline-none focus:bg-accent focus:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50",
+      className
+    )}
+    {...props}
+  >
+    <span className="absolute right-2 flex h-3.5 w-3.5 items-center justify-center">
+      <SelectPrimitive.ItemIndicator>
+        <Check className="h-4 w-4" />
+      </SelectPrimitive.ItemIndicator>
+    </span>
+    <SelectPrimitive.ItemText>{children}</SelectPrimitive.ItemText>
+  </SelectPrimitive.Item>
+));
+SelectItem.displayName = SelectPrimitive.Item.displayName;
+
+const SelectSeparator = React.forwardRef<
+  React.ElementRef<typeof SelectPrimitive.Separator>,
+  React.ComponentPropsWithoutRef<typeof SelectPrimitive.Separator>
+>(({ className, ...props }, ref) => (
+  <SelectPrimitive.Separator
+    ref={ref}
+    className={cn("-mx-1 my-1 h-px bg-muted", className)}
+    {...props}
+  />
+));
+SelectSeparator.displayName = SelectPrimitive.Separator.displayName;
+
+export {
+  Select,
+  SelectGroup,
+  SelectValue,
+  SelectTrigger,
+  SelectContent,
+  SelectLabel,
+  SelectItem,
+  SelectSeparator,
+};
+
+--- @ui/checkbox.tsx ---
+import * as React from "react";
+import * as CheckboxPrimitive from "@radix-ui/react-checkbox";
+import { Check, Minus } from "lucide-react";
+import { cn } from "@/lib/utils";
+
+const Checkbox = React.forwardRef<
+  React.ElementRef<typeof CheckboxPrimitive.Root>,
+  React.ComponentPropsWithoutRef<typeof CheckboxPrimitive.Root>
+>(({ className, ...props }, ref) => (
+  <CheckboxPrimitive.Root
+    ref={ref}
+    className={cn(
+      "group peer h-4 w-4 shrink-0 rounded-sm border border-input shadow transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50 data-[state=checked]:border-primary data-[state=checked]:bg-primary data-[state=checked]:text-primary-foreground data-[state=indeterminate]:border-primary data-[state=indeterminate]:bg-primary data-[state=indeterminate]:text-primary-foreground",
+      className
+    )}
+    {...props}
+  >
+    <CheckboxPrimitive.Indicator className={cn("flex items-center justify-center text-current")}>
+      <Check className="h-3.5 w-3.5 group-data-[state=indeterminate]:hidden" />
+      <Minus className="hidden h-3.5 w-3.5 group-data-[state=indeterminate]:block" />
+    </CheckboxPrimitive.Indicator>
+  </CheckboxPrimitive.Root>
+));
+Checkbox.displayName = CheckboxPrimitive.Root.displayName;
+
+export { Checkbox };
+
+--- @ui/separator.tsx ---
+import * as React from "react";
+import * as SeparatorPrimitive from "@radix-ui/react-separator";
+import { cn } from "@/lib/utils";
+
+const Separator = React.forwardRef<
+  React.ElementRef<typeof SeparatorPrimitive.Root>,
+  React.ComponentPropsWithoutRef<typeof SeparatorPrimitive.Root>
+>(({ className, orientation = "horizontal", decorative = true, ...props }, ref) => (
+  <SeparatorPrimitive.Root
+    ref={ref}
+    decorative={decorative}
+    orientation={orientation}
+    className={cn(
+      "shrink-0 bg-border",
+      orientation === "horizontal" ? "h-[1px] w-full" : "h-full w-[1px]",
+      className
+    )}
+    {...props}
+  />
+));
+Separator.displayName = SeparatorPrimitive.Root.displayName;
+
+export { Separator };
+
+--- @components/page-header.tsx ---
+import * as React from "react";
+import { cn } from "@/lib/utils";
+
+/**
+ * ██ PageHeader —— 页头
+ * ────────────────────────────────────────────────────────────────────────
+ * 2026-10-28 采纳《页面排版-白框模式》规范 §4，新增 `layout` 两档：
+ *
+ *   inline（默认，新写法）  标题 + 说明**同行紧跟**（gap-x-3 = 12px），底对齐。
+ *                          页头不设下边距（mb-0），间距交给页面容器 `gap-2`（8px）。
+ *                          用于**详情页 / 表单页**（它们必须保留页头 = 实体身份）。
+ *
+ *   stacked（旧写法，兼容） 标题与说明上下堆叠、左右两端对齐、`mb-6`。
+ *                          只为未迁移的存量页面保留；新页面不要用。
+ *
+ * ⚠️ 实测调出来的三个数，别改：
+ *   1. `items-end` 不能省 —— 少了它，20px 标题与 14px 说明会变成"中间对齐"，说明会"飘"；
+ *   2. 说明必须**紧跟标题右侧 12px** —— 曾用 `justify-between` 推到最右，被否：
+ *      「放右边就没效果了」；
+ *   3. 说明字号锁 `text-sm`（14px），不要为了配合标题缩小。
+ *
+ * ⚠️ 列表页**不要用本组件**：列表页去掉页头，内容装 `ContentFrame`。
+ *    页头里的按钮（视图切换 / 新建 / 统计计数）要搬到内容区顶部工具行的**最右侧**，
+ *    否则"去页头"会把功能一起删掉（这是最容易翻车的一步）。
+ */
+export interface PageHeaderProps {
+  title: string;
+  description?: string;
+  actions?: React.ReactNode;
+  /** 排版：inline = 标题与说明同行（详情/表单页默认）｜stacked = 上下堆叠（存量兼容） */
+  layout?: "inline" | "stacked";
+  className?: string;
+}
+
+export function PageHeader({
+  title,
+  description,
+  actions,
+  layout = "inline",
+  className,
+}: PageHeaderProps) {
+  if (layout === "stacked") {
+    return (
+      <div className={cn("mb-6 flex flex-wrap items-start justify-between gap-4", className)}>
+        <div className="flex flex-col gap-1">
+          <h1 className="text-xl font-semibold tracking-tight">{title}</h1>
+          {description && <p className="text-sm text-muted-foreground">{description}</p>}
+        </div>
+        {actions && <div className="flex items-center gap-2">{actions}</div>}
+      </div>
+    );
+  }
+
+  return (
+    <div
+      data-testid="page-header"
+      className={cn("mb-0 flex flex-wrap items-end gap-x-3 gap-y-1", className)}
+    >
+      <h1 className="text-xl font-semibold tracking-tight">{title}</h1>
+      {description && <p className="text-sm text-muted-foreground">{description}</p>}
+      {actions && <div className="ml-auto flex items-center gap-2">{actions}</div>}
+    </div>
+  );
+}
+
+--- @components/status-badge.tsx ---
+import { Badge } from "@/components/ui/badge";
+
+const MAP: Record<string, { variant: "success" | "warning" | "destructive" | "info" | "secondary"; label: string }> = {
+  success: { variant: "success", label: "成功" },
+  succeeded: { variant: "success", label: "成功" },
+  online: { variant: "success", label: "在线" },
+  active: { variant: "success", label: "启用" },
+  running: { variant: "info", label: "运行中" },
+  pending: { variant: "warning", label: "待处理" },
+  draft: { variant: "secondary", label: "草稿" },
+  offline: { variant: "secondary", label: "离线" },
+  failed: { variant: "destructive", label: "失败" },
+  error: { variant: "destructive", label: "异常" },
+};
+
+export function StatusBadge({ status }: { status: string }) {
+  const s = MAP[status] ?? { variant: "secondary" as const, label: status };
+  return <Badge variant={s.variant}>{s.label}</Badge>;
+}
+
+--- src/mock/data.ts ---
+/** mock 数据 —— 页面案例的演示数据（改这里即可换成你自己的数据/接口） */
+
+export interface Agent {
+  id: string;
+  name: string;
+  role: string;
+  status: "online" | "offline" | "error";
+  model: string;
+  tasks: number;
+  tokens: number;
+}
+
+export const agents: Agent[] = [
+  { id: "agt_001", name: "选题猎手", role: "worker", status: "online", model: "gpt-4o", tasks: 128, tokens: 42100 },
+  { id: "agt_002", name: "文案生成器", role: "worker", status: "online", model: "claude-3.5", tasks: 96, tokens: 88200 },
+  { id: "agt_003", name: "海外渠道运营", role: "project_manager", status: "online", model: "deepseek-reasoner", tasks: 54, tokens: 21030 },
+  { id: "agt_004", name: "合规审核", role: "worker", status: "error", model: "gpt-4o-mini", tasks: 12, tokens: 5400 },
+  { id: "agt_005", name: "数据清洗", role: "worker", status: "offline", model: "qwen-max", tasks: 301, tokens: 156000 },
+  { id: "agt_006", name: "投放优化", role: "worker", status: "online", model: "glm-4", tasks: 77, tokens: 33120 },
+];
+
+export interface Run {
+  id: string;
+  agent: string;
+  recipe: string;
+  status: "succeeded" | "failed" | "running";
+  startedAt: string;
+  duration: string;
+}
+
+export const runs: Run[] = [
+  { id: "run_9001", agent: "选题猎手", recipe: "每日选题生成", status: "succeeded", startedAt: "09:12", duration: "42s" },
+  { id: "run_9002", agent: "文案生成器", recipe: "商品文案批量生成", status: "running", startedAt: "09:20", duration: "3m" },
+  { id: "run_9003", agent: "合规审核", recipe: "文案合规检查", status: "failed", startedAt: "09:22", duration: "8s" },
+  { id: "run_9004", agent: "投放优化", recipe: "广告出价调优", status: "succeeded", startedAt: "08:55", duration: "1m12s" },
+  { id: "run_9005", agent: "数据清洗", recipe: "类目数据去重", status: "succeeded", startedAt: "08:40", duration: "5m01s" },
+];
+
+export const trendData = [
+  { date: "09-10", runs: 18, tokens: 12400 },
+  { date: "09-11", runs: 22, tokens: 15100 },
+  { date: "09-12", runs: 19, tokens: 13900 },
+  { date: "09-13", runs: 27, tokens: 19800 },
+  { date: "09-14", runs: 24, tokens: 17600 },
+  { date: "09-15", runs: 30, tokens: 22100 },
+  { date: "09-16", runs: 26, tokens: 17400 },
+];
+
+export const roleDistribution = [
+  { name: "worker", value: 4 },
+  { name: "project_manager", value: 1 },
+  { name: "host_manager", value: 1 },
+];
+
+export interface Product {
+  id: string;
+  hs6: string;
+  name: string;
+  category: string;
+  platform: string;
+  price: number;
+  status: "active" | "draft" | "offline";
+  updatedAt: string;
+}
+
+export const products: Product[] = [
+  { id: "P-1001", hs6: "8517.12", name: "无线蓝牙耳机 Pro", category: "消费电子", platform: "Amazon", price: 39.9, status: "active", updatedAt: "2026-09-15" },
+  { id: "P-1002", hs6: "9405.21", name: "LED 桌面氛围灯", category: "家居照明", platform: "Shopee", price: 15.5, status: "active", updatedAt: "2026-09-14" },
+  { id: "P-1003", hs6: "6109.10", name: "纯棉圆领 T 恤", category: "服饰", platform: "TikTok Shop", price: 8.8, status: "draft", updatedAt: "2026-09-16" },
+  { id: "P-1004", hs6: "3304.99", name: "补水保湿精华液", category: "美妆个护", platform: "Amazon", price: 22.0, status: "active", updatedAt: "2026-09-12" },
+  { id: "P-1005", hs6: "9503.00", name: "儿童益智积木", category: "玩具", platform: "eBay", price: 12.3, status: "offline", updatedAt: "2026-09-10" },
+  { id: "P-1006", hs6: "8471.30", name: "便携式笔记本电脑支架", category: "办公用品", platform: "Amazon", price: 18.6, status: "active", updatedAt: "2026-09-15" },
+  { id: "P-1007", hs6: "4202.92", name: "防泼水双肩背包", category: "箱包", platform: "Shopee", price: 27.9, status: "active", updatedAt: "2026-09-13" },
+  { id: "P-1008", hs6: "8518.30", name: "头戴式降噪耳机", category: "消费电子", platform: "Amazon", price: 59.0, status: "draft", updatedAt: "2026-09-16" },
+];

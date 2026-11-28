@@ -1,0 +1,80 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "detail",
+  "type": "registry:page",
+  "title": "详情页",
+  "description": "ShardKit 案例：详情页",
+  "registryDependencies": [
+    "card",
+    "button",
+    "badge",
+    "separator",
+    "table",
+    "tabs"
+  ],
+  "dependencies": [
+    "lucide-react"
+  ],
+  "files": [
+    {
+      "path": "src/pages/cases/detail.tsx",
+      "target": "src/pages/AgentDetail.tsx",
+      "type": "registry:page"
+    },
+    {
+      "path": "src/components/ui/card.tsx",
+      "target": "@ui/card.tsx",
+      "type": "registry:ui"
+    },
+    {
+      "path": "src/components/ui/button.tsx",
+      "target": "@ui/button.tsx",
+      "type": "registry:ui"
+    },
+    {
+      "path": "src/components/ui/badge.tsx",
+      "target": "@ui/badge.tsx",
+      "type": "registry:ui"
+    },
+    {
+      "path": "src/components/ui/separator.tsx",
+      "target": "@ui/separator.tsx",
+      "type": "registry:ui"
+    },
+    {
+      "path": "src/components/ui/table.tsx",
+      "target": "@ui/table.tsx",
+      "type": "registry:ui"
+    },
+    {
+      "path": "src/components/ui/tabs.tsx",
+      "target": "@ui/tabs.tsx",
+      "type": "registry:ui"
+    },
+    {
+      "path": "src/components/page-header.tsx",
+      "target": "@components/page-header.tsx",
+      "type": "registry:file"
+    },
+    {
+      "path": "src/components/status-badge.tsx",
+      "target": "@components/status-badge.tsx",
+      "type": "registry:file"
+    },
+    {
+      "path": "src/mock/data.ts",
+      "target": "src/mock/data.ts",
+      "type": "registry:file"
+    }
+  ],
+  "categories": [
+    "shardkit",
+    "page"
+  ],
+  "meta": {
+    "shardkit": {
+      "kind": "page",
+      "target": "src/pages/AgentDetail.tsx"
+    }
+  }
+}

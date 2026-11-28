@@ -1,0 +1,94 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "list",
+  "type": "registry:page",
+  "title": "列表页",
+  "description": "ShardKit 案例：列表页",
+  "registryDependencies": [
+    "table",
+    "input",
+    "button",
+    "badge",
+    "card",
+    "select",
+    "checkbox",
+    "separator"
+  ],
+  "dependencies": [
+    "lucide-react",
+    "@radix-ui/react-select",
+    "@radix-ui/react-checkbox"
+  ],
+  "files": [
+    {
+      "path": "src/pages/cases/dialog-crud/index.tsx",
+      "target": "src/pages/ProductList.tsx",
+      "type": "registry:page"
+    },
+    {
+      "path": "src/components/ui/table.tsx",
+      "target": "@ui/table.tsx",
+      "type": "registry:ui"
+    },
+    {
+      "path": "src/components/ui/input.tsx",
+      "target": "@ui/input.tsx",
+      "type": "registry:ui"
+    },
+    {
+      "path": "src/components/ui/button.tsx",
+      "target": "@ui/button.tsx",
+      "type": "registry:ui"
+    },
+    {
+      "path": "src/components/ui/badge.tsx",
+      "target": "@ui/badge.tsx",
+      "type": "registry:ui"
+    },
+    {
+      "path": "src/components/ui/card.tsx",
+      "target": "@ui/card.tsx",
+      "type": "registry:ui"
+    },
+    {
+      "path": "src/components/ui/select.tsx",
+      "target": "@ui/select.tsx",
+      "type": "registry:ui"
+    },
+    {
+      "path": "src/components/ui/checkbox.tsx",
+      "target": "@ui/checkbox.tsx",
+      "type": "registry:ui"
+    },
+    {
+      "path": "src/components/ui/separator.tsx",
+      "target": "@ui/separator.tsx",
+      "type": "registry:ui"
+    },
+    {
+      "path": "src/components/page-header.tsx",
+      "target": "@components/page-header.tsx",
+      "type": "registry:file"
+    },
+    {
+      "path": "src/components/status-badge.tsx",
+      "target": "@components/status-badge.tsx",
+      "type": "registry:file"
+    },
+    {
+      "path": "src/mock/data.ts",
+      "target": "src/mock/data.ts",
+      "type": "registry:file"
+    }
+  ],
+  "categories": [
+    "shardkit",
+    "page"
+  ],
+  "meta": {
+    "shardkit": {
+      "kind": "page",
+      "target": "src/pages/ProductList.tsx"
+    }
+  }
+}

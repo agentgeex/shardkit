@@ -1,0 +1,64 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "blocks",
+  "type": "registry:block",
+  "title": "布局区块",
+  "description": "ShardKit 案例：布局区块",
+  "registryDependencies": [
+    "card",
+    "badge",
+    "button",
+    "input",
+    "separator"
+  ],
+  "dependencies": [
+    "lucide-react"
+  ],
+  "files": [
+    {
+      "path": "src/pages/cases/blocks.tsx",
+      "target": "src/blocks/Blocks.tsx",
+      "type": "registry:page"
+    },
+    {
+      "path": "src/components/ui/card.tsx",
+      "target": "@ui/card.tsx",
+      "type": "registry:ui"
+    },
+    {
+      "path": "src/components/ui/badge.tsx",
+      "target": "@ui/badge.tsx",
+      "type": "registry:ui"
+    },
+    {
+      "path": "src/components/ui/button.tsx",
+      "target": "@ui/button.tsx",
+      "type": "registry:ui"
+    },
+    {
+      "path": "src/components/ui/input.tsx",
+      "target": "@ui/input.tsx",
+      "type": "registry:ui"
+    },
+    {
+      "path": "src/components/ui/separator.tsx",
+      "target": "@ui/separator.tsx",
+      "type": "registry:ui"
+    },
+    {
+      "path": "src/components/page-header.tsx",
+      "target": "@components/page-header.tsx",
+      "type": "registry:file"
+    }
+  ],
+  "categories": [
+    "shardkit",
+    "block"
+  ],
+  "meta": {
+    "shardkit": {
+      "kind": "block",
+      "target": "src/blocks/Blocks.tsx"
+    }
+  }
+}

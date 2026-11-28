@@ -1,0 +1,689 @@
+=== ShardKit Bundle: 详情页 (detail) ===
+# 用法：把下面每段写入对应"目标路径"，再按需 npm install。
+# 本包含 10 个文件 + 1 个 npm 依赖。
+
+[npm]  npm install lucide-react
+
+--- 目标路径清单 ---
+  src/pages/AgentDetail.tsx
+  @ui/card.tsx
+  @ui/button.tsx
+  @ui/badge.tsx
+  @ui/separator.tsx
+  @ui/table.tsx
+  @ui/tabs.tsx
+  @components/page-header.tsx
+  @components/status-badge.tsx
+  src/mock/data.ts
+
+--- src/pages/AgentDetail.tsx ---
+/**
+ * 页面案例：详情页 Detail（信息卡 + 描述列表 + 时间线 + 关联表格 + 标签页）
+ * ──────────────────────────────────────────────────────────
+ * 一个「和真实应用一样完整」的后台详情页：
+ *   - 页头：名称 / 状态 / 角色 + 返回 / 编辑
+ *   - 概览：基础字段描述列表 + 资源指标卡
+ *   - 活动时间线
+ *   - 标签页：概览 / 执行记录 / 配置（JSON 视图）
+ *
+ * 依赖：shadcn {card,badge,separator,button,table,tabs} + page-header / status-badge
+ */
+import { useTranslation } from "react-i18next";
+import { ArrowLeft, Bot, Cpu, Activity, Clock, Edit3, Copy } from "lucide-react";
+import { ContentFrame, ContentFrameSection } from "@/components/ui/content-frame";
+import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
+import { StatusBadge } from "@/components/status-badge";
+import { agents, runs } from "@/mock/data";
+
+function Field({ label, value, mono }: { label: string; value: React.ReactNode; mono?: boolean }) {
+  return (
+    <div className="flex flex-col gap-1 py-2">
+      <span className="text-xs text-muted-foreground">{label}</span>
+      <span className={mono ? "font-mono text-sm" : "text-sm"}>{value}</span>
+    </div>
+  );
+}
+
+export default function DetailPage() {
+  const { t } = useTranslation();
+  const agent = agents[0];
+  const timeline = [
+    { t: "09:20", text: "执行「每日选题生成」，产出 12 条选题", tone: "bg-emerald-500" },
+    { t: "09:12", text: "接收调度任务 run_9001", tone: "bg-sky-500" },
+    { t: "08:58", text: "模型路由切换至 gpt-4o", tone: "bg-violet-500" },
+    { t: "08:40", text: "Agent 上线", tone: "bg-muted-foreground" },
+  ];
+
+  return (
+    <div data-testid="detail-page" className="flex flex-col">
+      <ContentFrame padding={5}>
+        {/* 身份条：原页头的标题/ID/状态 + 编辑/返回，全部降为框内首行（导航已高亮页名） */}
+        <div
+          data-testid="detail-head"
+          className="mb-4 flex flex-wrap items-center justify-between gap-x-4 gap-y-2 border-b border-border pb-4"
+        >
+          <div className="flex min-w-0 flex-wrap items-center gap-x-3 gap-y-1">
+            <Bot className="h-5 w-5 shrink-0 text-primary" />
+            <h1 className="min-w-0 truncate text-xl font-semibold tracking-tight">{agent.name}</h1>
+            <span className="min-w-0 truncate font-mono text-xs text-muted-foreground">{agent.id}</span>
+            <StatusBadge status={agent.status} />
+            <Badge variant="outline" className="font-normal">{agent.role}</Badge>
+          </div>
+          <div className="flex shrink-0 items-center gap-2">
+            <Button variant="edit" size="sm"><Edit3 className="h-4 w-4" /> 编辑</Button>
+            {/* 返回永远是最后一个 */}
+            <Button variant="back" size="sm"><ArrowLeft className="h-4 w-4" /> 返回</Button>
+          </div>
+        </div>
+
+        {/* 分区直接作为白框子项：间距由各 section 的 pb-5 自报。
+            容器若再加 gap-5，就会与 section padding 双算（规范踩坑 7）。 */}
+        {/* 配置概览 */}
+          <ContentFrameSection>
+            <h2 className="text-base font-semibold">配置概览</h2>
+            <div className="grid gap-x-8 gap-y-4 sm:grid-cols-2 lg:grid-cols-4">
+              <Field label={t("field.baseModel")} value={agent.model} mono />
+              <Field label={t("field.role")} value={agent.role} />
+              <Field label={t("field.tasksTotal")} value={<span className="tabular-nums">{agent.tasks}</span>} />
+              <Field label={t("field.tokenTotal")} value={<span className="tabular-nums">{agent.tokens.toLocaleString()}</span>} />
+            </div>
+          </ContentFrameSection>
+
+          {/* 实时指标（原三个带边框小卡 → 去边框，纯字段式） */}
+          <ContentFrameSection>
+            <h2 className="text-base font-semibold">实时指标</h2>
+            <div className="grid gap-4 sm:grid-cols-3">
+              {[
+                { icon: Cpu, label: "CPU", value: "23%" },
+                { icon: Activity, label: "队列", value: "0" },
+                { icon: Clock, label: "运行时长", value: "6h 12m" },
+              ].map((m) => (
+                <div key={m.label} className="flex items-center gap-3">
+                  <m.icon className="h-5 w-5 shrink-0 text-muted-foreground" />
+                  <div>
+                    <div className="text-xs text-muted-foreground">{m.label}</div>
+                    <div className="text-sm font-semibold tabular-nums">{m.value}</div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </ContentFrameSection>
+
+          {/* 活动时间线 */}
+          <ContentFrameSection>
+            <div className="flex flex-col gap-1">
+              <h2 className="text-base font-semibold">活动时间线</h2>
+              <p className="text-sm text-muted-foreground">最近事件</p>
+            </div>
+            <ol className="relative flex flex-col gap-4 border-l border-border pl-4">
+              {timeline.map((e, i) => (
+                <li key={i} className="relative">
+                  <span className={`absolute -left-[21px] top-1 h-2.5 w-2.5 rounded-full ${e.tone} ring-4 ring-card`} />
+                  <div className="text-xs text-muted-foreground tabular-nums">{e.t}</div>
+                  <div className="text-sm">{e.text}</div>
+                </li>
+              ))}
+            </ol>
+          </ContentFrameSection>
+
+          {/* 详情标签页 */}
+          <ContentFrameSection>
+            <div className="flex flex-col gap-1">
+              <h2 className="text-base font-semibold">详情</h2>
+              <p className="text-sm text-muted-foreground">按标签页查看更多信息</p>
+            </div>
+            <Tabs defaultValue="runs">
+              <TabsList>
+                <TabsTrigger value="runs">执行记录</TabsTrigger>
+                <TabsTrigger value="config">配置</TabsTrigger>
+                <TabsTrigger value="logs">日志</TabsTrigger>
+              </TabsList>
+
+              <TabsContent value="runs">
+                <Table>
+                  <TableHeader>
+                    <TableRow>
+                      <TableHead>{t("field.execId")}</TableHead>
+                      <TableHead>{t("field.recipe")}</TableHead>
+                      <TableHead>{t("field.startedAt")}</TableHead>
+                      <TableHead>{t("field.status")}</TableHead>
+                      <TableHead className="text-right">{t("field.duration")}</TableHead>
+                    </TableRow>
+                  </TableHeader>
+                  <TableBody>
+                    {runs.map((r) => (
+                      <TableRow key={r.id}>
+                        <TableCell className="font-mono text-xs">{r.id}</TableCell>
+                        <TableCell>{r.recipe}</TableCell>
+                        <TableCell className="text-muted-foreground tabular-nums">{r.startedAt}</TableCell>
+                        <TableCell><StatusBadge status={r.status} /></TableCell>
+                        <TableCell className="text-right tabular-nums">{r.duration}</TableCell>
+                      </TableRow>
+                    ))}
+                  </TableBody>
+                </Table>
+              </TabsContent>
+
+              <TabsContent value="config">
+                <div className="relative rounded-lg border bg-muted/40 p-4">
+                  <Button
+                    variant="secondary"
+                    size="icon"
+                    className="absolute right-2 top-2 h-7 w-7"
+                    aria-label="复制配置"
+                    onClick={() => navigator.clipboard?.writeText(JSON.stringify(agent, null, 2))}
+                  >
+                    <Copy className="h-3.5 w-3.5" />
+                  </Button>
+                  <pre className="overflow-auto text-xs leading-relaxed">
+{JSON.stringify(agent, null, 2)}
+                  </pre>
+                </div>
+              </TabsContent>
+
+              <TabsContent value="logs">
+                <ol className="flex flex-col gap-2 font-mono text-xs">
+                  {[
+                    "[09:20:11] INFO  执行配方「每日选题生成」完成，产出 12 条",
+                    "[09:12:03] INFO  接收调度任务 run_9001",
+                    "[09:12:03] DEBUG 载入配方参数 { topN: 20, market: 'SEA' }",
+                    "[08:58:44] INFO  模型路由切换 gpt-4o → claude-3.5",
+                    `[08:40:00] INFO  Agent ${agent.id} 上线`,
+                  ].map((l, i) => (
+                    <li key={i} className="flex gap-3">
+                      <span className="text-muted-foreground">{l.slice(1, 9)}</span>
+                      <span>{l.slice(11)}</span>
+                    </li>
+                  ))}
+                </ol>
+              </TabsContent>
+            </Tabs>
+        </ContentFrameSection>
+      </ContentFrame>
+    </div>
+  );
+}
+
+--- @ui/card.tsx ---
+import * as React from "react";
+import { cn } from "@/lib/utils";
+
+const Card = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(
+  ({ className, ...props }, ref) => (
+    <div
+      ref={ref}
+      data-card=""
+      className={cn("rounded-xl border bg-card text-card-foreground shadow-surface", className)}
+      {...props}
+    />
+  )
+);
+Card.displayName = "Card";
+
+const CardHeader = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(
+  ({ className, ...props }, ref) => (
+    <div ref={ref} className={cn("flex flex-col space-y-1.5 p-6", className)} {...props} />
+  )
+);
+CardHeader.displayName = "CardHeader";
+
+const CardTitle = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(
+  ({ className, ...props }, ref) => (
+    <div
+      ref={ref}
+      className={cn("text-base font-semibold leading-none tracking-tight", className)}
+      {...props}
+    />
+  )
+);
+CardTitle.displayName = "CardTitle";
+
+const CardDescription = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(
+  ({ className, ...props }, ref) => (
+    <div ref={ref} className={cn("text-sm text-muted-foreground", className)} {...props} />
+  )
+);
+CardDescription.displayName = "CardDescription";
+
+const CardContent = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(
+  ({ className, ...props }, ref) => (
+    <div ref={ref} className={cn("p-6 pt-0", className)} {...props} />
+  )
+);
+CardContent.displayName = "CardContent";
+
+const CardFooter = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(
+  ({ className, ...props }, ref) => (
+    <div ref={ref} className={cn("flex items-center p-6 pt-0", className)} {...props} />
+  )
+);
+CardFooter.displayName = "CardFooter";
+
+export { Card, CardHeader, CardFooter, CardTitle, CardDescription, CardContent };
+
+--- @ui/button.tsx ---
+import * as React from "react";
+import { Slot } from "@radix-ui/react-slot";
+import { cva, type VariantProps } from "class-variance-authority";
+import { cn } from "@/lib/utils";
+
+const buttonVariants = cva(
+  // 基础：所有按钮统一加一层边框（老冯验收反馈 2026-09-28：每个按钮都要有边框）
+  "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md border text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 [&_svg]:size-4 [&_svg]:shrink-0",
+  {
+    variants: {
+      variant: {
+        default: "border-primary/20 bg-primary text-primary-foreground shadow hover:bg-primary/90",
+        destructive: "border-destructive/30 bg-destructive text-destructive-foreground shadow-sm hover:bg-destructive/90",
+        outline: "border-input bg-background shadow-sm hover:bg-accent hover:text-accent-foreground",
+        secondary: "border-input bg-secondary text-secondary-foreground shadow-sm hover:bg-secondary/80",
+        // ── 按钮用途分色（2026-10-28 采纳《页面排版-白框模式》§6）──────────────
+        // 白底页面上 ghost/outline 描边按钮基本看不见（对向项目返工三次）→ 可见按钮
+        // 一律实底 + 白字，靠**色相**区分用途。对比度：按钮 ≥3:1、正文 ≥4.5:1，必须实测。
+        //   default 蓝 = 新建/保存/确认/提交   run 绿 = 运行/重跑/重试
+        //   view    青 = 详情/打开/流程图       edit 橙 = 编辑/修改/配置
+        //   back    紫 = 返回/后退             destructive 红 = 删除/归档
+        run: "border-action-run/40 bg-action-run text-action-run-foreground shadow-sm hover:bg-action-run/90",
+        view: "border-action-view/40 bg-action-view text-action-view-foreground shadow-sm hover:bg-action-view/90",
+        edit: "border-warning/50 bg-warning text-warning-foreground shadow-sm hover:bg-warning/90",
+        back: "border-action-back/60 bg-action-back text-action-back-foreground shadow-sm hover:bg-action-back/90",
+        ghost: "border-input bg-transparent hover:bg-accent hover:text-accent-foreground",
+        link: "border-input bg-transparent text-primary underline-offset-4 hover:underline",
+      },
+      size: {
+        default: "h-9 px-4 py-2",
+        sm: "h-8 rounded-md px-3 text-xs",
+        lg: "h-10 rounded-md px-8",
+        icon: "h-9 w-9",
+      },
+    },
+    defaultVariants: { variant: "default", size: "default" },
+  }
+);
+
+export interface ButtonProps
+  extends React.ButtonHTMLAttributes<HTMLButtonElement>,
+    VariantProps<typeof buttonVariants> {
+  asChild?: boolean;
+}
+
+const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
+  ({ className, variant, size, asChild = false, ...props }, ref) => {
+    const Comp = asChild ? Slot : "button";
+    return <Comp className={cn(buttonVariants({ variant, size, className }))} ref={ref} {...props} />;
+  }
+);
+Button.displayName = "Button";
+
+export { Button, buttonVariants };
+
+--- @ui/badge.tsx ---
+import * as React from "react";
+import { cva, type VariantProps } from "class-variance-authority";
+import { cn } from "@/lib/utils";
+
+const badgeVariants = cva(
+  "inline-flex items-center rounded-md border px-2 py-0.5 text-xs font-medium transition-colors focus:outline-none",
+  {
+    variants: {
+      variant: {
+        default: "border-transparent bg-primary text-primary-foreground",
+        secondary: "border-transparent bg-secondary text-secondary-foreground",
+        destructive: "border-transparent bg-destructive text-destructive-foreground",
+        outline: "text-foreground",
+        success: "border-success/30 bg-success/15 text-success",
+        warning: "border-warning/30 bg-warning/15 text-warning",
+        info: "border-info/30 bg-info/15 text-info",
+      },
+    },
+    defaultVariants: { variant: "default" },
+  }
+);
+
+export interface BadgeProps
+  extends React.HTMLAttributes<HTMLDivElement>,
+    VariantProps<typeof badgeVariants> {}
+
+export function Badge({ className, variant, ...props }: BadgeProps) {
+  return <div className={cn(badgeVariants({ variant }), className)} {...props} />;
+}
+
+export { badgeVariants };
+
+--- @ui/separator.tsx ---
+import * as React from "react";
+import * as SeparatorPrimitive from "@radix-ui/react-separator";
+import { cn } from "@/lib/utils";
+
+const Separator = React.forwardRef<
+  React.ElementRef<typeof SeparatorPrimitive.Root>,
+  React.ComponentPropsWithoutRef<typeof SeparatorPrimitive.Root>
+>(({ className, orientation = "horizontal", decorative = true, ...props }, ref) => (
+  <SeparatorPrimitive.Root
+    ref={ref}
+    decorative={decorative}
+    orientation={orientation}
+    className={cn(
+      "shrink-0 bg-border",
+      orientation === "horizontal" ? "h-[1px] w-full" : "h-full w-[1px]",
+      className
+    )}
+    {...props}
+  />
+));
+Separator.displayName = SeparatorPrimitive.Root.displayName;
+
+export { Separator };
+
+--- @ui/table.tsx ---
+import * as React from "react";
+import { cn } from "@/lib/utils";
+
+/** TableBody 的斑马线开关通过 context 下发给 TableRow（才能在 tr 上生成 even: 变体，保证 hover 可覆盖） */
+const TableStripedContext = React.createContext(false);
+
+const Table = React.forwardRef<HTMLTableElement, React.HTMLAttributes<HTMLTableElement>>(
+  ({ className, ...props }, ref) => (
+    <div className="relative w-full overflow-auto rounded-lg border border-border">
+      <table ref={ref} className={cn("w-full caption-bottom text-sm", className)} {...props} />
+    </div>
+  )
+);
+Table.displayName = "Table";
+
+const TableHeader = React.forwardRef<
+  HTMLTableSectionElement,
+  React.HTMLAttributes<HTMLTableSectionElement>
+>(({ className, ...props }, ref) => (
+  <thead ref={ref} className={cn("[&_tr]:border-b bg-muted/40", className)} {...props} />
+));
+TableHeader.displayName = "TableHeader";
+
+type TableBodyProps = React.HTMLAttributes<HTMLTableSectionElement> & {
+  /** 斑马线：偶数行加浅底色（语义 token bg-muted/30，深色模式自动适配；hover 仍可覆盖） */
+  striped?: boolean;
+};
+
+const TableBody = React.forwardRef<HTMLTableSectionElement, TableBodyProps>(
+  ({ className, striped = false, ...props }, ref) => (
+    <TableStripedContext.Provider value={striped}>
+      <tbody ref={ref} className={cn("[&_tr:last-child]:border-0", className)} {...props} />
+    </TableStripedContext.Provider>
+  )
+);
+TableBody.displayName = "TableBody";
+
+const TableRow = React.forwardRef<HTMLTableRowElement, React.HTMLAttributes<HTMLTableRowElement>>(
+  ({ className, ...props }, ref) => {
+    const striped = React.useContext(TableStripedContext);
+    return (
+      <tr
+        ref={ref}
+        className={cn(
+          "border-b transition-colors hover:bg-muted/50 data-[state=selected]:bg-muted",
+          striped && "even:bg-muted/30",
+          className
+        )}
+        {...props}
+      />
+    );
+  }
+);
+TableRow.displayName = "TableRow";
+
+const TableHead = React.forwardRef<
+  HTMLTableCellElement,
+  React.ThHTMLAttributes<HTMLTableCellElement>
+>(({ className, ...props }, ref) => (
+  <th
+    ref={ref}
+    className={cn(
+      // 2026-10-30：表头字重 500 → 600（老冯要求所有表头加粗；只动字重，字号/颜色/高度一律不变）。
+      // 600 = 本项目字重阶梯既有档位（/detail-view 标签列即 600），不擅自上 700。
+      "h-10 border-r border-border/60 px-3 text-left align-middle text-xs font-semibold text-muted-foreground last:border-r-0 [&:has([role=checkbox])]:pr-0",
+      className
+    )}
+    {...props}
+  />
+));
+TableHead.displayName = "TableHead";
+
+const TableCell = React.forwardRef<
+  HTMLTableCellElement,
+  React.TdHTMLAttributes<HTMLTableCellElement>
+>(({ className, ...props }, ref) => (
+  <td
+    ref={ref}
+    className={cn("border-r border-border/60 p-3 align-middle last:border-r-0 [&:has([role=checkbox])]:pr-0", className)}
+    {...props}
+  />
+));
+TableCell.displayName = "TableCell";
+
+const TableCaption = React.forwardRef<
+  HTMLTableCaptionElement,
+  React.HTMLAttributes<HTMLTableCaptionElement>
+>(({ className, ...props }, ref) => (
+  <caption ref={ref} className={cn("mt-4 text-sm text-muted-foreground", className)} {...props} />
+));
+TableCaption.displayName = "TableCaption";
+
+export { Table, TableHeader, TableBody, TableHead, TableRow, TableCell, TableCaption };
+
+--- @ui/tabs.tsx ---
+import * as React from "react";
+import * as TabsPrimitive from "@radix-ui/react-tabs";
+import { cn } from "@/lib/utils";
+
+const Tabs = TabsPrimitive.Root;
+
+const TabsList = React.forwardRef<
+  React.ElementRef<typeof TabsPrimitive.List>,
+  React.ComponentPropsWithoutRef<typeof TabsPrimitive.List>
+>(({ className, ...props }, ref) => (
+  <TabsPrimitive.List
+    ref={ref}
+    className={cn(
+      "inline-flex h-9 items-center justify-center rounded-lg bg-muted p-1 text-muted-foreground",
+      className
+    )}
+    {...props}
+  />
+));
+TabsList.displayName = TabsPrimitive.List.displayName;
+
+const TabsTrigger = React.forwardRef<
+  React.ElementRef<typeof TabsPrimitive.Trigger>,
+  React.ComponentPropsWithoutRef<typeof TabsPrimitive.Trigger>
+>(({ className, ...props }, ref) => (
+  <TabsPrimitive.Trigger
+    ref={ref}
+    className={cn(
+      "inline-flex items-center justify-center whitespace-nowrap rounded-md px-3 py-1 text-sm font-medium transition-all focus-visible:outline-none disabled:pointer-events-none disabled:opacity-50 data-[state=active]:bg-background data-[state=active]:text-foreground data-[state=active]:shadow",
+      className
+    )}
+    {...props}
+  />
+));
+TabsTrigger.displayName = TabsPrimitive.Trigger.displayName;
+
+const TabsContent = React.forwardRef<
+  React.ElementRef<typeof TabsPrimitive.Content>,
+  React.ComponentPropsWithoutRef<typeof TabsPrimitive.Content>
+>(({ className, ...props }, ref) => (
+  <TabsPrimitive.Content
+    ref={ref}
+    className={cn("mt-2 focus-visible:outline-none", className)}
+    {...props}
+  />
+));
+TabsContent.displayName = TabsPrimitive.Content.displayName;
+
+export { Tabs, TabsList, TabsTrigger, TabsContent };
+
+--- @components/page-header.tsx ---
+import * as React from "react";
+import { cn } from "@/lib/utils";
+
+/**
+ * ██ PageHeader —— 页头
+ * ────────────────────────────────────────────────────────────────────────
+ * 2026-10-28 采纳《页面排版-白框模式》规范 §4，新增 `layout` 两档：
+ *
+ *   inline（默认，新写法）  标题 + 说明**同行紧跟**（gap-x-3 = 12px），底对齐。
+ *                          页头不设下边距（mb-0），间距交给页面容器 `gap-2`（8px）。
+ *                          用于**详情页 / 表单页**（它们必须保留页头 = 实体身份）。
+ *
+ *   stacked（旧写法，兼容） 标题与说明上下堆叠、左右两端对齐、`mb-6`。
+ *                          只为未迁移的存量页面保留；新页面不要用。
+ *
+ * ⚠️ 实测调出来的三个数，别改：
+ *   1. `items-end` 不能省 —— 少了它，20px 标题与 14px 说明会变成"中间对齐"，说明会"飘"；
+ *   2. 说明必须**紧跟标题右侧 12px** —— 曾用 `justify-between` 推到最右，被否：
+ *      「放右边就没效果了」；
+ *   3. 说明字号锁 `text-sm`（14px），不要为了配合标题缩小。
+ *
+ * ⚠️ 列表页**不要用本组件**：列表页去掉页头，内容装 `ContentFrame`。
+ *    页头里的按钮（视图切换 / 新建 / 统计计数）要搬到内容区顶部工具行的**最右侧**，
+ *    否则"去页头"会把功能一起删掉（这是最容易翻车的一步）。
+ */
+export interface PageHeaderProps {
+  title: string;
+  description?: string;
+  actions?: React.ReactNode;
+  /** 排版：inline = 标题与说明同行（详情/表单页默认）｜stacked = 上下堆叠（存量兼容） */
+  layout?: "inline" | "stacked";
+  className?: string;
+}
+
+export function PageHeader({
+  title,
+  description,
+  actions,
+  layout = "inline",
+  className,
+}: PageHeaderProps) {
+  if (layout === "stacked") {
+    return (
+      <div className={cn("mb-6 flex flex-wrap items-start justify-between gap-4", className)}>
+        <div className="flex flex-col gap-1">
+          <h1 className="text-xl font-semibold tracking-tight">{title}</h1>
+          {description && <p className="text-sm text-muted-foreground">{description}</p>}
+        </div>
+        {actions && <div className="flex items-center gap-2">{actions}</div>}
+      </div>
+    );
+  }
+
+  return (
+    <div
+      data-testid="page-header"
+      className={cn("mb-0 flex flex-wrap items-end gap-x-3 gap-y-1", className)}
+    >
+      <h1 className="text-xl font-semibold tracking-tight">{title}</h1>
+      {description && <p className="text-sm text-muted-foreground">{description}</p>}
+      {actions && <div className="ml-auto flex items-center gap-2">{actions}</div>}
+    </div>
+  );
+}
+
+--- @components/status-badge.tsx ---
+import { Badge } from "@/components/ui/badge";
+
+const MAP: Record<string, { variant: "success" | "warning" | "destructive" | "info" | "secondary"; label: string }> = {
+  success: { variant: "success", label: "成功" },
+  succeeded: { variant: "success", label: "成功" },
+  online: { variant: "success", label: "在线" },
+  active: { variant: "success", label: "启用" },
+  running: { variant: "info", label: "运行中" },
+  pending: { variant: "warning", label: "待处理" },
+  draft: { variant: "secondary", label: "草稿" },
+  offline: { variant: "secondary", label: "离线" },
+  failed: { variant: "destructive", label: "失败" },
+  error: { variant: "destructive", label: "异常" },
+};
+
+export function StatusBadge({ status }: { status: string }) {
+  const s = MAP[status] ?? { variant: "secondary" as const, label: status };
+  return <Badge variant={s.variant}>{s.label}</Badge>;
+}
+
+--- src/mock/data.ts ---
+/** mock 数据 —— 页面案例的演示数据（改这里即可换成你自己的数据/接口） */
+
+export interface Agent {
+  id: string;
+  name: string;
+  role: string;
+  status: "online" | "offline" | "error";
+  model: string;
+  tasks: number;
+  tokens: number;
+}
+
+export const agents: Agent[] = [
+  { id: "agt_001", name: "选题猎手", role: "worker", status: "online", model: "gpt-4o", tasks: 128, tokens: 42100 },
+  { id: "agt_002", name: "文案生成器", role: "worker", status: "online", model: "claude-3.5", tasks: 96, tokens: 88200 },
+  { id: "agt_003", name: "海外渠道运营", role: "project_manager", status: "online", model: "deepseek-reasoner", tasks: 54, tokens: 21030 },
+  { id: "agt_004", name: "合规审核", role: "worker", status: "error", model: "gpt-4o-mini", tasks: 12, tokens: 5400 },
+  { id: "agt_005", name: "数据清洗", role: "worker", status: "offline", model: "qwen-max", tasks: 301, tokens: 156000 },
+  { id: "agt_006", name: "投放优化", role: "worker", status: "online", model: "glm-4", tasks: 77, tokens: 33120 },
+];
+
+export interface Run {
+  id: string;
+  agent: string;
+  recipe: string;
+  status: "succeeded" | "failed" | "running";
+  startedAt: string;
+  duration: string;
+}
+
+export const runs: Run[] = [
+  { id: "run_9001", agent: "选题猎手", recipe: "每日选题生成", status: "succeeded", startedAt: "09:12", duration: "42s" },
+  { id: "run_9002", agent: "文案生成器", recipe: "商品文案批量生成", status: "running", startedAt: "09:20", duration: "3m" },
+  { id: "run_9003", agent: "合规审核", recipe: "文案合规检查", status: "failed", startedAt: "09:22", duration: "8s" },
+  { id: "run_9004", agent: "投放优化", recipe: "广告出价调优", status: "succeeded", startedAt: "08:55", duration: "1m12s" },
+  { id: "run_9005", agent: "数据清洗", recipe: "类目数据去重", status: "succeeded", startedAt: "08:40", duration: "5m01s" },
+];
+
+export const trendData = [
+  { date: "09-10", runs: 18, tokens: 12400 },
+  { date: "09-11", runs: 22, tokens: 15100 },
+  { date: "09-12", runs: 19, tokens: 13900 },
+  { date: "09-13", runs: 27, tokens: 19800 },
+  { date: "09-14", runs: 24, tokens: 17600 },
+  { date: "09-15", runs: 30, tokens: 22100 },
+  { date: "09-16", runs: 26, tokens: 17400 },
+];
+
+export const roleDistribution = [
+  { name: "worker", value: 4 },
+  { name: "project_manager", value: 1 },
+  { name: "host_manager", value: 1 },
+];
+
+export interface Product {
+  id: string;
+  hs6: string;
+  name: string;
+  category: string;
+  platform: string;
+  price: number;
+  status: "active" | "draft" | "offline";
+  updatedAt: string;
+}
+
+export const products: Product[] = [
+  { id: "P-1001", hs6: "8517.12", name: "无线蓝牙耳机 Pro", category: "消费电子", platform: "Amazon", price: 39.9, status: "active", updatedAt: "2026-09-15" },
+  { id: "P-1002", hs6: "9405.21", name: "LED 桌面氛围灯", category: "家居照明", platform: "Shopee", price: 15.5, status: "active", updatedAt: "2026-09-14" },
+  { id: "P-1003", hs6: "6109.10", name: "纯棉圆领 T 恤", category: "服饰", platform: "TikTok Shop", price: 8.8, status: "draft", updatedAt: "2026-09-16" },
+  { id: "P-1004", hs6: "3304.99", name: "补水保湿精华液", category: "美妆个护", platform: "Amazon", price: 22.0, status: "active", updatedAt: "2026-09-12" },
+  { id: "P-1005", hs6: "9503.00", name: "儿童益智积木", category: "玩具", platform: "eBay", price: 12.3, status: "offline", updatedAt: "2026-09-10" },
+  { id: "P-1006", hs6: "8471.30", name: "便携式笔记本电脑支架", category: "办公用品", platform: "Amazon", price: 18.6, status: "active", updatedAt: "2026-09-15" },
+  { id: "P-1007", hs6: "4202.92", name: "防泼水双肩背包", category: "箱包", platform: "Shopee", price: 27.9, status: "active", updatedAt: "2026-09-13" },
+  { id: "P-1008", hs6: "8518.30", name: "头戴式降噪耳机", category: "消费电子", platform: "Amazon", price: 59.0, status: "draft", updatedAt: "2026-09-16" },
+];

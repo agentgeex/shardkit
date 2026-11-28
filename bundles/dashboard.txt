@@ -1,0 +1,551 @@
+=== ShardKit Bundle: 仪表盘 (dashboard) ===
+# 用法：把下面每段写入对应"目标路径"，再按需 npm install。
+# 本包含 8 个文件 + 2 个 npm 依赖。
+
+[npm]  npm install recharts lucide-react
+
+--- 目标路径清单 ---
+  src/pages/Dashboard.tsx
+  @ui/card.tsx
+  @ui/badge.tsx
+  @ui/table.tsx
+  @ui/separator.tsx
+  @components/page-header.tsx
+  @components/status-badge.tsx
+  src/mock/data.ts
+
+--- src/pages/Dashboard.tsx ---
+/**
+ * 页面案例：仪表盘 Dashboard
+ * ────────────────────────────
+ * 依赖：recharts lucide-react + shadcn card/badge/table/separator
+ */
+import {
+  LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer,
+  BarChart, Bar, PieChart, Pie, Cell, Legend,
+} from "recharts";
+import { Bot, Workflow, PlayCircle, Zap, TrendingUp } from "lucide-react";
+import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
+import { ContentFrame } from "@/components/ui/content-frame";
+import { StatusBadge } from "@/components/status-badge";
+import { trendData, roleDistribution, agents, runs } from "@/mock/data";
+
+const PIE_COLORS = ["#3b82f6", "#22c55e", "#f59e0b", "#a855f7"];
+
+function StatCard({ title, value, sub, icon, tone }: {
+  title: string; value: string; sub: string; icon: React.ReactNode; tone: string;
+}) {
+  return (
+    <Card>
+      <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+        <CardTitle className="text-sm font-medium text-muted-foreground">{title}</CardTitle>
+        <div className={`flex h-8 w-8 items-center justify-center rounded-lg ${tone}`}>{icon}</div>
+      </CardHeader>
+      <CardContent>
+        <div className="text-2xl font-bold">{value}</div>
+        <p className="mt-1 text-xs text-muted-foreground">{sub}</p>
+      </CardContent>
+    </Card>
+  );
+}
+
+export default function DashboardPage() {
+  const online = agents.filter((a) => a.status === "online").length;
+  const successRate = Math.round((runs.filter((r) => r.status === "succeeded").length / runs.length) * 100);
+
+  return (
+    <div data-testid="dashboard-page" className="flex flex-col">
+      <ContentFrame>
+      {/* 页头已去（导航高亮即页名）；说明降为框内首行，"实时数据"移到最右 */}
+      <div className="mb-4 flex flex-wrap items-center gap-x-3 gap-y-1">
+        <p className="text-sm text-muted-foreground">关键指标总览：Agent 运行 / 任务执行 / 资源消耗</p>
+        <Badge variant="info" className="ml-auto">实时数据</Badge>
+      </div>
+
+      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        <StatCard title="在线 Agent" value={`${online}/${agents.length}`} sub="较昨日 +1" icon={<Bot className="h-4 w-4 text-sky-400" />} tone="bg-sky-500/15 ring-1 ring-sky-500/30" />
+        <StatCard title="任务配方" value="5" sub="已发布 4 / 草稿 1" icon={<Workflow className="h-4 w-4 text-violet-400" />} tone="bg-violet-500/15 ring-1 ring-violet-500/30" />
+        <StatCard title="执行次数（今日）" value="26" sub={`成功率 ${successRate}%`} icon={<PlayCircle className="h-4 w-4 text-emerald-400" />} tone="bg-emerald-500/15 ring-1 ring-emerald-500/30" />
+        <StatCard title="Token 消耗（今日）" value="17.4K" sub="较昨日 -11%" icon={<Zap className="h-4 w-4 text-amber-400" />} tone="bg-amber-500/15 ring-1 ring-amber-500/30" />
+      </div>
+
+      <div className="mt-4 grid gap-4 lg:grid-cols-3">
+        <Card className="lg:col-span-2">
+          <CardHeader>
+            <CardTitle className="flex items-center gap-2 text-base"><TrendingUp className="h-4 w-4" /> 近 7 日执行与 Token 趋势</CardTitle>
+            <CardDescription>执行次数（左轴）与 Token 消耗（右轴）</CardDescription>
+          </CardHeader>
+          <CardContent className="h-[300px]">
+            <ResponsiveContainer width="100%" height="100%">
+              <LineChart data={trendData} margin={{ top: 5, right: 10, left: -10, bottom: 0 }}>
+                <CartesianGrid strokeDasharray="3 3" stroke="hsl(var(--border))" />
+                <XAxis dataKey="date" tick={{ fontSize: 12 }} stroke="#94a3b8" />
+                {/* 计数轴不给小数刻度：执行次数与 Token 都是整数，recharts 默认会算出 2.25 这类刻度 */}
+                <YAxis yAxisId="left" tick={{ fontSize: 12 }} stroke="#94a3b8" allowDecimals={false} />
+                <YAxis yAxisId="right" orientation="right" tick={{ fontSize: 12 }} stroke="#94a3b8" allowDecimals={false} />
+                <Tooltip contentStyle={{ borderRadius: 8, border: "1px solid hsl(var(--border))", fontSize: 12 }} />
+                <Legend wrapperStyle={{ fontSize: 12 }} />
+                <Line yAxisId="left" type="monotone" dataKey="runs" name="执行次数" stroke="#3b82f6" strokeWidth={2} dot={{ r: 3 }} />
+                <Line yAxisId="right" type="monotone" dataKey="tokens" name="Token" stroke="#22c55e" strokeWidth={2} dot={{ r: 3 }} />
+              </LineChart>
+            </ResponsiveContainer>
+          </CardContent>
+        </Card>
+
+        <Card>
+          <CardHeader>
+            <CardTitle className="text-base">Agent 角色分布</CardTitle>
+            <CardDescription>按角色统计在线 Agent 数量</CardDescription>
+          </CardHeader>
+          <CardContent className="h-[300px]">
+            <ResponsiveContainer width="100%" height="100%">
+              <PieChart>
+                <Pie data={roleDistribution} dataKey="value" nameKey="name" cx="50%" cy="50%" innerRadius={55} outerRadius={90} paddingAngle={3}>
+                  {roleDistribution.map((_, i) => (<Cell key={i} fill={PIE_COLORS[i % PIE_COLORS.length]} />))}
+                </Pie>
+                <Tooltip contentStyle={{ borderRadius: 8, border: "1px solid hsl(var(--border))", fontSize: 12 }} />
+                <Legend wrapperStyle={{ fontSize: 12 }} />
+              </PieChart>
+            </ResponsiveContainer>
+          </CardContent>
+        </Card>
+      </div>
+
+      <div className="mt-4 grid gap-4 lg:grid-cols-3">
+        <Card className="lg:col-span-1">
+          <CardHeader>
+            <CardTitle className="text-base">执行状态分布</CardTitle>
+            <CardDescription>今日执行结果构成</CardDescription>
+          </CardHeader>
+          <CardContent className="h-[240px]">
+            <ResponsiveContainer width="100%" height="100%">
+              <BarChart
+                data={[
+                  { name: "成功", value: runs.filter((r) => r.status === "succeeded").length },
+                  { name: "失败", value: runs.filter((r) => r.status === "failed").length },
+                  { name: "运行中", value: runs.filter((r) => r.status === "running").length },
+                ]}
+                margin={{ top: 5, right: 10, left: -20, bottom: 0 }}
+              >
+                <CartesianGrid strokeDasharray="3 3" stroke="hsl(var(--border))" vertical={false} />
+                <XAxis dataKey="name" tick={{ fontSize: 12 }} stroke="#94a3b8" />
+                {/* 同上：执行条数是计数，轴刻度必须为整数（否则出现 1.5 / 2.25 这类无意义刻度） */}
+                <YAxis tick={{ fontSize: 12 }} stroke="#94a3b8" allowDecimals={false} />
+                <Tooltip contentStyle={{ borderRadius: 8, border: "1px solid hsl(var(--border))", fontSize: 12 }} />
+                <Bar dataKey="value" name="数量" radius={[6, 6, 0, 0]} fill="#6366f1" />
+              </BarChart>
+            </ResponsiveContainer>
+          </CardContent>
+        </Card>
+
+        <Card className="lg:col-span-2">
+          <CardHeader>
+            <CardTitle className="text-base">最近执行</CardTitle>
+            <CardDescription>最新的任务运行记录</CardDescription>
+          </CardHeader>
+          <CardContent className="p-0">
+            <Table>
+              <TableHeader>
+                <TableRow>
+                  <TableHead>执行 ID</TableHead>
+                  <TableHead>Agent</TableHead>
+                  <TableHead>配方</TableHead>
+                  <TableHead>状态</TableHead>
+                  <TableHead className="text-right">耗时</TableHead>
+                </TableRow>
+              </TableHeader>
+              <TableBody>
+                {runs.map((r) => (
+                  <TableRow key={r.id}>
+                    <TableCell className="font-mono text-xs">{r.id}</TableCell>
+                    <TableCell>{r.agent}</TableCell>
+                    <TableCell className="text-muted-foreground">{r.recipe}</TableCell>
+                    <TableCell><StatusBadge status={r.status} /></TableCell>
+                    <TableCell className="text-right tabular-nums">{r.duration}</TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
+          </CardContent>
+        </Card>
+      </div>
+      </ContentFrame>
+    </div>
+  );
+}
+
+--- @ui/card.tsx ---
+import * as React from "react";
+import { cn } from "@/lib/utils";
+
+const Card = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(
+  ({ className, ...props }, ref) => (
+    <div
+      ref={ref}
+      data-card=""
+      className={cn("rounded-xl border bg-card text-card-foreground shadow-surface", className)}
+      {...props}
+    />
+  )
+);
+Card.displayName = "Card";
+
+const CardHeader = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(
+  ({ className, ...props }, ref) => (
+    <div ref={ref} className={cn("flex flex-col space-y-1.5 p-6", className)} {...props} />
+  )
+);
+CardHeader.displayName = "CardHeader";
+
+const CardTitle = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(
+  ({ className, ...props }, ref) => (
+    <div
+      ref={ref}
+      className={cn("text-base font-semibold leading-none tracking-tight", className)}
+      {...props}
+    />
+  )
+);
+CardTitle.displayName = "CardTitle";
+
+const CardDescription = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(
+  ({ className, ...props }, ref) => (
+    <div ref={ref} className={cn("text-sm text-muted-foreground", className)} {...props} />
+  )
+);
+CardDescription.displayName = "CardDescription";
+
+const CardContent = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(
+  ({ className, ...props }, ref) => (
+    <div ref={ref} className={cn("p-6 pt-0", className)} {...props} />
+  )
+);
+CardContent.displayName = "CardContent";
+
+const CardFooter = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(
+  ({ className, ...props }, ref) => (
+    <div ref={ref} className={cn("flex items-center p-6 pt-0", className)} {...props} />
+  )
+);
+CardFooter.displayName = "CardFooter";
+
+export { Card, CardHeader, CardFooter, CardTitle, CardDescription, CardContent };
+
+--- @ui/badge.tsx ---
+import * as React from "react";
+import { cva, type VariantProps } from "class-variance-authority";
+import { cn } from "@/lib/utils";
+
+const badgeVariants = cva(
+  "inline-flex items-center rounded-md border px-2 py-0.5 text-xs font-medium transition-colors focus:outline-none",
+  {
+    variants: {
+      variant: {
+        default: "border-transparent bg-primary text-primary-foreground",
+        secondary: "border-transparent bg-secondary text-secondary-foreground",
+        destructive: "border-transparent bg-destructive text-destructive-foreground",
+        outline: "text-foreground",
+        success: "border-success/30 bg-success/15 text-success",
+        warning: "border-warning/30 bg-warning/15 text-warning",
+        info: "border-info/30 bg-info/15 text-info",
+      },
+    },
+    defaultVariants: { variant: "default" },
+  }
+);
+
+export interface BadgeProps
+  extends React.HTMLAttributes<HTMLDivElement>,
+    VariantProps<typeof badgeVariants> {}
+
+export function Badge({ className, variant, ...props }: BadgeProps) {
+  return <div className={cn(badgeVariants({ variant }), className)} {...props} />;
+}
+
+export { badgeVariants };
+
+--- @ui/table.tsx ---
+import * as React from "react";
+import { cn } from "@/lib/utils";
+
+/** TableBody 的斑马线开关通过 context 下发给 TableRow（才能在 tr 上生成 even: 变体，保证 hover 可覆盖） */
+const TableStripedContext = React.createContext(false);
+
+const Table = React.forwardRef<HTMLTableElement, React.HTMLAttributes<HTMLTableElement>>(
+  ({ className, ...props }, ref) => (
+    <div className="relative w-full overflow-auto rounded-lg border border-border">
+      <table ref={ref} className={cn("w-full caption-bottom text-sm", className)} {...props} />
+    </div>
+  )
+);
+Table.displayName = "Table";
+
+const TableHeader = React.forwardRef<
+  HTMLTableSectionElement,
+  React.HTMLAttributes<HTMLTableSectionElement>
+>(({ className, ...props }, ref) => (
+  <thead ref={ref} className={cn("[&_tr]:border-b bg-muted/40", className)} {...props} />
+));
+TableHeader.displayName = "TableHeader";
+
+type TableBodyProps = React.HTMLAttributes<HTMLTableSectionElement> & {
+  /** 斑马线：偶数行加浅底色（语义 token bg-muted/30，深色模式自动适配；hover 仍可覆盖） */
+  striped?: boolean;
+};
+
+const TableBody = React.forwardRef<HTMLTableSectionElement, TableBodyProps>(
+  ({ className, striped = false, ...props }, ref) => (
+    <TableStripedContext.Provider value={striped}>
+      <tbody ref={ref} className={cn("[&_tr:last-child]:border-0", className)} {...props} />
+    </TableStripedContext.Provider>
+  )
+);
+TableBody.displayName = "TableBody";
+
+const TableRow = React.forwardRef<HTMLTableRowElement, React.HTMLAttributes<HTMLTableRowElement>>(
+  ({ className, ...props }, ref) => {
+    const striped = React.useContext(TableStripedContext);
+    return (
+      <tr
+        ref={ref}
+        className={cn(
+          "border-b transition-colors hover:bg-muted/50 data-[state=selected]:bg-muted",
+          striped && "even:bg-muted/30",
+          className
+        )}
+        {...props}
+      />
+    );
+  }
+);
+TableRow.displayName = "TableRow";
+
+const TableHead = React.forwardRef<
+  HTMLTableCellElement,
+  React.ThHTMLAttributes<HTMLTableCellElement>
+>(({ className, ...props }, ref) => (
+  <th
+    ref={ref}
+    className={cn(
+      // 2026-10-30：表头字重 500 → 600（老冯要求所有表头加粗；只动字重，字号/颜色/高度一律不变）。
+      // 600 = 本项目字重阶梯既有档位（/detail-view 标签列即 600），不擅自上 700。
+      "h-10 border-r border-border/60 px-3 text-left align-middle text-xs font-semibold text-muted-foreground last:border-r-0 [&:has([role=checkbox])]:pr-0",
+      className
+    )}
+    {...props}
+  />
+));
+TableHead.displayName = "TableHead";
+
+const TableCell = React.forwardRef<
+  HTMLTableCellElement,
+  React.TdHTMLAttributes<HTMLTableCellElement>
+>(({ className, ...props }, ref) => (
+  <td
+    ref={ref}
+    className={cn("border-r border-border/60 p-3 align-middle last:border-r-0 [&:has([role=checkbox])]:pr-0", className)}
+    {...props}
+  />
+));
+TableCell.displayName = "TableCell";
+
+const TableCaption = React.forwardRef<
+  HTMLTableCaptionElement,
+  React.HTMLAttributes<HTMLTableCaptionElement>
+>(({ className, ...props }, ref) => (
+  <caption ref={ref} className={cn("mt-4 text-sm text-muted-foreground", className)} {...props} />
+));
+TableCaption.displayName = "TableCaption";
+
+export { Table, TableHeader, TableBody, TableHead, TableRow, TableCell, TableCaption };
+
+--- @ui/separator.tsx ---
+import * as React from "react";
+import * as SeparatorPrimitive from "@radix-ui/react-separator";
+import { cn } from "@/lib/utils";
+
+const Separator = React.forwardRef<
+  React.ElementRef<typeof SeparatorPrimitive.Root>,
+  React.ComponentPropsWithoutRef<typeof SeparatorPrimitive.Root>
+>(({ className, orientation = "horizontal", decorative = true, ...props }, ref) => (
+  <SeparatorPrimitive.Root
+    ref={ref}
+    decorative={decorative}
+    orientation={orientation}
+    className={cn(
+      "shrink-0 bg-border",
+      orientation === "horizontal" ? "h-[1px] w-full" : "h-full w-[1px]",
+      className
+    )}
+    {...props}
+  />
+));
+Separator.displayName = SeparatorPrimitive.Root.displayName;
+
+export { Separator };
+
+--- @components/page-header.tsx ---
+import * as React from "react";
+import { cn } from "@/lib/utils";
+
+/**
+ * ██ PageHeader —— 页头
+ * ────────────────────────────────────────────────────────────────────────
+ * 2026-10-28 采纳《页面排版-白框模式》规范 §4，新增 `layout` 两档：
+ *
+ *   inline（默认，新写法）  标题 + 说明**同行紧跟**（gap-x-3 = 12px），底对齐。
+ *                          页头不设下边距（mb-0），间距交给页面容器 `gap-2`（8px）。
+ *                          用于**详情页 / 表单页**（它们必须保留页头 = 实体身份）。
+ *
+ *   stacked（旧写法，兼容） 标题与说明上下堆叠、左右两端对齐、`mb-6`。
+ *                          只为未迁移的存量页面保留；新页面不要用。
+ *
+ * ⚠️ 实测调出来的三个数，别改：
+ *   1. `items-end` 不能省 —— 少了它，20px 标题与 14px 说明会变成"中间对齐"，说明会"飘"；
+ *   2. 说明必须**紧跟标题右侧 12px** —— 曾用 `justify-between` 推到最右，被否：
+ *      「放右边就没效果了」；
+ *   3. 说明字号锁 `text-sm`（14px），不要为了配合标题缩小。
+ *
+ * ⚠️ 列表页**不要用本组件**：列表页去掉页头，内容装 `ContentFrame`。
+ *    页头里的按钮（视图切换 / 新建 / 统计计数）要搬到内容区顶部工具行的**最右侧**，
+ *    否则"去页头"会把功能一起删掉（这是最容易翻车的一步）。
+ */
+export interface PageHeaderProps {
+  title: string;
+  description?: string;
+  actions?: React.ReactNode;
+  /** 排版：inline = 标题与说明同行（详情/表单页默认）｜stacked = 上下堆叠（存量兼容） */
+  layout?: "inline" | "stacked";
+  className?: string;
+}
+
+export function PageHeader({
+  title,
+  description,
+  actions,
+  layout = "inline",
+  className,
+}: PageHeaderProps) {
+  if (layout === "stacked") {
+    return (
+      <div className={cn("mb-6 flex flex-wrap items-start justify-between gap-4", className)}>
+        <div className="flex flex-col gap-1">
+          <h1 className="text-xl font-semibold tracking-tight">{title}</h1>
+          {description && <p className="text-sm text-muted-foreground">{description}</p>}
+        </div>
+        {actions && <div className="flex items-center gap-2">{actions}</div>}
+      </div>
+    );
+  }
+
+  return (
+    <div
+      data-testid="page-header"
+      className={cn("mb-0 flex flex-wrap items-end gap-x-3 gap-y-1", className)}
+    >
+      <h1 className="text-xl font-semibold tracking-tight">{title}</h1>
+      {description && <p className="text-sm text-muted-foreground">{description}</p>}
+      {actions && <div className="ml-auto flex items-center gap-2">{actions}</div>}
+    </div>
+  );
+}
+
+--- @components/status-badge.tsx ---
+import { Badge } from "@/components/ui/badge";
+
+const MAP: Record<string, { variant: "success" | "warning" | "destructive" | "info" | "secondary"; label: string }> = {
+  success: { variant: "success", label: "成功" },
+  succeeded: { variant: "success", label: "成功" },
+  online: { variant: "success", label: "在线" },
+  active: { variant: "success", label: "启用" },
+  running: { variant: "info", label: "运行中" },
+  pending: { variant: "warning", label: "待处理" },
+  draft: { variant: "secondary", label: "草稿" },
+  offline: { variant: "secondary", label: "离线" },
+  failed: { variant: "destructive", label: "失败" },
+  error: { variant: "destructive", label: "异常" },
+};
+
+export function StatusBadge({ status }: { status: string }) {
+  const s = MAP[status] ?? { variant: "secondary" as const, label: status };
+  return <Badge variant={s.variant}>{s.label}</Badge>;
+}
+
+--- src/mock/data.ts ---
+/** mock 数据 —— 页面案例的演示数据（改这里即可换成你自己的数据/接口） */
+
+export interface Agent {
+  id: string;
+  name: string;
+  role: string;
+  status: "online" | "offline" | "error";
+  model: string;
+  tasks: number;
+  tokens: number;
+}
+
+export const agents: Agent[] = [
+  { id: "agt_001", name: "选题猎手", role: "worker", status: "online", model: "gpt-4o", tasks: 128, tokens: 42100 },
+  { id: "agt_002", name: "文案生成器", role: "worker", status: "online", model: "claude-3.5", tasks: 96, tokens: 88200 },
+  { id: "agt_003", name: "海外渠道运营", role: "project_manager", status: "online", model: "deepseek-reasoner", tasks: 54, tokens: 21030 },
+  { id: "agt_004", name: "合规审核", role: "worker", status: "error", model: "gpt-4o-mini", tasks: 12, tokens: 5400 },
+  { id: "agt_005", name: "数据清洗", role: "worker", status: "offline", model: "qwen-max", tasks: 301, tokens: 156000 },
+  { id: "agt_006", name: "投放优化", role: "worker", status: "online", model: "glm-4", tasks: 77, tokens: 33120 },
+];
+
+export interface Run {
+  id: string;
+  agent: string;
+  recipe: string;
+  status: "succeeded" | "failed" | "running";
+  startedAt: string;
+  duration: string;
+}
+
+export const runs: Run[] = [
+  { id: "run_9001", agent: "选题猎手", recipe: "每日选题生成", status: "succeeded", startedAt: "09:12", duration: "42s" },
+  { id: "run_9002", agent: "文案生成器", recipe: "商品文案批量生成", status: "running", startedAt: "09:20", duration: "3m" },
+  { id: "run_9003", agent: "合规审核", recipe: "文案合规检查", status: "failed", startedAt: "09:22", duration: "8s" },
+  { id: "run_9004", agent: "投放优化", recipe: "广告出价调优", status: "succeeded", startedAt: "08:55", duration: "1m12s" },
+  { id: "run_9005", agent: "数据清洗", recipe: "类目数据去重", status: "succeeded", startedAt: "08:40", duration: "5m01s" },
+];
+
+export const trendData = [
+  { date: "09-10", runs: 18, tokens: 12400 },
+  { date: "09-11", runs: 22, tokens: 15100 },
+  { date: "09-12", runs: 19, tokens: 13900 },
+  { date: "09-13", runs: 27, tokens: 19800 },
+  { date: "09-14", runs: 24, tokens: 17600 },
+  { date: "09-15", runs: 30, tokens: 22100 },
+  { date: "09-16", runs: 26, tokens: 17400 },
+];
+
+export const roleDistribution = [
+  { name: "worker", value: 4 },
+  { name: "project_manager", value: 1 },
+  { name: "host_manager", value: 1 },
+];
+
+export interface Product {
+  id: string;
+  hs6: string;
+  name: string;
+  category: string;
+  platform: string;
+  price: number;
+  status: "active" | "draft" | "offline";
+  updatedAt: string;
+}
+
+export const products: Product[] = [
+  { id: "P-1001", hs6: "8517.12", name: "无线蓝牙耳机 Pro", category: "消费电子", platform: "Amazon", price: 39.9, status: "active", updatedAt: "2026-09-15" },
+  { id: "P-1002", hs6: "9405.21", name: "LED 桌面氛围灯", category: "家居照明", platform: "Shopee", price: 15.5, status: "active", updatedAt: "2026-09-14" },
+  { id: "P-1003", hs6: "6109.10", name: "纯棉圆领 T 恤", category: "服饰", platform: "TikTok Shop", price: 8.8, status: "draft", updatedAt: "2026-09-16" },
+  { id: "P-1004", hs6: "3304.99", name: "补水保湿精华液", category: "美妆个护", platform: "Amazon", price: 22.0, status: "active", updatedAt: "2026-09-12" },
+  { id: "P-1005", hs6: "9503.00", name: "儿童益智积木", category: "玩具", platform: "eBay", price: 12.3, status: "offline", updatedAt: "2026-09-10" },
+  { id: "P-1006", hs6: "8471.30", name: "便携式笔记本电脑支架", category: "办公用品", platform: "Amazon", price: 18.6, status: "active", updatedAt: "2026-09-15" },
+  { id: "P-1007", hs6: "4202.92", name: "防泼水双肩背包", category: "箱包", platform: "Shopee", price: 27.9, status: "active", updatedAt: "2026-09-13" },
+  { id: "P-1008", hs6: "8518.30", name: "头戴式降噪耳机", category: "消费电子", platform: "Amazon", price: 59.0, status: "draft", updatedAt: "2026-09-16" },
+];

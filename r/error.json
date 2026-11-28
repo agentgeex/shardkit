@@ -1,0 +1,40 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "error",
+  "type": "registry:page",
+  "title": "错误页",
+  "description": "ShardKit 案例：错误页",
+  "registryDependencies": [
+    "button"
+  ],
+  "dependencies": [
+    "lucide-react"
+  ],
+  "files": [
+    {
+      "path": "src/pages/cases/error.tsx",
+      "target": "src/pages/Error.tsx",
+      "type": "registry:page"
+    },
+    {
+      "path": "src/components/ui/button.tsx",
+      "target": "@ui/button.tsx",
+      "type": "registry:ui"
+    },
+    {
+      "path": "src/components/page-header.tsx",
+      "target": "@components/page-header.tsx",
+      "type": "registry:file"
+    }
+  ],
+  "categories": [
+    "shardkit",
+    "page"
+  ],
+  "meta": {
+    "shardkit": {
+      "kind": "page",
+      "target": "src/pages/Error.tsx"
+    }
+  }
+}

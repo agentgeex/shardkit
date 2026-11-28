@@ -1,0 +1,302 @@
+=== ShardKit Bundle: 认证页 (auth) ===
+# 用法：把下面每段写入对应"目标路径"，再按需 npm install。
+# 本包含 6 个文件 + 1 个 npm 依赖。
+
+[npm]  npm install lucide-react
+
+--- 目标路径清单 ---
+  src/pages/Login.tsx
+  @ui/input.tsx
+  @ui/button.tsx
+  @ui/label.tsx
+  @ui/card.tsx
+  @ui/separator.tsx
+
+--- src/pages/Login.tsx ---
+/**
+ * 页面案例：认证页 Auth（居中登录卡 + 表单）
+ * ──────────────────────────────────────
+ * 整页复用方式：
+ *   1. 复制本文件到你的项目 src/pages/Login.tsx
+ *   2. 依赖：shadcn {input,button,label,card,separator}
+ *   3. 把 handleSubmit 换成你的登录 API；背景氛围光可按品牌改色。
+ *
+ * 注意：认证页通常独立于后台 Shell（不带侧边栏）。
+ *   本页（/auth）是「案例集内部」的浏览态预览；**真正的整页独立认证页见 /login**
+ *   —— 位于 AppShell 之外，无侧边栏 / 无标签栏，路由为 /login。
+ */
+import * as React from "react";
+import { Link } from "react-router-dom";
+import { Boxes, Lock, Mail, ArrowRight, ExternalLink } from "lucide-react";
+import { ContentFrame } from "@/components/ui/content-frame";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
+import { Separator } from "@/components/ui/separator";
+
+export default function AuthPage() {
+  const [loading, setLoading] = React.useState(false);
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    setLoading(true);
+    // TODO: 换成你的登录 API，例如 await api.login(email, password)
+    setTimeout(() => setLoading(false), 1200);
+  };
+
+  return (
+    <div data-testid="auth-case" className="flex flex-col">
+      <ContentFrame className="flex min-h-[70vh] flex-col">
+      {/* 指向真正的独立认证页（AppShell 之外） */}
+      <div
+        className="mb-4 flex flex-wrap items-center gap-3 rounded-lg border border-primary/30 bg-primary/5 px-4 py-3 text-sm"
+        data-testid="auth-standalone-banner"
+      >
+        <span className="text-muted-foreground">
+          认证页已独立为整页路由（位于后台框架之外，无侧边栏 / 无标签栏）：
+        </span>
+        <Link to="/login" data-testid="to-standalone-login">
+          <Button variant="outline" size="sm">
+            <ExternalLink className="h-4 w-4" /> 打开独立认证页 /login
+          </Button>
+        </Link>
+      </div>
+
+      <div className="relative flex flex-1 items-center justify-center">
+      <div className="pointer-events-none absolute inset-0 -z-10 overflow-hidden">
+        <div className="absolute left-1/2 top-1/4 h-[360px] w-[360px] -translate-x-1/2 rounded-full bg-indigo-500/10 blur-[120px]" />
+      </div>
+
+      <Card className="w-full max-w-sm shadow-none">
+        <CardHeader className="items-center text-center">
+          <div className="mx-auto mb-2 flex h-11 w-11 items-center justify-center rounded-xl bg-gradient-to-br from-sky-400 via-indigo-500 to-fuchsia-500 text-white shadow-[0_0_20px_-2px_rgba(99,102,241,0.8)]">
+            <Boxes className="h-5 w-5" />
+          </div>
+          <CardTitle>登录到控制台</CardTitle>
+          <CardDescription>输入你的账号以继续</CardDescription>
+        </CardHeader>
+        <CardContent>
+          <form onSubmit={handleSubmit} className="space-y-4">
+            <div className="space-y-2">
+              <Label htmlFor="email">邮箱</Label>
+              <div className="relative">
+                <Mail className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
+                <Input id="email" type="email" placeholder="you@example.com" className="pl-8" required />
+              </div>
+            </div>
+            <div className="space-y-2">
+              <div className="flex items-center justify-between">
+                <Label htmlFor="password">密码</Label>
+                <a href="#" className="text-xs text-primary hover:underline">忘记密码？</a>
+              </div>
+              <div className="relative">
+                <Lock className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
+                <Input id="password" type="password" placeholder="••••••••" className="pl-8" required />
+              </div>
+            </div>
+            <Button type="submit" className="w-full" disabled={loading}>
+              {loading ? "登录中…" : <>登录 <ArrowRight className="h-4 w-4" /></>}
+            </Button>
+          </form>
+          <div className="my-4 flex items-center gap-3">
+            <Separator className="flex-1" />
+            <span className="text-xs text-muted-foreground">或</span>
+            <Separator className="flex-1" />
+          </div>
+          <Button variant="outline" className="w-full">使用 SSO 单点登录</Button>
+          <p className="mt-4 text-center text-xs text-muted-foreground">
+            还没有账号？<a href="#" className="text-primary hover:underline">申请试用</a>
+          </p>
+        </CardContent>
+      </Card>
+      </div>
+      </ContentFrame>
+    </div>
+  );
+}
+
+--- @ui/input.tsx ---
+import * as React from "react";
+import { cn } from "@/lib/utils";
+
+export interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {}
+
+const Input = React.forwardRef<HTMLInputElement, InputProps>(
+  ({ className, type, ...props }, ref) => {
+    return (
+      <input
+        type={type}
+        className={cn(
+          "flex h-9 w-full rounded-md border border-input bg-transparent px-3 py-1 text-sm shadow-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50",
+          className
+        )}
+        ref={ref}
+        {...props}
+      />
+    );
+  }
+);
+Input.displayName = "Input";
+
+export { Input };
+
+--- @ui/button.tsx ---
+import * as React from "react";
+import { Slot } from "@radix-ui/react-slot";
+import { cva, type VariantProps } from "class-variance-authority";
+import { cn } from "@/lib/utils";
+
+const buttonVariants = cva(
+  // 基础：所有按钮统一加一层边框（老冯验收反馈 2026-09-28：每个按钮都要有边框）
+  "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md border text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 [&_svg]:size-4 [&_svg]:shrink-0",
+  {
+    variants: {
+      variant: {
+        default: "border-primary/20 bg-primary text-primary-foreground shadow hover:bg-primary/90",
+        destructive: "border-destructive/30 bg-destructive text-destructive-foreground shadow-sm hover:bg-destructive/90",
+        outline: "border-input bg-background shadow-sm hover:bg-accent hover:text-accent-foreground",
+        secondary: "border-input bg-secondary text-secondary-foreground shadow-sm hover:bg-secondary/80",
+        // ── 按钮用途分色（2026-10-28 采纳《页面排版-白框模式》§6）──────────────
+        // 白底页面上 ghost/outline 描边按钮基本看不见（对向项目返工三次）→ 可见按钮
+        // 一律实底 + 白字，靠**色相**区分用途。对比度：按钮 ≥3:1、正文 ≥4.5:1，必须实测。
+        //   default 蓝 = 新建/保存/确认/提交   run 绿 = 运行/重跑/重试
+        //   view    青 = 详情/打开/流程图       edit 橙 = 编辑/修改/配置
+        //   back    紫 = 返回/后退             destructive 红 = 删除/归档
+        run: "border-action-run/40 bg-action-run text-action-run-foreground shadow-sm hover:bg-action-run/90",
+        view: "border-action-view/40 bg-action-view text-action-view-foreground shadow-sm hover:bg-action-view/90",
+        edit: "border-warning/50 bg-warning text-warning-foreground shadow-sm hover:bg-warning/90",
+        back: "border-action-back/60 bg-action-back text-action-back-foreground shadow-sm hover:bg-action-back/90",
+        ghost: "border-input bg-transparent hover:bg-accent hover:text-accent-foreground",
+        link: "border-input bg-transparent text-primary underline-offset-4 hover:underline",
+      },
+      size: {
+        default: "h-9 px-4 py-2",
+        sm: "h-8 rounded-md px-3 text-xs",
+        lg: "h-10 rounded-md px-8",
+        icon: "h-9 w-9",
+      },
+    },
+    defaultVariants: { variant: "default", size: "default" },
+  }
+);
+
+export interface ButtonProps
+  extends React.ButtonHTMLAttributes<HTMLButtonElement>,
+    VariantProps<typeof buttonVariants> {
+  asChild?: boolean;
+}
+
+const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
+  ({ className, variant, size, asChild = false, ...props }, ref) => {
+    const Comp = asChild ? Slot : "button";
+    return <Comp className={cn(buttonVariants({ variant, size, className }))} ref={ref} {...props} />;
+  }
+);
+Button.displayName = "Button";
+
+export { Button, buttonVariants };
+
+--- @ui/label.tsx ---
+import * as React from "react";
+import * as LabelPrimitive from "@radix-ui/react-label";
+import { cn } from "@/lib/utils";
+
+const Label = React.forwardRef<
+  React.ElementRef<typeof LabelPrimitive.Root>,
+  React.ComponentPropsWithoutRef<typeof LabelPrimitive.Root>
+>(({ className, ...props }, ref) => (
+  <LabelPrimitive.Root
+    ref={ref}
+    className={cn(
+      "text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70",
+      className
+    )}
+    {...props}
+  />
+));
+Label.displayName = LabelPrimitive.Root.displayName;
+
+export { Label };
+
+--- @ui/card.tsx ---
+import * as React from "react";
+import { cn } from "@/lib/utils";
+
+const Card = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(
+  ({ className, ...props }, ref) => (
+    <div
+      ref={ref}
+      data-card=""
+      className={cn("rounded-xl border bg-card text-card-foreground shadow-surface", className)}
+      {...props}
+    />
+  )
+);
+Card.displayName = "Card";
+
+const CardHeader = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(
+  ({ className, ...props }, ref) => (
+    <div ref={ref} className={cn("flex flex-col space-y-1.5 p-6", className)} {...props} />
+  )
+);
+CardHeader.displayName = "CardHeader";
+
+const CardTitle = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(
+  ({ className, ...props }, ref) => (
+    <div
+      ref={ref}
+      className={cn("text-base font-semibold leading-none tracking-tight", className)}
+      {...props}
+    />
+  )
+);
+CardTitle.displayName = "CardTitle";
+
+const CardDescription = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(
+  ({ className, ...props }, ref) => (
+    <div ref={ref} className={cn("text-sm text-muted-foreground", className)} {...props} />
+  )
+);
+CardDescription.displayName = "CardDescription";
+
+const CardContent = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(
+  ({ className, ...props }, ref) => (
+    <div ref={ref} className={cn("p-6 pt-0", className)} {...props} />
+  )
+);
+CardContent.displayName = "CardContent";
+
+const CardFooter = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(
+  ({ className, ...props }, ref) => (
+    <div ref={ref} className={cn("flex items-center p-6 pt-0", className)} {...props} />
+  )
+);
+CardFooter.displayName = "CardFooter";
+
+export { Card, CardHeader, CardFooter, CardTitle, CardDescription, CardContent };
+
+--- @ui/separator.tsx ---
+import * as React from "react";
+import * as SeparatorPrimitive from "@radix-ui/react-separator";
+import { cn } from "@/lib/utils";
+
+const Separator = React.forwardRef<
+  React.ElementRef<typeof SeparatorPrimitive.Root>,
+  React.ComponentPropsWithoutRef<typeof SeparatorPrimitive.Root>
+>(({ className, orientation = "horizontal", decorative = true, ...props }, ref) => (
+  <SeparatorPrimitive.Root
+    ref={ref}
+    decorative={decorative}
+    orientation={orientation}
+    className={cn(
+      "shrink-0 bg-border",
+      orientation === "horizontal" ? "h-[1px] w-full" : "h-full w-[1px]",
+      className
+    )}
+    {...props}
+  />
+));
+Separator.displayName = SeparatorPrimitive.Root.displayName;
+
+export { Separator };

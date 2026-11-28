@@ -1,0 +1,212 @@
+=== ShardKit Bundle: 错误页 (error) ===
+# 用法：把下面每段写入对应"目标路径"，再按需 npm install。
+# 本包含 3 个文件 + 1 个 npm 依赖。
+
+[npm]  npm install lucide-react
+
+--- 目标路径清单 ---
+  src/pages/Error.tsx
+  @ui/button.tsx
+  @components/page-header.tsx
+
+--- src/pages/Error.tsx ---
+/**
+ * 页面案例：错误页 Error（404 / 500 / 403 三态示例）
+ * ──────────────────────────────────────────────
+ * 依赖：仅 shadcn {button} + lucide-react。用 `code` prop 切换 404 / 500 / 403 文案。
+ */
+import * as React from "react";
+import { Link } from "react-router-dom";
+import { Home, RotateCcw, ShieldAlert, FileQuestion, ServerCrash } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { ContentFrame } from "@/components/ui/content-frame";
+
+const PRESETS = {
+  "404": {
+    title: "页面不存在",
+    desc: "你访问的页面已被移除或从未存在。",
+    icon: FileQuestion,
+    tone: "text-sky-400",
+    bg: "bg-sky-500/10 ring-sky-500/30",
+  },
+  "500": {
+    title: "服务器错误",
+    desc: "服务端出了点问题，请稍后重试或联系管理员。",
+    icon: ServerCrash,
+    tone: "text-destructive",
+    bg: "bg-destructive/10 ring-destructive/30",
+  },
+  "403": {
+    title: "无权访问",
+    desc: "你没有权限查看该资源，请联系管理员开通。",
+    icon: ShieldAlert,
+    tone: "text-amber-400",
+    bg: "bg-amber-500/10 ring-amber-500/30",
+  },
+} as const;
+
+export default function ErrorPage() {
+  const [code, setCode] = React.useState<keyof typeof PRESETS>("404");
+  const p = PRESETS[code];
+  const Icon = p.icon;
+
+  return (
+    <div data-testid="error-page" className="flex flex-col">
+      <ContentFrame className="flex min-h-[60vh] flex-col gap-3">
+        {/* 形态切换（原页头 actions；去页头后搬到框内顶部最右，否则功能消失） */}
+        <div className="flex flex-wrap items-center justify-between gap-2">
+          <p className="text-sm text-muted-foreground">
+            标准错误状态页：切换下方标签查看 404 / 500 / 403 三种形态
+          </p>
+          <div className="flex gap-1">
+            {(Object.keys(PRESETS) as (keyof typeof PRESETS)[]).map((k) => (
+              <Button
+                key={k}
+                size="sm"
+                variant={k === code ? "default" : "secondary"}
+                onClick={() => setCode(k)}
+              >
+                {k}
+              </Button>
+            ))}
+          </div>
+        </div>
+
+      <div className="flex min-h-[52vh] flex-col items-center justify-center text-center">
+        <div className={`mb-6 flex h-16 w-16 items-center justify-center rounded-2xl ring-1 ${p.bg}`}>
+          <Icon className={`h-8 w-8 ${p.tone}`} />
+        </div>
+        <div className="text-5xl font-bold tracking-tight">{code}</div>
+        <h2 className="mt-3 text-lg font-semibold">{p.title}</h2>
+        <p className="mt-1 max-w-sm text-sm text-muted-foreground">{p.desc}</p>
+        <div className="mt-6 flex gap-2">
+          <Button asChild variant="outline"><Link to="/"><Home className="h-4 w-4" /> 返回首页</Link></Button>
+          <Button onClick={() => window.location.reload()}><RotateCcw className="h-4 w-4" /> 重试</Button>
+        </div>
+      </div>
+      </ContentFrame>
+    </div>
+  );
+}
+
+--- @ui/button.tsx ---
+import * as React from "react";
+import { Slot } from "@radix-ui/react-slot";
+import { cva, type VariantProps } from "class-variance-authority";
+import { cn } from "@/lib/utils";
+
+const buttonVariants = cva(
+  // 基础：所有按钮统一加一层边框（老冯验收反馈 2026-09-28：每个按钮都要有边框）
+  "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md border text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 [&_svg]:size-4 [&_svg]:shrink-0",
+  {
+    variants: {
+      variant: {
+        default: "border-primary/20 bg-primary text-primary-foreground shadow hover:bg-primary/90",
+        destructive: "border-destructive/30 bg-destructive text-destructive-foreground shadow-sm hover:bg-destructive/90",
+        outline: "border-input bg-background shadow-sm hover:bg-accent hover:text-accent-foreground",
+        secondary: "border-input bg-secondary text-secondary-foreground shadow-sm hover:bg-secondary/80",
+        // ── 按钮用途分色（2026-10-28 采纳《页面排版-白框模式》§6）──────────────
+        // 白底页面上 ghost/outline 描边按钮基本看不见（对向项目返工三次）→ 可见按钮
+        // 一律实底 + 白字，靠**色相**区分用途。对比度：按钮 ≥3:1、正文 ≥4.5:1，必须实测。
+        //   default 蓝 = 新建/保存/确认/提交   run 绿 = 运行/重跑/重试
+        //   view    青 = 详情/打开/流程图       edit 橙 = 编辑/修改/配置
+        //   back    紫 = 返回/后退             destructive 红 = 删除/归档
+        run: "border-action-run/40 bg-action-run text-action-run-foreground shadow-sm hover:bg-action-run/90",
+        view: "border-action-view/40 bg-action-view text-action-view-foreground shadow-sm hover:bg-action-view/90",
+        edit: "border-warning/50 bg-warning text-warning-foreground shadow-sm hover:bg-warning/90",
+        back: "border-action-back/60 bg-action-back text-action-back-foreground shadow-sm hover:bg-action-back/90",
+        ghost: "border-input bg-transparent hover:bg-accent hover:text-accent-foreground",
+        link: "border-input bg-transparent text-primary underline-offset-4 hover:underline",
+      },
+      size: {
+        default: "h-9 px-4 py-2",
+        sm: "h-8 rounded-md px-3 text-xs",
+        lg: "h-10 rounded-md px-8",
+        icon: "h-9 w-9",
+      },
+    },
+    defaultVariants: { variant: "default", size: "default" },
+  }
+);
+
+export interface ButtonProps
+  extends React.ButtonHTMLAttributes<HTMLButtonElement>,
+    VariantProps<typeof buttonVariants> {
+  asChild?: boolean;
+}
+
+const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
+  ({ className, variant, size, asChild = false, ...props }, ref) => {
+    const Comp = asChild ? Slot : "button";
+    return <Comp className={cn(buttonVariants({ variant, size, className }))} ref={ref} {...props} />;
+  }
+);
+Button.displayName = "Button";
+
+export { Button, buttonVariants };
+
+--- @components/page-header.tsx ---
+import * as React from "react";
+import { cn } from "@/lib/utils";
+
+/**
+ * ██ PageHeader —— 页头
+ * ────────────────────────────────────────────────────────────────────────
+ * 2026-10-28 采纳《页面排版-白框模式》规范 §4，新增 `layout` 两档：
+ *
+ *   inline（默认，新写法）  标题 + 说明**同行紧跟**（gap-x-3 = 12px），底对齐。
+ *                          页头不设下边距（mb-0），间距交给页面容器 `gap-2`（8px）。
+ *                          用于**详情页 / 表单页**（它们必须保留页头 = 实体身份）。
+ *
+ *   stacked（旧写法，兼容） 标题与说明上下堆叠、左右两端对齐、`mb-6`。
+ *                          只为未迁移的存量页面保留；新页面不要用。
+ *
+ * ⚠️ 实测调出来的三个数，别改：
+ *   1. `items-end` 不能省 —— 少了它，20px 标题与 14px 说明会变成"中间对齐"，说明会"飘"；
+ *   2. 说明必须**紧跟标题右侧 12px** —— 曾用 `justify-between` 推到最右，被否：
+ *      「放右边就没效果了」；
+ *   3. 说明字号锁 `text-sm`（14px），不要为了配合标题缩小。
+ *
+ * ⚠️ 列表页**不要用本组件**：列表页去掉页头，内容装 `ContentFrame`。
+ *    页头里的按钮（视图切换 / 新建 / 统计计数）要搬到内容区顶部工具行的**最右侧**，
+ *    否则"去页头"会把功能一起删掉（这是最容易翻车的一步）。
+ */
+export interface PageHeaderProps {
+  title: string;
+  description?: string;
+  actions?: React.ReactNode;
+  /** 排版：inline = 标题与说明同行（详情/表单页默认）｜stacked = 上下堆叠（存量兼容） */
+  layout?: "inline" | "stacked";
+  className?: string;
+}
+
+export function PageHeader({
+  title,
+  description,
+  actions,
+  layout = "inline",
+  className,
+}: PageHeaderProps) {
+  if (layout === "stacked") {
+    return (
+      <div className={cn("mb-6 flex flex-wrap items-start justify-between gap-4", className)}>
+        <div className="flex flex-col gap-1">
+          <h1 className="text-xl font-semibold tracking-tight">{title}</h1>
+          {description && <p className="text-sm text-muted-foreground">{description}</p>}
+        </div>
+        {actions && <div className="flex items-center gap-2">{actions}</div>}
+      </div>
+    );
+  }
+
+  return (
+    <div
+      data-testid="page-header"
+      className={cn("mb-0 flex flex-wrap items-end gap-x-3 gap-y-1", className)}
+    >
+      <h1 className="text-xl font-semibold tracking-tight">{title}</h1>
+      {description && <p className="text-sm text-muted-foreground">{description}</p>}
+      {actions && <div className="ml-auto flex items-center gap-2">{actions}</div>}
+    </div>
+  );
+}
