@@ -31,6 +31,7 @@ import { planToFlow, type StepNodeData } from "./plan-flow/adapter";
 import { exportToFlow, type ExportGraph } from "./plan-flow/export-adapter";
 import { StepNode } from "./plan-flow/step-node";
 import { getDataVersion } from "@/lib/page-refresh-data";
+import { publicUrl } from "@/lib/utils";
 import {
   buildColumns, optimalSplit, uniformSplit, manualSplit, placeColumns, edgeStats,
   PAD, MAX_ZOOM, READABLE_ZOOM, BODY_BASE, GAP_X,
@@ -40,8 +41,8 @@ import {
 const nodeTypes = { step: StepNode };
 
 const REAL_PLANS = [
-  { key: "plan_119dfdc4ce44", name: "书籍创作 · 137 步", file: "/plan_exports/plan_119dfdc4ce44.graph.json", steps: "/plan_exports/plan_119dfdc4ce44.steps_json.json" },
-  { key: "plan_4c2187220435", name: "书籍创作 · 47 步", file: "/plan_exports/plan_4c2187220435.graph.json", steps: "/plan_exports/plan_4c2187220435.steps_json.json" },
+  { key: "plan_119dfdc4ce44", name: "书籍创作 · 137 步", file: publicUrl("/plan_exports/plan_119dfdc4ce44.graph.json"), steps: publicUrl("/plan_exports/plan_119dfdc4ce44.steps_json.json") },
+  { key: "plan_4c2187220435", name: "书籍创作 · 47 步", file: publicUrl("/plan_exports/plan_4c2187220435.graph.json"), steps: publicUrl("/plan_exports/plan_4c2187220435.steps_json.json") },
 ];
 
 type Source = { kind: "mock"; idx: number } | { kind: "real"; idx: number };

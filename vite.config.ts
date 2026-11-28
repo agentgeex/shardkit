@@ -8,6 +8,9 @@ import react from "@vitejs/plugin-react";
 // - 独立开源项目：零自定义注入，npm install 即可复现。
 export default defineConfig({
   plugins: [react()],
+  // 部署基路径：dev / 自托管根路径留空即 "/"；
+  // GitHub Pages 项目页用 `VITE_BASE=/shardkit/ npm run build`（见 build:pages）。
+  base: process.env.VITE_BASE || "/",
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "./src"),

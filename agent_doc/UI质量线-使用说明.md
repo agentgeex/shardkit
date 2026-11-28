@@ -120,6 +120,6 @@ node scripts/visual-baseline.mjs compare # ④ 视觉回归（需 dev server）
 
 ## 5. 后续
 
-- 接入 CI（`.github/workflows` 或 Gitee Go）：`tsc -b` + 规则闸 + 视觉基线。
+- 接入 CI（`.github/workflows` 或其他 CI）：`tsc -b` + 规则闸 + 视觉基线。
 - 视觉基线扩展到更多关键路由（表格 / 表单 / 查询 / 详情）。
 - 每修一批存量，跑 `--update` 收紧预算。

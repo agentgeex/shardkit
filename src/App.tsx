@@ -92,9 +92,11 @@ const registryDataProvider = {
 };
 
 export function App() {
+  // basename 跟随部署基路径：dev/根路径为 ""，GitHub Pages 下为 "/shardkit"。
+  const basename = import.meta.env.BASE_URL.replace(/\/+$/, "");
   return (
     <QueryClientProvider client={queryClient}>
-      <BrowserRouter>
+      <BrowserRouter basename={basename}>
         <ToastProvider>
         <Refine
           dataProvider={registryDataProvider}

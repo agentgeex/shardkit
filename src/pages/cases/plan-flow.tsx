@@ -43,13 +43,14 @@ import { StepNode } from "./plan-flow/step-node";
 import { computeExecutionOrder, usePlayback, applyPlayback } from "./plan-flow/playback";
 // 自适应网格算法（与实验页 /plan-flow-fit 共用同一份实现，别在本页另写一套）
 import { buildColumns, optimalSplit, placeColumns, GAP_X, GAP_Y, READABLE_ZOOM, type Container, type Pack } from "@/lib/plan-grid";
+import { publicUrl } from "@/lib/utils";
 
 const nodeTypes = { step: StepNode };
 const LEGEND: RunStatus[] = ["pending", "running", "succeeded", "failed", "cancelled"];
 
 const REAL_PLANS = [
-  { key: "plan_119dfdc4ce44", name: "书籍创作 · 137 步", file: "/plan_exports/plan_119dfdc4ce44.graph.json", steps: "/plan_exports/plan_119dfdc4ce44.steps_json.json" },
-  { key: "plan_4c2187220435", name: "书籍创作 · 47 步", file: "/plan_exports/plan_4c2187220435.graph.json", steps: "/plan_exports/plan_4c2187220435.steps_json.json" },
+  { key: "plan_119dfdc4ce44", name: "书籍创作 · 137 步", file: publicUrl("/plan_exports/plan_119dfdc4ce44.graph.json"), steps: publicUrl("/plan_exports/plan_119dfdc4ce44.steps_json.json") },
+  { key: "plan_4c2187220435", name: "书籍创作 · 47 步", file: publicUrl("/plan_exports/plan_4c2187220435.graph.json"), steps: publicUrl("/plan_exports/plan_4c2187220435.steps_json.json") },
 ];
 
 type Source = { kind: "mock"; idx: number } | { kind: "real"; idx: number };

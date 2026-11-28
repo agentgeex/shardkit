@@ -5,7 +5,7 @@ import {
   Maximize2, Minimize2, Languages, Check, ChevronDown, User, BookOpen, Lock, LogOut,
 } from "lucide-react";
 import { CASES } from "@/lib/cases";
-import { cn } from "@/lib/utils";
+import { cn, publicUrl } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import { Popover, PopoverTrigger, PopoverContent } from "@/components/ui/popover";
@@ -50,12 +50,12 @@ interface NavGroup {
 }
 
 /**
- * 导航(2026-09-16 老冯二次纠偏后;2026-09-29 接入 i18n):
+ * 导航(2026-09-16 维护者二次纠偏后;2026-09-29 接入 i18n):
  *   - 取消独立「底层组件」层;组件下沉到案例页,不再有面向人类程序员的零件索引。
  *   - 「控件展厅」(/components) 是一个**成品页面案例**(表单/交互控件集中演示),进入例导航。
  *   - 分组标题走 i18n(labelKey);案例条目标题走 CASES 的 titleEn(caseTitle)。
  *
- * 2026-11-05 重排（老冯：「东西不要动，重新排一下」）：
+ * 2026-11-05 重排（维护者：「东西不要动，重新排一下」）：
  *   原「页面案例」一组塞 11 项（大小粒度混在一起，表格/查询/组件却各自成组）。
  *   按类型拆开：开始(仪表盘领先) → 表单 → 表格 → 查询 → 组件 → 列表页 → 综合示例 → 布局区块。
  *   只调顺序与归组，不改任何页面/路由/案例元信息。
@@ -79,7 +79,7 @@ function pick(...paths: string[]): NavEntry[] {
 
 export const NAV_GROUPS: NavGroup[] = [
   {
-    // 仪表盘领先（老冯 2026-11-05）；空白页是「标签全关」的兜底页，紧随其后
+    // 仪表盘领先（维护者 2026-11-05）；空白页是「标签全关」的兜底页，紧随其后
     key: "start",
     label: "开始",
     labelKey: "nav.sectionStart",
@@ -183,7 +183,7 @@ function useTheme() {
   const [dark, setDark] = React.useState<boolean>(() => {
     try {
       const t = localStorage.getItem("shardkit.theme");
-      // 默认亮色（2026-11-27 老冯定）：只有主动存过 dark 才走暗色
+      // 默认亮色（2026-11-27 维护者定）：只有主动存过 dark 才走暗色
       return t === "dark";
     } catch {
       return false;
@@ -212,7 +212,7 @@ function Brand({ collapsed }: { collapsed: boolean }) {
       {/* 品牌标：public/logo.svg（唯一源，渐变底板 + 白色 K 字形由两片「碎片」与竖条构成）。
           2026-11-05 起不再用 lucide 图标拼贴，图片自带渐变，外层只保留光晕与描边环。 */}
       <div className="relative flex h-7 w-7 shrink-0 items-center justify-center rounded-lg shadow-[0_0_16px_-2px_rgba(99,102,241,0.8)]">
-        <img src="/logo.svg" alt="ShardKit" width={28} height={28} className="h-7 w-7 rounded-lg" />
+        <img src={publicUrl("/logo.svg")} alt="ShardKit" width={28} height={28} className="h-7 w-7 rounded-lg" />
         <span className="absolute inset-0 rounded-lg ring-1 ring-white/20" />
       </div>
       {!collapsed && (
@@ -296,7 +296,7 @@ function HeaderActions({ dark, toggle }: { dark: boolean; toggle: () => void }) 
 
       {/* 仓库 */}
       <a
-        href="https://gitee.com/robertrfeng/shard-kit"
+        href="https://github.com/agentgeex/shardkit"
         target="_blank"
         rel="noreferrer"
         data-testid="header-repo"
@@ -436,7 +436,7 @@ interface Crumb {
 /**
  * ██ 面包屑 AppBreadcrumb
  * ────────────────────────────────────────────────────────────────────────
- * 2026-10-29 老冯定：顶栏左侧原先的「通用查询」框已删除（未接线的纯占位），
+ * 2026-10-29 维护者定：顶栏左侧原先的「通用查询」框已删除（未接线的纯占位），
  * 空着难看 → 改成面包屑，承担「我现在在哪」。
  *
  * 为什么是面包屑而不是别的：
@@ -451,7 +451,7 @@ interface Crumb {
  *   - /menu/* 单独走 MENU_LEAVES（多级菜单示例，不在 NAV_GROUPS 里）
  *
  * ★ 弹窗不算一层 —— 面包屑只表达**页面**层级；新建/编辑/运行弹窗是页内浮层，
- *   不改 URL 也不该改面包屑（老冯明确「弹出框就不用了吧」）。
+ *   不改 URL 也不该改面包屑（维护者明确「弹出框就不用了吧」）。
  */
 function AppBreadcrumb() {
   const { pathname } = useLocation();
@@ -630,7 +630,7 @@ export function AppShell({ children }: { children?: React.ReactNode }) {
           ))}
           <Separator className="bg-white/10" />
           {/* 多级菜单示例：做进侧边栏导航（父级可展开/折叠，叶子对应空页面）。
-              2026-11-05 老冯：整块从顶部下移到此处，不再抢在「仪表盘」前面。 */}
+              2026-11-05 维护者：整块从顶部下移到此处，不再抢在「仪表盘」前面。 */}
           <div className="space-y-1">
             {!collapsed && (
               <div className="px-3 pb-1 text-[11px] font-semibold uppercase tracking-wider text-chrome-foreground/75">

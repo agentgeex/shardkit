@@ -23,7 +23,8 @@
     "build:meta": "npm run build:registry && npm run build:cases",
     "dev": "npm run build:meta && vite --host --port 5178",
     "build": "npm run build:meta && tsc -b && vite build",
-    "preview": "npm run build:meta && vite preview --host --port 4178"
+    "preview": "npm run build:meta && vite preview --host --port 4178",
+    "build:pages": "VITE_BASE=/shardkit/ npm run build && cp dist/index.html dist/404.html && touch dist/.nojekyll"
   },
   "engines": {
     "node": ">=20"
